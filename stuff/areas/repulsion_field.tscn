@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddw60y66ofbnk"]
+
+[ext_resource type="Script" uid="uid://cro55h7akb3qr" path="res://stuff/areas/repulsion_field.gd" id="1_dylxu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdojn"]
+radius = 16.0
+
+[node name="RepulsionField" type="Area2D"]
+script = ExtResource("1_dylxu")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jdojn")

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c2lbr66wq6kg0"]
+
+[node name="NavigationAgent" type="NavigationAgent2D"]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+path_metadata_flags = 0
+avoidance_enabled = true
+neighbor_distance = 0.1
+max_neighbors = 1

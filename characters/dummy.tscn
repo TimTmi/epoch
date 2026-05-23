@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://baea7mi510h84"]
+
+[ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_ec5st"]
+[ext_resource type="Script" uid="uid://jgtkdovq1ilv" path="res://characters/dummy.gd" id="2_a4ghk"]
+
+[node name="Dummy" instance=ExtResource("1_ec5st")]
+mass = 6.0
+script = ExtResource("2_a4ghk")
+init_speed = 0.0

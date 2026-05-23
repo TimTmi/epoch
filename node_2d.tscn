@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://d44uyhxp1dbd"]
+
+[ext_resource type="PackedScene" uid="uid://beuj7q8inxk7r" path="res://characters/quickfist.tscn" id="1_yu8ic"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u5bsa"]
+radius = 4.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Quickfist" parent="." instance=ExtResource("1_yu8ic")]
+position = Vector2(192, 128)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Quickfist"]
+node_a = NodePath("..")
+node_b = NodePath("../RigidBody2D")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Quickfist"]
+position = Vector2(64, 0)
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Quickfist/RigidBody2D"]
+visible = false
+shape = SubResource("CircleShape2D_u5bsa")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Quickfist/RigidBody2D"]
+gravity = Vector2(0, 0)

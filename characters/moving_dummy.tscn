@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlwp8mtpiaq5j"]
+
+[ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_0jrr2"]
+[ext_resource type="Script" uid="uid://cr2fdfpky5a82" path="res://characters/moving_dummy.gd" id="2_j7xm7"]
+[ext_resource type="Script" uid="uid://c8gjrc4odmf3l" path="res://controllers/controller_moving_dummy.gd" id="3_1up1j"]
+
+[node name="MovingDummy" instance=ExtResource("1_0jrr2")]
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("2_j7xm7")
+direction = Vector2(1, 0)
+
+[node name="Controller" parent="." index="2"]
+script = ExtResource("3_1up1j")
+direction = Vector2(1, 0)

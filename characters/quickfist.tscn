@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://beuj7q8inxk7r"]
+
+[ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_g3edd"]
+[ext_resource type="Script" uid="uid://r7yjbkhius11" path="res://characters/quickfist.gd" id="1_pvk3o"]
+[ext_resource type="Script" uid="uid://41q628hsfkar" path="res://controllers/controller_quickfist.gd" id="3_da4ym"]
+[ext_resource type="PackedScene" uid="uid://toqr7ohrnsmc" path="res://moves/move.tscn" id="3_qq2d2"]
+[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://moves/move_punch.gd" id="3_sap6m"]
+[ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://moves/move_kick.gd" id="4_71pv7"]
+[ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://sprites/move_icons/punch.png" id="5_wipni"]
+[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://moves/move_dash.gd" id="6_eq2x3"]
+[ext_resource type="Texture2D" uid="uid://cvo8mstq6igi4" path="res://sprites/move_icons/kick.png" id="7_4emf8"]
+[ext_resource type="Texture2D" uid="uid://btmhq8ugnrrru" path="res://sprites/move_icons/dash.png" id="8_ylgfk"]
+[ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://moves/move_stomp.gd" id="10_7gikk"]
+[ext_resource type="Texture2D" uid="uid://buf1msnrt8wib" path="res://sprites/move_icons/stomp.png" id="11_i4nuh"]
+[ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://moves/move_rage.gd" id="12_c8n1f"]
+[ext_resource type="PackedScene" uid="uid://ddw60y66ofbnk" path="res://stuff/areas/repulsion_field.tscn" id="14_yosrb"]
+
+[node name="Quickfist" unique_id=524260012 instance=ExtResource("1_g3edd")]
+script = ExtResource("1_pvk3o")
+
+[node name="Controller" parent="." index="2"]
+script = ExtResource("3_da4ym")
+is_player = true
+
+[node name="LMB" parent="Moves" index="0" unique_id=1565160055 instance=ExtResource("3_qq2d2")]
+wait_time = 0.1
+script = ExtResource("3_sap6m")
+distance = 10
+duration = 0.2
+dash_distance = 200.0
+knockback_force = 200.0
+stun_duration = 0.2
+damage = 5
+icon = ExtResource("5_wipni")
+
+[node name="RMB" parent="Moves" index="1" unique_id=736640600 instance=ExtResource("3_qq2d2")]
+wait_time = 2.0
+script = ExtResource("4_71pv7")
+distance = 0
+duration = 0.2
+dash_distance = 400.0
+knockback_force = 400.0
+stun_duration = 1.0
+damage = 15
+icon = ExtResource("7_4emf8")
+
+[node name="Shift" parent="Moves" index="2" unique_id=2094681076 instance=ExtResource("3_qq2d2")]
+wait_time = 2.0
+script = ExtResource("6_eq2x3")
+force = 600
+icon = ExtResource("8_ylgfk")
+
+[node name="E" parent="Moves" index="3" unique_id=2011293915 instance=ExtResource("3_qq2d2")]
+wait_time = 3.0
+script = ExtResource("10_7gikk")
+damage = 10
+radius = 32
+time = 0.5
+knockback_force = 300
+stun_duration = 1.0
+icon = ExtResource("11_i4nuh")
+
+[node name="Q" parent="Moves" index="4" unique_id=201681605 instance=ExtResource("3_qq2d2")]
+wait_time = 3.0
+script = ExtResource("12_c8n1f")
+duration = 10.0
+damage_on_self = 50.0
+
+[node name="RepulsionField" parent="." index="13" unique_id=1238053453 instance=ExtResource("14_yosrb")]
+radius = 64

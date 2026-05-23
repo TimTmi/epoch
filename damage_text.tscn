@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3vndm3ppg4d3"]
+
+[ext_resource type="FontFile" uid="uid://ck7if36oado2d" path="res://fonts/04B_03__.TTF" id="1_skcfd"]
+[ext_resource type="Script" uid="uid://bcfyevl3dpbrk" path="res://damage_text.gd" id="2_7acmg"]
+
+[node name="DamageText" type="Label"]
+custom_minimum_size = Vector2(32, 16)
+offset_right = 32.0
+offset_bottom = 16.0
+theme_override_fonts/font = ExtResource("1_skcfd")
+theme_override_font_sizes/font_size = 8
+text = "130"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_7acmg")
+color = Color(1, 1, 1, 1)
