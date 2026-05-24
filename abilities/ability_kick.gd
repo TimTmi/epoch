@@ -1,7 +1,7 @@
 extends Ability
 
 
-const KICK = preload("uid://cvo8mstq6igi4")
+const KICK = preload("uid://dyflk7p2dlcdc")
 const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 
 @export var distance: int = 0

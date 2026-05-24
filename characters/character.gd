@@ -57,7 +57,7 @@ func use_ability(ability_name, input) -> void:
 func push(force: Vector2):
 	apply_central_impulse(force * time_scale)
 
-func ability(direction: Vector2) -> void:
+func move(direction: Vector2) -> void:
 	direction = direction.normalized() * speed * time_scale
 	apply_central_force(direction)
 

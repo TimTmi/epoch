@@ -1,7 +1,7 @@
 extends Ability
 
 
-const PUNCH = preload("uid://dl2wm0662ws8w")
+const PUNCH = preload("uid://dyflk7p2dlcdc")
 const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 
 @export var distance: int = 10
