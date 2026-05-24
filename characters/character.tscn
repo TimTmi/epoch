@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cddjgr22gtrxr"]
+[gd_scene format=3 uid="uid://cddjgr22gtrxr"]
 
 [ext_resource type="Texture2D" uid="uid://dbbtku7b5kc8i" path="res://sprites/ball.png" id="1_320dt"]
 [ext_resource type="Script" uid="uid://bb4wbo1lhj1h8" path="res://characters/character.gd" id="1_fhmv7"]
@@ -12,7 +12,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_fshvy"]
 radius = 4.0
 
-[node name="Character" type="RigidBody2D"]
+[node name="Character" type="RigidBody2D" unique_id=1388713911]
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
@@ -21,54 +21,54 @@ linear_damp = 10.0
 script = ExtResource("1_fhmv7")
 metadata/_edit_group_ = true
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1187355946]
 texture = ExtResource("1_320dt")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1728318662]
 visible = false
 shape = SubResource("CircleShape2D_fshvy")
 
-[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("character")]
+[node name="Controller" type="Node" parent="." unique_id=919348798 node_paths=PackedStringArray("character")]
 script = ExtResource("4_yh1dq")
 character = NodePath("..")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." unique_id=1727725242]
 script = ExtResource("4_yulxs")
 
-[node name="AttackPercent" type="Node" parent="."]
-script = ExtResource("4_yulxs")
-minimum = -100.0
-value = 0.0
-
-[node name="AttackFlat" type="Node" parent="."]
+[node name="AttackPercent" type="Node" parent="." unique_id=895692068]
 script = ExtResource("4_yulxs")
 minimum = -100.0
 value = 0.0
 
-[node name="DefensePercent" type="Node" parent="."]
+[node name="AttackFlat" type="Node" parent="." unique_id=425194810]
 script = ExtResource("4_yulxs")
 minimum = -100.0
 value = 0.0
 
-[node name="DefenseFlat" type="Node" parent="."]
+[node name="DefensePercent" type="Node" parent="." unique_id=52221767]
 script = ExtResource("4_yulxs")
 minimum = -100.0
 value = 0.0
 
-[node name="SetHealth" type="Node" parent="." node_paths=PackedStringArray("health")]
+[node name="DefenseFlat" type="Node" parent="." unique_id=1166171224]
+script = ExtResource("4_yulxs")
+minimum = -100.0
+value = 0.0
+
+[node name="SetHealth" type="Node" parent="." unique_id=178028005 node_paths=PackedStringArray("health")]
 script = ExtResource("5_fb6n5")
 health = NodePath("../Health")
 
-[node name="TakeDamage" type="Node" parent="."]
+[node name="TakeDamage" type="Node" parent="." unique_id=50723274]
 script = ExtResource("5_wufx3")
 
-[node name="DealDamage" type="Node" parent="."]
+[node name="DealDamage" type="Node" parent="." unique_id=601410577]
 script = ExtResource("7_ub4me")
 
-[node name="Heal" type="Node" parent="."]
+[node name="Heal" type="Node" parent="." unique_id=1796543689]
 script = ExtResource("8_q46et")
 
-[node name="Moves" type="Node" parent="."]
+[node name="Abilities" type="Node" parent="." unique_id=303212282]
 
 [connection signal="dead" from="." to="." method="_on_dead"]
 [connection signal="stat_changed" from="Health" to="." method="_on_health_changed"]

@@ -2,10 +2,10 @@ extends RigidBody2D
 class_name Character
 
 
-const DAMAGE_TEXT = preload("res://damage_text.tscn")
+const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @onready var world = get_parent()
-@onready var moves = $Moves
+@onready var abilities = $Abilities
 @onready var controller = $Controller
 @onready var health: Stat = $Health
 @onready var attack_percent: Stat = $AttackPercent
@@ -26,7 +26,7 @@ var team: int = 0:
 		team = value
 		set_collision_layer_value(value, true)
 		set_collision_mask_value(value, true)
-var effects = preload("res://effects/effects.gd").new()
+var effects = preload("uid://gco7nrbbf05b").new()
 
 
 #signal health_changed(old_value: int, new_value: int)
@@ -49,15 +49,15 @@ func ready():
 func set_input(enable: bool) -> void:
 	input_disabled = !enable
 
-func use_move(move_name, input) -> void:
-	var move = moves.get_node_or_null(move_name)
-	if move != null:
-		move.use(input)
+func use_ability(ability_name, input) -> void:
+	var ability = abilities.get_node_or_null(ability_name)
+	if ability != null:
+		ability.use(input)
 
 func push(force: Vector2):
 	apply_central_impulse(force * time_scale)
 
-func move(direction: Vector2) -> void:
+func ability(direction: Vector2) -> void:
 	direction = direction.normalized() * speed * time_scale
 	apply_central_force(direction)
 

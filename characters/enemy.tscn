@@ -1,27 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://cljnv24xco11o"]
+[gd_scene format=3 uid="uid://cljnv24xco11o"]
 
 [ext_resource type="Script" uid="uid://wqq7q8t8ish0" path="res://characters/enemy.gd" id="1_cb2mb"]
 [ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_ep8ut"]
 [ext_resource type="Script" uid="uid://c78v0ig6crqst" path="res://controllers/controller_enemy.gd" id="3_hkupn"]
-[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://moves/move_punch.gd" id="3_pyydh"]
-[ext_resource type="PackedScene" uid="uid://toqr7ohrnsmc" path="res://moves/move.tscn" id="4_fpaoq"]
-[ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://sprites/move_icons/punch.png" id="6_vbn7a"]
+[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/ability_punch.gd" id="3_pyydh"]
+[ext_resource type="PackedScene" uid="uid://toqr7ohrnsmc" path="res://abilities/Ability.tscn" id="4_fpaoq"]
+[ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://sprites/ability_icons/punch.png" id="6_vbn7a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r06cu"]
 
-[node name="Enemy" instance=ExtResource("1_ep8ut")]
+[node name="Enemy" unique_id=1463307526 instance=ExtResource("1_ep8ut")]
 script = ExtResource("1_cb2mb")
 
 [node name="Controller" parent="." index="2"]
 script = ExtResource("3_hkupn")
 
-[node name="PunchArea" type="Area2D" parent="." index="5"]
+[node name="PunchArea" type="Area2D" parent="." index="5" unique_id=2082474333]
 visible = false
 
-[node name="Collision" type="CollisionShape2D" parent="PunchArea" index="0"]
+[node name="Collision" type="CollisionShape2D" parent="PunchArea" index="0" unique_id=121794133]
 shape = SubResource("CircleShape2D_r06cu")
 
-[node name="LMB" parent="Moves" index="0" instance=ExtResource("4_fpaoq")]
+[node name="LMB" parent="Moves" index="0" unique_id=2142597352 instance=ExtResource("4_fpaoq")]
 wait_time = 0.1
 script = ExtResource("3_pyydh")
 distance = 10

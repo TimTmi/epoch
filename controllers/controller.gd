@@ -2,7 +2,7 @@ extends Node
 class_name Controller
 
 
-const NAVIGATION_AGENT = preload("res://character_navigation_agent.tscn")
+const NAVIGATION_AGENT = preload("uid://c2lbr66wq6kg0")
 
 @export var character: Character
 @export var is_player: bool = false
@@ -14,15 +14,15 @@ const NAVIGATION_AGENT = preload("res://character_navigation_agent.tscn")
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("lmb"):
-		character.use_move("LMB", character.get_global_mouse_position())
+		character.use_ability("LMB", character.get_global_mouse_position())
 	elif Input.is_action_just_pressed("rmb"):
-		character.use_move("RMB", character.get_global_mouse_position())
+		character.use_ability("RMB", character.get_global_mouse_position())
 	elif Input.is_action_just_pressed("shift"):
-		character.use_move("Shift", character.position + character.linear_velocity)
+		character.use_ability("Shift", character.position + character.linear_velocity)
 	elif Input.is_action_just_pressed("e"):
-		character.use_move("E", character.get_global_mouse_position())
+		character.use_ability("E", character.get_global_mouse_position())
 	elif Input.is_action_just_pressed("q"):
-		character.use_move("Q", character.get_global_mouse_position())
+		character.use_ability("Q", character.get_global_mouse_position())
 
 func _ready():
 	set_physics_process(false)

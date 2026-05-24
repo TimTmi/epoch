@@ -1,7 +1,7 @@
 extends Controller
 
 
-const TRIGGER_AREA = preload("res://trigger_area.tscn")
+const TRIGGER_AREA = preload("uid://qwyoqy8oqpe")
 
 
 func ready():

@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://toqr7ohrnsmc"]
-
-[ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://moves/move.gd" id="1_8wae0"]
-
-[node name="Move" type="Timer"]
-one_shot = true
-script = ExtResource("1_8wae0")
-
-[connection signal="timeout" from="." to="." method="_on_timeout"]

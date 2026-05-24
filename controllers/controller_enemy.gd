@@ -8,4 +8,4 @@ func _computer_controller():
 	var direction = (enemy.position - character.position).normalized()
 	character.move(direction)
 	if character.punchable:
-		character.use_move("LMB", enemy.position)
+		character.use_ability("LMB", enemy.position)

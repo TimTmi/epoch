@@ -1,7 +1,7 @@
 extends Control
 
 
-const CHARACTER_INFO = preload("res://ui_elements/character_info.tscn")
+const CHARACTER_INFO = preload("uid://dul6274pcb0qw")
 
 @onready var team_info = $TeamInfo
 

@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const DAMAGE_TEXT = preload("res://damage_text.tscn")
+const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @onready var global_manager = get_node("/root/GlobalManager")
 @onready var UI = $CanvasLayer/UI
@@ -16,7 +16,7 @@ func _ready():
 	
 	global_manager.world = self
 	var character = load("res://characters/%s.tscn" %player).instantiate()
-	var camera = preload("res://camera.tscn").instantiate()
+	var camera = preload("uid://dskry0mydaydk").instantiate()
 	character.add_child(camera)
 	character.add_to_group("player")
 	add_character(character, 1)

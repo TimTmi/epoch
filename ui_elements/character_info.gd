@@ -1,11 +1,11 @@
 extends VBoxContainer
 
 
-const MOVE_COOLDOWN = preload("res://ui_elements/move_cooldown.tscn")
+const ABILITY_COOLDOWN = preload("res://ui_elements/ability_cooldown.tscn")
 
 @onready var character_name = $VBoxContainer/Name
 @onready var health = $VBoxContainer/Health
-@onready var moves = $Moves
+@onready var abilities = $Abilities
 
 
 func set_up_info(character: Character):
@@ -14,11 +14,11 @@ func set_up_info(character: Character):
 	health.max_value = character.health.value
 	health.value = character.health.value
 	character.health.stat_changed.connect(_on_health_changed)
-	for i in character.moves.get_children():
-		var move_cooldown = MOVE_COOLDOWN.instantiate()
-		move_cooldown.move = i
-		move_cooldown.texture_progress = i.icon
-		moves.add_child(move_cooldown)
+	for i in character.abilities.get_children():
+		var ability_cooldown = ABILITY_COOLDOWN.instantiate()
+		ability_cooldown.ability = i
+		ability_cooldown.texture_progress = i.icon
+		abilities.add_child(ability_cooldown)
 
 func _on_health_changed(_old_value: float, new_value: float):
 	health.value = new_value

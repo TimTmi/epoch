@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cm4mxmbml4olx"]
+[gd_scene format=3 uid="uid://cm4mxmbml4olx"]
 
 [ext_resource type="Script" uid="uid://cymr4yummw5hq" path="res://world.gd" id="1_5qxuo"]
 [ext_resource type="Texture2D" uid="uid://4ab6q6foyl0h" path="res://sprites/wall.png" id="2_kvf0d"]
@@ -24,35 +24,35 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-256, -128, 256, -128, 
 source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 4.0
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=1838541832]
 script = ExtResource("1_5qxuo")
 
-[node name="Walls" type="TileMap" parent="."]
+[node name="Walls" type="TileMap" parent="." unique_id=506168131]
 tile_set = SubResource("TileSet_jng6c")
 rendering_quadrant_size = 64
 format = 2
 layer_0/tile_data = PackedInt32Array(-262153, 0, 0, -262152, 0, 0, -262151, 0, 0, -262150, 0, 0, -262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 0, 0, -262136, 0, 0, -196600, 0, 0, -131064, 0, 0, -65528, 0, 0, 8, 0, 0, 65544, 0, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 262151, 0, 0, 262150, 0, 0, 262149, 0, 0, 262148, 0, 0, 262147, 0, 0, 262146, 0, 0, 262145, 0, 0, 262144, 0, 0, 327679, 0, 0, 327678, 0, 0, 327677, 0, 0, 327676, 0, 0, 327675, 0, 0, 327674, 0, 0, 327673, 0, 0, 327672, 0, 0, 327671, 0, 0, 262135, 0, 0, -131081, 0, 0, -196617, 0, 0, -65545, 0, 0, -9, 0, 0, 65527, 0, 0, 131063, 0, 0, 196599, 0, 0, -327688, 0, 0, -327686, 0, 0, -327684, 0, 0, -327682, 0, 0, -393216, 0, 0, -393214, 0, 0, -393212, 0, 0, -393210, 0, 0)
 metadata/_edit_lock_ = true
 
-[node name="NavigationRegion" type="NavigationRegion2D" parent="."]
+[node name="NavigationRegion" type="NavigationRegion2D" parent="." unique_id=1980622690]
 navigation_polygon = SubResource("NavigationPolygon_tfq1u")
 use_edge_connections = false
 script = ExtResource("3_1t8f1")
 metadata/_edit_lock_ = true
 
-[node name="Dummy" parent="." instance=ExtResource("3_jjril")]
+[node name="Dummy" parent="." unique_id=780913285 instance=ExtResource("3_jjril")]
 position = Vector2(64, 0)
 collision_layer = 1
 collision_mask = 1
 
-[node name="MovingDummy" parent="." instance=ExtResource("4_lqkhr")]
+[node name="MovingDummy" parent="." unique_id=2030932857 instance=ExtResource("4_lqkhr")]
 position = Vector2(-64, 0)
 collision_layer = 1
 collision_mask = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1572184448]
 
-[node name="UI" type="Control" parent="CanvasLayer"]
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=781222651]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,7 +63,7 @@ mouse_filter = 2
 script = ExtResource("5_serjb")
 metadata/_edit_lock_ = true
 
-[node name="TeamInfo" type="HBoxContainer" parent="CanvasLayer/UI"]
+[node name="TeamInfo" type="HBoxContainer" parent="CanvasLayer/UI" unique_id=991489781]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

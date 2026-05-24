@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://toqr7ohrnsmc"]
+
+[ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/ability.gd" id="1_8wae0"]
+
+[node name="Ability" type="Timer" unique_id=663691986]
+one_shot = true
+script = ExtResource("1_8wae0")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]
