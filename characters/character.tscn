@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dbx5mntwqhm84" path="res://components/functions/function_take_damage.gd" id="5_wufx3"]
 [ext_resource type="Script" uid="uid://cn5m2q8ajrcu" path="res://components/functions/function_deal_damage.gd" id="7_ub4me"]
 [ext_resource type="Script" uid="uid://divettjah5q1i" path="res://components/functions/function_heal.gd" id="8_q46et"]
+[ext_resource type="Script" uid="uid://rrxhiirlttku" path="res://characters/ability_system.gd" id="9_vliyq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fshvy"]
 radius = 4.0
@@ -68,7 +69,8 @@ script = ExtResource("7_ub4me")
 [node name="Heal" type="Node" parent="." unique_id=1796543689]
 script = ExtResource("8_q46et")
 
-[node name="Abilities" type="Node" parent="." unique_id=303212282]
+[node name="AbilitySystem" type="Node" parent="." unique_id=1720081024]
+script = ExtResource("9_vliyq")
 
 [connection signal="dead" from="." to="." method="_on_dead"]
 [connection signal="stat_changed" from="Health" to="." method="_on_health_changed"]

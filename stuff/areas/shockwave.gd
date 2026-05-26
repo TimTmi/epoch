@@ -1,4 +1,4 @@
-extends Area2D
+class_name Shockwave extends Area2D
 
 
 @onready var collision = $Collision

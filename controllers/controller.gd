@@ -4,6 +4,17 @@ class_name Controller
 
 const NAVIGATION_AGENT = preload("uid://c2lbr66wq6kg0")
 
+@export_group("Input")
+@export var primary_action: String = "primary"
+@export var secondary_action: String = "secondary"
+@export var utility_action: String = "utility"
+@export var special_action: String = "special"
+@export var ultimate_action: String = "ultimate"
+@export var extra_1_action: String = "extra_1"
+@export var extra_2_action: String = "extra_2"
+@export var extra_3_action: String = "extra_3"
+
+@export_group("Setup")
 @export var character: Character
 @export var is_player: bool = false
 	#set(value):
@@ -13,16 +24,22 @@ const NAVIGATION_AGENT = preload("uid://c2lbr66wq6kg0")
 
 
 func _unhandled_input(_event):
-	if Input.is_action_just_pressed("lmb"):
-		character.use_ability("LMB", character.get_global_mouse_position())
-	elif Input.is_action_just_pressed("rmb"):
-		character.use_ability("RMB", character.get_global_mouse_position())
-	elif Input.is_action_just_pressed("shift"):
-		character.use_ability("Shift", character.position + character.linear_velocity)
-	elif Input.is_action_just_pressed("e"):
-		character.use_ability("E", character.get_global_mouse_position())
-	elif Input.is_action_just_pressed("q"):
-		character.use_ability("Q", character.get_global_mouse_position())
+	if Input.is_action_just_pressed(primary_action):
+		character.try_activate_slot(AbilitySystem.CommandSlot.PRIMARY, AbilityIntent.from_target_position(character.get_global_mouse_position()))
+	elif Input.is_action_just_pressed(secondary_action):
+		character.try_activate_slot(AbilitySystem.CommandSlot.SECONDARY, AbilityIntent.from_target_position(character.get_global_mouse_position()))
+	elif Input.is_action_just_pressed(utility_action):
+		character.try_activate_slot(AbilitySystem.CommandSlot.UTILITY, AbilityIntent.from_target_position(character.get_global_mouse_position()))
+	elif Input.is_action_just_pressed(special_action):
+		character.try_activate_slot(AbilitySystem.CommandSlot.SPECIAL, AbilityIntent.from_target_position(character.get_global_mouse_position()))
+	elif Input.is_action_just_pressed(ultimate_action):
+		character.try_activate_slot(AbilitySystem.CommandSlot.ULTIMATE, AbilityIntent.from_target_position(character.get_global_mouse_position()))
+	elif Input.is_action_just_pressed(extra_1_action):
+		character.try_activate_slot(AbilitySystem.CommandSlot.EXTRA_1, AbilityIntent.from_target_position(character.get_global_mouse_position()))
+	elif Input.is_action_just_pressed(extra_2_action):
+		character.try_activate_slot(AbilitySystem.CommandSlot.EXTRA_2, AbilityIntent.from_target_position(character.get_global_mouse_position()))
+	elif Input.is_action_just_pressed(extra_3_action):
+		character.try_activate_slot(AbilitySystem.CommandSlot.EXTRA_3, AbilityIntent.from_target_position(character.get_global_mouse_position()))
 
 func _ready():
 	set_physics_process(false)
@@ -57,7 +74,7 @@ func _on_velocity_computed(safe_velocity: Vector2):
 	character.move(safe_velocity)
 
 func _player_controller():
-	character.move(Input.get_vector("a", "d", "w", "s"))
+	character.move(Input.get_vector("move_left", "move_right", "move_up", "move_down"))
 
 func _computer_controller():
 	pass

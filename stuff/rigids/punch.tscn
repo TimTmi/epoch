@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyflk7p2dlcdc"]
+[gd_scene format=3 uid="uid://dyflk7p2dlcdc"]
 
 [ext_resource type="Script" uid="uid://cl7pwstu7wn0d" path="res://stuff/rigids/punch.gd" id="1_ox1b7"]
 
@@ -33,20 +33,20 @@ scale_min = 4.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_vlx20")
 
-[node name="Punch" type="Area2D"]
+[node name="Punch" type="Area2D" unique_id=494390561]
 linear_damp = 10.0
 script = ExtResource("1_ox1b7")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1711204671]
 shape = SubResource("CircleShape2D_yjuvy")
 
-[node name="Particles" type="GPUParticles2D" parent="Collision"]
+[node name="Particles" type="GPUParticles2D" parent="Collision" unique_id=1115851789]
 show_behind_parent = true
 amount = 32
-process_material = SubResource("ParticleProcessMaterial_2vff0")
 lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_2vff0")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=515595907]
 wait_time = 60.0
 one_shot = true
 autostart = true

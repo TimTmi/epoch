@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 
-const ABILITY_COOLDOWN = preload("res://ui_elements/ability_cooldown.tscn")
+const ABILITY_CARD = preload("res://ui_elements/AbilityCard.tscn")
 
 @onready var character_name = $VBoxContainer/Name
 @onready var health = $VBoxContainer/Health
@@ -14,11 +14,19 @@ func set_up_info(character: Character):
 	health.max_value = character.health.value
 	health.value = character.health.value
 	character.health.stat_changed.connect(_on_health_changed)
-	for i in character.abilities.get_children():
-		var ability_cooldown = ABILITY_COOLDOWN.instantiate()
-		ability_cooldown.ability = i
-		ability_cooldown.texture_progress = i.icon
-		abilities.add_child(ability_cooldown)
+	
+	#for i in character.abilities.get_children():
+		#var ability_cooldown = ABILITY_COOLDOWN.instantiate()
+		#ability_cooldown.ability = i
+		#ability_cooldown.texture_progress = i.icon
+		#abilities.add_child(ability_cooldown)
+	
+	for slot: AbilitySystem.CommandSlot in character.ability_system.slot_ability_instances:
+		var instance: AbilityInstance = character.ability_system.slot_ability_instances.get(slot)
+		
+		var card: AbilityCard = ABILITY_CARD.instantiate()
+		abilities.add_child(card)
+		card.setup(instance)
 
 func _on_health_changed(_old_value: float, new_value: float):
 	health.value = new_value

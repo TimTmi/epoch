@@ -5,13 +5,13 @@ class_name Character
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @onready var world = get_parent()
-@onready var abilities = $Abilities
 @onready var controller = $Controller
 @onready var health: Stat = $Health
 @onready var attack_percent: Stat = $AttackPercent
 @onready var attack_flat: Stat = $AttackFlat
 @onready var defense_percent: Stat = $DefensePercent
 @onready var defense_flat: Stat = $DefenseFlat
+@onready var ability_system: AbilitySystem = $AbilitySystem
 
 @export var init_speed: float = 1000
 @onready var speed: float = init_speed
@@ -49,10 +49,11 @@ func ready():
 func set_input(enable: bool) -> void:
 	input_disabled = !enable
 
-func use_ability(ability_name, input) -> void:
-	var ability = abilities.get_node_or_null(ability_name)
-	if ability != null:
-		ability.use(input)
+func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
+	ability_system.try_activate_ability(ability, intent, self)
+
+func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent) -> void:
+	ability_system.try_activate_slot(slot, intent, self)
 
 func push(force: Vector2):
 	apply_central_impulse(force * time_scale)

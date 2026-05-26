@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2lbr66wq6kg0"]
 
-[node name="NavigationAgent" type="NavigationAgent2D"]
+[node name="NavigationAgent" type="NavigationAgent2D" unique_id=2073712260]
 path_desired_distance = 4.0
 target_desired_distance = 4.0
 path_metadata_flags = 0

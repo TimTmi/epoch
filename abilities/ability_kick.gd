@@ -1,4 +1,4 @@
-extends Ability
+class_name Kick extends Ability
 
 
 const KICK = preload("uid://dyflk7p2dlcdc")
@@ -12,21 +12,29 @@ const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 @export var damage: int = 15
 
 
-func _use(input: Vector2) -> void:
-	var kick = KICK.instantiate()
-	var direction = to_direction(input)
+func activate(context: AbilityContext) -> void:
+	var user: Character = context.user
+	var direction: Vector2 = context.get_target_direction()
+	if direction == Vector2.INF:
+		return
+	
+	var kick: CircleStrike = KICK.instantiate()
+	
 	kick.set_radius(6)
 	user.set_input(false)
 	user.add_child(kick)
 	user.apply_central_impulse(direction * dash_distance)
-	var tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	
+	var tween = user.create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.tween_property(kick, "position", direction * distance, duration).as_relative()
 	tween.tween_callback(user.set_input.bind(true))
 	tween.tween_callback(kick.queue_free)
-	tween.tween_callback(end)
-	kick.body_entered.connect(_on_body_entered)
+	
+	kick.body_entered.connect(_on_body_entered.bind(user))
+	
+	await tween.finished
 
-func _on_body_entered(body):
+func _on_body_entered(body, user: Character):
 	if not body is Character or body.team == user.team:
 		return
 	user.deal_damage(damage, body)

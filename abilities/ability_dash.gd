@@ -1,10 +1,12 @@
-extends Ability
+class_name Dash extends Ability
 
 
 @export var force: int = 600
 
 
-func _use(input: Vector2) -> void:
-	var direction = to_direction(input)
-	user.push(direction * force)
-	end()
+func activate(context: AbilityContext) -> void:
+	var direction: Vector2 = context.get_target_direction()
+	if direction == Vector2.INF:
+		return
+	
+	context.user.push(direction * force)

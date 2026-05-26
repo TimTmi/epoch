@@ -1,4 +1,4 @@
-extends Ability
+class_name Rage extends Ability
 
 
 const AFTERIMAGE = preload("uid://bcph033gu3bmn")
@@ -7,8 +7,10 @@ const AFTERIMAGE = preload("uid://bcph033gu3bmn")
 @export var damage_on_self: float = 50
 
 
-func _use(_input: Vector2) -> void:
-	var tween: Tween = create_tween()
+func activate(context: AbilityContext) -> void:
+	var user: Character = context.user
+	
+	var tween: Tween = user.create_tween()
 	var afterimage = AFTERIMAGE.instantiate()
 	var damage_interval: float = duration / damage_on_self
 	var take_damage_function: ComponentFunction = user.get_node("TakeDamage")
@@ -24,4 +26,5 @@ func _use(_input: Vector2) -> void:
 	#tween.tween_callback(take_damage_function.handlers.erase.bind(take_damage_override_function))
 	tween.tween_callback(take_damage_function.remove_handler.bind(take_damage_override_function))
 	tween.tween_callback(afterimage.queue_free)
-	tween.tween_callback(end)
+	
+	await tween.finished
