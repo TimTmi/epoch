@@ -18,7 +18,6 @@ func tick(delta: float) -> void:
 	cooldown_remaining -= delta
 
 func can_activate(context: AbilityContext) -> bool:
-	print(cooldown_remaining <= 0.0)
 	return cooldown_remaining <= 0.0 and ability.can_activate(context)
 
 func activate(context: AbilityContext) -> void:

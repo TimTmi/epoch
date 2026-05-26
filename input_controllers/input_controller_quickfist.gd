@@ -1,4 +1,4 @@
-extends Controller
+extends InputController
 
 
 const TRIGGER_AREA = preload("uid://qwyoqy8oqpe")

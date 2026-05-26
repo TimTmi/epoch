@@ -1,4 +1,4 @@
-extends Controller
+extends InputController
 
 
 func _computer_controller():
