@@ -46,6 +46,9 @@ func _ready():
 func ready():
 	pass
 
+func get_effective_delta(delta: float) -> float:
+	return delta * time_scale
+
 func set_input(enable: bool) -> void:
 	input_disabled = !enable
 
