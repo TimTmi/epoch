@@ -1,5 +1,4 @@
-extends Node
-class_name Controller
+class_name InputController extends Node
 
 
 const NAVIGATION_AGENT = preload("uid://c2lbr66wq6kg0")

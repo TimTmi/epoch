@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dbbtku7b5kc8i" path="res://sprites/ball.png" id="1_320dt"]
 [ext_resource type="Script" uid="uid://bb4wbo1lhj1h8" path="res://characters/character.gd" id="1_fhmv7"]
-[ext_resource type="Script" uid="uid://dcc6au7kosgf1" path="res://controllers/controller.gd" id="4_yh1dq"]
+[ext_resource type="Script" uid="uid://dcc6au7kosgf1" path="res://input_controllers/input_controller.gd" id="4_yh1dq"]
 [ext_resource type="Script" uid="uid://cdphqoewvgi1w" path="res://components/stat.gd" id="4_yulxs"]
 [ext_resource type="Script" uid="uid://dui35sr605rdj" path="res://components/functions/function_set_health.gd" id="5_fb6n5"]
 [ext_resource type="Script" uid="uid://dbx5mntwqhm84" path="res://components/functions/function_take_damage.gd" id="5_wufx3"]

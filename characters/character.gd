@@ -5,7 +5,7 @@ class_name Character
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @onready var world = get_parent()
-@onready var controller = $Controller
+@onready var controller: InputController = $Controller
 @onready var health: Stat = $Health
 @onready var attack_percent: Stat = $AttackPercent
 @onready var attack_flat: Stat = $AttackFlat

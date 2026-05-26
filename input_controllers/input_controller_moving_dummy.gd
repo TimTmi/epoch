@@ -1,4 +1,4 @@
-extends Controller
+extends InputController
 
 
 @export var direction: Vector2 = Vector2.RIGHT
