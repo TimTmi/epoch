@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://d44uyhxp1dbd"]
+[gd_scene format=3 uid="uid://d44uyhxp1dbd"]
 
-[ext_resource type="PackedScene" uid="uid://beuj7q8inxk7r" path="res://characters/quickfist.tscn" id="1_yu8ic"]
+[ext_resource type="PackedScene" uid="uid://beuj7q8inxk7r" path="res://characters/quickfist/quickfist.tscn" id="1_yu8ic"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u5bsa"]
 radius = 4.0

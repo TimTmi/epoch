@@ -15,12 +15,6 @@ func set_up_info(character: Character):
 	health.value = character.health.value
 	character.health.stat_changed.connect(_on_health_changed)
 	
-	#for i in character.abilities.get_children():
-		#var ability_cooldown = ABILITY_COOLDOWN.instantiate()
-		#ability_cooldown.ability = i
-		#ability_cooldown.texture_progress = i.icon
-		#abilities.add_child(ability_cooldown)
-	
 	for slot: AbilitySystem.CommandSlot in character.ability_system.slot_ability_instances:
 		var instance: AbilityInstance = character.ability_system.slot_ability_instances.get(slot)
 		

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://beuj7q8inxk7r"]
 
 [ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_g3edd"]
-[ext_resource type="Script" uid="uid://r7yjbkhius11" path="res://characters/quickfist.gd" id="1_pvk3o"]
+[ext_resource type="Script" uid="uid://r7yjbkhius11" path="res://characters/quickfist/quickfist.gd" id="1_pvk3o"]
 [ext_resource type="Script" uid="uid://41q628hsfkar" path="res://input_controllers/input_controller_quickfist.gd" id="3_da4ym"]
 [ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://sprites/ability_icons/placeholder.png" id="6_76vjt"]
 [ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://sprites/ability_icons/punch.png" id="6_a28xo"]
