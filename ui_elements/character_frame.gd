@@ -1,7 +1,7 @@
-extends VBoxContainer
+class_name CharacterFrame extends VBoxContainer
 
 
-const ABILITY_CARD = preload("res://ui_elements/AbilityCard.tscn")
+const ABILITY_CARD = preload("uid://cm35bklqb0tb1")
 
 @onready var character_name = $VBoxContainer/Name
 @onready var health = $VBoxContainer/Health
@@ -9,6 +9,8 @@ const ABILITY_CARD = preload("res://ui_elements/AbilityCard.tscn")
 
 
 func set_up_info(character: Character):
+	await character.ability_system.abilities_setup_finished
+	
 	character_name.text = character.name
 	health.custom_minimum_size.x = character.health.value
 	health.max_value = character.health.value

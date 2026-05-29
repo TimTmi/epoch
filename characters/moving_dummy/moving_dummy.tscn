@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlwp8mtpiaq5j"]
 
 [ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_0jrr2"]
-[ext_resource type="Script" uid="uid://cr2fdfpky5a82" path="res://characters/moving_dummy.gd" id="2_j7xm7"]
+[ext_resource type="Script" uid="uid://cr2fdfpky5a82" path="res://characters/moving_dummy/moving_dummy.gd" id="2_j7xm7"]
 [ext_resource type="Script" uid="uid://c8gjrc4odmf3l" path="res://input_controllers/input_controller_moving_dummy.gd" id="3_1up1j"]
 
 [node name="MovingDummy" unique_id=319497575 instance=ExtResource("1_0jrr2")]

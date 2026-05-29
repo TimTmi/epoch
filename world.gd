@@ -1,7 +1,14 @@
 extends Node2D
 
 
+const CAMERA = preload("uid://dskry0mydaydk")
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
+
+@export var character_registry: CharacterRegistry
+
+@export var teams: Array[TeamConfig]
+@export var player_team: int
+@export var player_character: StringName
 
 @onready var global_manager = get_node("/root/GlobalManager")
 @onready var UI = $CanvasLayer/UI
@@ -15,13 +22,26 @@ func _ready():
 	randomize()
 	
 	global_manager.world = self
-	var character = load("res://characters/%s.tscn" %player).instantiate()
-	var camera = preload("uid://dskry0mydaydk").instantiate()
-	character.add_child(camera)
-	character.add_to_group("player")
-	add_character(character, 1)
 	
-	$MovingDummy.team = 2
+	for team: TeamConfig in teams:
+		for id: StringName in team.members:
+			var config: CharacterConfig = character_registry.get_character(id)
+			var character: Character = config.scene.instantiate()
+			add_character(character, team.id)
+			character.apply_config(config)
+			
+			if player_team == team.id and player_character == config.id:
+				var camera = CAMERA.instantiate()
+				character.add_child(camera)
+				character.add_to_group("player")
+	
+	#var character = load("res://characters/%s.tscn" %player).instantiate()
+	#var camera = preload("uid://dskry0mydaydk").instantiate()
+	#character.add_child(camera)
+	#character.add_to_group("player")
+	#add_character(character, 1)
+	#
+	#$MovingDummy.team = 2
 	
 	#for i in enemies:
 		#var enemy = load("res://characters/%s.tscn" %i).instantiate()

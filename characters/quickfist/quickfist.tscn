@@ -2,60 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_g3edd"]
 [ext_resource type="Script" uid="uid://41q628hsfkar" path="res://input_controllers/input_controller_quickfist.gd" id="3_da4ym"]
-[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://sprites/ability_icons/placeholder.png" id="6_76vjt"]
-[ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://sprites/ability_icons/punch.png" id="6_a28xo"]
-[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/ability_punch.gd" id="7_mvb12"]
-[ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://abilities/ability_kick.gd" id="8_gma3m"]
-[ext_resource type="Texture2D" uid="uid://cvo8mstq6igi4" path="res://sprites/ability_icons/kick.png" id="8_iq6so"]
-[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/ability_dash.gd" id="9_p2a7h"]
-[ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://abilities/ability_stomp.gd" id="10_a28xo"]
-[ext_resource type="Texture2D" uid="uid://btmhq8ugnrrru" path="res://sprites/ability_icons/dash.png" id="10_insg2"]
-[ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://abilities/ability_rage.gd" id="11_iq6so"]
-[ext_resource type="Texture2D" uid="uid://buf1msnrt8wib" path="res://sprites/ability_icons/stomp.png" id="12_51c8g"]
-[ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/ability.gd" id="15_a28xo"]
-
-[sub_resource type="Resource" id="Resource_insg2"]
-script = ExtResource("7_mvb12")
-knockback_force = 1000.0
-icon = ExtResource("6_a28xo")
-cooldown = 0.2
-metadata/_custom_type_script = "uid://bn027ie5mw1i8"
-
-[sub_resource type="Resource" id="Resource_51c8g"]
-script = ExtResource("8_gma3m")
-knockback_force = 6000.0
-icon = ExtResource("8_iq6so")
-cooldown = 5.0
-metadata/_custom_type_script = "uid://cnltbdm12rskg"
-
-[sub_resource type="Resource" id="Resource_c0s5k"]
-script = ExtResource("9_p2a7h")
-icon = ExtResource("10_insg2")
-cooldown = 2.0
-metadata/_custom_type_script = "uid://fu3wehw686tb"
-
-[sub_resource type="Resource" id="Resource_0m5rs"]
-script = ExtResource("10_a28xo")
-icon = ExtResource("12_51c8g")
-cooldown = 10.0
-metadata/_custom_type_script = "uid://pb88iskxrcgt"
-
-[sub_resource type="Resource" id="Resource_nyyk8"]
-script = ExtResource("11_iq6so")
-cooldown = 10.0
-metadata/_custom_type_script = "uid://bl37x7k5tv5yn"
 
 [node name="Quickfist" unique_id=524260012 instance=ExtResource("1_g3edd")]
 
 [node name="Controller" parent="." index="2" unique_id=919348798]
 script = ExtResource("3_da4ym")
 is_player = true
-
-[node name="AbilitySystem" parent="." index="12" unique_id=1720081024]
-slot_abilities = Dictionary[int, ExtResource("15_a28xo")]({
-0: SubResource("Resource_insg2"),
-1: SubResource("Resource_51c8g"),
-2: SubResource("Resource_c0s5k"),
-3: SubResource("Resource_0m5rs"),
-4: SubResource("Resource_nyyk8")
-})

@@ -46,6 +46,14 @@ func _ready():
 func ready():
 	pass
 
+func apply_config(config: CharacterConfig) -> void:
+	var character_stats: CharacterStats = config.stats
+	
+	#health.current = character_stats.health
+	#health.maximum = character_stats.health
+	
+	ability_system.setup_abilities(config.slot_abilities, config.passive_abilities)
+
 func get_effective_delta(delta: float) -> float:
 	return delta * time_scale
 

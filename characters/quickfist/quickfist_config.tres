@@ -3,34 +3,47 @@
 [ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/ability.gd" id="1_pcgie"]
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://characters/character_config.gd" id="2_gvs0x"]
 [ext_resource type="PackedScene" uid="uid://beuj7q8inxk7r" path="res://characters/quickfist/quickfist.tscn" id="2_t5guw"]
+[ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://sprites/ability_icons/punch.png" id="4_dkmb8"]
 [ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://sprites/ability_icons/placeholder.png" id="4_fcwrf"]
 [ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/ability_punch.gd" id="5_fmbpl"]
 [ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://abilities/ability_kick.gd" id="6_ahvqm"]
+[ext_resource type="Texture2D" uid="uid://cvo8mstq6igi4" path="res://sprites/ability_icons/kick.png" id="6_m3qy4"]
 [ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/ability_dash.gd" id="7_dkmb8"]
+[ext_resource type="Texture2D" uid="uid://btmhq8ugnrrru" path="res://sprites/ability_icons/dash.png" id="8_cli6e"]
 [ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://abilities/ability_stomp.gd" id="8_m3qy4"]
 [ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://abilities/ability_rage.gd" id="9_cli6e"]
+[ext_resource type="Texture2D" uid="uid://buf1msnrt8wib" path="res://sprites/ability_icons/stomp.png" id="10_1amtr"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://characters/stats_config.gd" id="10_ue7k2"]
 
 [sub_resource type="Resource" id="Resource_1amtr"]
 script = ExtResource("5_fmbpl")
 knockback_force = 1000.0
+icon = ExtResource("4_dkmb8")
+cooldown = 0.2
 metadata/_custom_type_script = "uid://bn027ie5mw1i8"
 
 [sub_resource type="Resource" id="Resource_fmngg"]
 script = ExtResource("6_ahvqm")
 knockback_force = 6000.0
+icon = ExtResource("6_m3qy4")
+cooldown = 3.0
 metadata/_custom_type_script = "uid://cnltbdm12rskg"
 
 [sub_resource type="Resource" id="Resource_rahbb"]
 script = ExtResource("7_dkmb8")
+icon = ExtResource("8_cli6e")
+cooldown = 1.0
 metadata/_custom_type_script = "uid://fu3wehw686tb"
 
 [sub_resource type="Resource" id="Resource_67gcs"]
 script = ExtResource("8_m3qy4")
+icon = ExtResource("10_1amtr")
+cooldown = 5.0
 metadata/_custom_type_script = "uid://pb88iskxrcgt"
 
 [sub_resource type="Resource" id="Resource_wp0ch"]
 script = ExtResource("9_cli6e")
+cooldown = 10.0
 metadata/_custom_type_script = "uid://bl37x7k5tv5yn"
 
 [sub_resource type="Resource" id="Resource_ry0nd"]
