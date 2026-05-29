@@ -29,7 +29,7 @@ texture = ExtResource("1_320dt")
 visible = false
 shape = SubResource("CircleShape2D_fshvy")
 
-[node name="Controller" type="Node" parent="." unique_id=919348798 node_paths=PackedStringArray("character")]
+[node name="InputController" type="Node" parent="." unique_id=919348798 node_paths=PackedStringArray("character")]
 script = ExtResource("4_yh1dq")
 character = NodePath("..")
 
