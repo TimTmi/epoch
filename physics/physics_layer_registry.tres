@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LayerRegistry" format=3 uid="uid://vigqcs7lq21t"]
+
+[ext_resource type="Script" uid="uid://dpldsmpgkui2h" path="res://layers/layer_registry.gd" id="1_24guv"]
+
+[resource]
+script = ExtResource("1_24guv")
+sublayers = PackedStringArray("characters", "statics", "projectiles")
+metadata/_custom_type_script = "uid://dpldsmpgkui2h"
