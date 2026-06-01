@@ -8,26 +8,26 @@ class_name PhysicsMaskResolver extends Resource
 func get_layer(team: StringName, sublayer: PhysicsSublayer.Type) -> int:
 	if not layer_controller:
 		push_warning("Layer controller not assigned")
-		return 0
+		return -1
 	
 	if not layer_controller.has_layer(team):
 		push_warning("Unknown team layer: %s" % team)
-		return 0
+		return -1
 	
 	return 1 << layer_controller.get_bit_index(team, sublayer)
 
 func get_mask(source_team: StringName, source_sublayer: PhysicsSublayer.Type) -> int:
 	if not layer_controller:
 		push_warning("Layer controller not assigned")
-		return 0
+		return -1
 	
 	if not ruleset:
 		push_warning("Ruleset not assigned")
-		return 0
+		return -1
 	
 	if not layer_controller.has_layer(source_team):
 		push_warning("Unknown team layer: %s" % source_team)
-		return 0
+		return -1
 	
 	var mask: int = 0
 	var same_team_mask: int = 0
