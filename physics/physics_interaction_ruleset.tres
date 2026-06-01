@@ -6,19 +6,19 @@
 [sub_resource type="Resource" id="Resource_il0ie"]
 script = ExtResource("1_il0ie")
 target = 1
-flags = 12
+flags = 14
 metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
 
 [sub_resource type="Resource" id="Resource_om5hh"]
 script = ExtResource("1_il0ie")
 target = 4
-flags = 12
+flags = 14
 metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
 
 [sub_resource type="Resource" id="Resource_7vnmh"]
 script = ExtResource("1_il0ie")
 source = 1
-flags = 12
+flags = 14
 metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
 
 [sub_resource type="Resource" id="Resource_l2daq"]
@@ -30,7 +30,7 @@ metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
 [sub_resource type="Resource" id="Resource_yyfsi"]
 script = ExtResource("1_il0ie")
 source = 4
-flags = 12
+flags = 14
 metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
 
 [resource]

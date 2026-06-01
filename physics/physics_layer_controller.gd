@@ -20,7 +20,7 @@ func get_layer_offset(layer: StringName) -> int:
 
 func get_bit_index(layer: StringName, sublayer: PhysicsSublayer.Type) -> int:
 	if not has_layer(layer):
-		return 0
+		return -1
 	
 	return get_layer_offset(layer) + sublayer
 
@@ -29,7 +29,7 @@ func get_full_layer_bitmask() -> int:
 
 func get_layer_bitmask(layer: StringName) -> int:
 	if not has_layer(layer):
-		return 0
+		return -1
 	
 	return get_full_layer_bitmask() << get_layer_offset(layer)
 
@@ -41,7 +41,7 @@ func get_sublayer_bitmask(sublayers: Array[PhysicsSublayer.Type]) -> int:
 
 func get_bitmask(layer: StringName, sublayers: Array[PhysicsSublayer.Type]) -> int:
 	if not has_layer(layer):
-		return 0
+		return -1
 	
 	var sublayer_bitmask: int = get_sublayer_bitmask(sublayers)
 	return sublayer_bitmask << get_layer_offset(layer)
