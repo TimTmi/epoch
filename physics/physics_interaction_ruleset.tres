@@ -5,9 +5,35 @@
 
 [sub_resource type="Resource" id="Resource_il0ie"]
 script = ExtResource("1_il0ie")
+target = 1
+flags = 12
+metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
+
+[sub_resource type="Resource" id="Resource_om5hh"]
+script = ExtResource("1_il0ie")
+target = 4
+flags = 12
+metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
+
+[sub_resource type="Resource" id="Resource_7vnmh"]
+script = ExtResource("1_il0ie")
+source = 1
+flags = 12
+metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
+
+[sub_resource type="Resource" id="Resource_l2daq"]
+script = ExtResource("1_il0ie")
+source = 1
+target = 1
+metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
+
+[sub_resource type="Resource" id="Resource_yyfsi"]
+script = ExtResource("1_il0ie")
+source = 4
+flags = 12
 metadata/_custom_type_script = "uid://djlxqcn1d6ef2"
 
 [resource]
 script = ExtResource("2_om5hh")
-custom_rules = Array[ExtResource("1_il0ie")]([SubResource("Resource_il0ie")])
+custom_rules = Array[ExtResource("1_il0ie")]([SubResource("Resource_il0ie"), SubResource("Resource_om5hh"), SubResource("Resource_7vnmh"), SubResource("Resource_l2daq"), SubResource("Resource_yyfsi")])
 metadata/_custom_type_script = "uid://gk5hf3yec3lo"

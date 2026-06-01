@@ -5,6 +5,6 @@
 
 [node name="Quickfist" unique_id=524260012 instance=ExtResource("1_g3edd")]
 
-[node name="Controller" parent="." index="2" unique_id=919348798]
+[node name="InputController" parent="." index="2" unique_id=919348798]
 script = ExtResource("3_da4ym")
 is_player = true

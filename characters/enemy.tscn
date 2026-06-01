@@ -9,7 +9,7 @@
 [node name="Enemy" unique_id=1463307526 instance=ExtResource("1_ep8ut")]
 script = ExtResource("1_cb2mb")
 
-[node name="Controller" parent="." index="2" unique_id=919348798]
+[node name="InputController" parent="." index="2" unique_id=919348798]
 script = ExtResource("3_hkupn")
 
 [node name="PunchArea" type="Area2D" parent="." index="5" unique_id=2082474333]
