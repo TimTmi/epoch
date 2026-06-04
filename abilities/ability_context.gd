@@ -24,7 +24,7 @@ func get_target_direction() -> Vector2:
 		direction = target_direction
 	elif target != null:
 		direction = target.position - user.position
-	elif target_position != null:
+	elif target_position != Vector2.INF:
 		direction = target_position - user.position
 	
 	if direction != Vector2.INF:
@@ -33,4 +33,4 @@ func get_target_direction() -> Vector2:
 	return direction
 
 func get_target_angle() -> float:
-	return user.get_angle_to(get_target_direction())
+	return get_target_direction().angle()
