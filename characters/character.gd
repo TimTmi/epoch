@@ -5,7 +5,7 @@ class_name Character
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @onready var world = get_parent()
-@onready var controller: InputController = $Controller
+@onready var controller: InputController = $InputController
 @onready var health: Stat = $Health
 @onready var attack_percent: Stat = $AttackPercent
 @onready var attack_flat: Stat = $AttackFlat
@@ -21,11 +21,8 @@ var input_disabled: int = 0:
 	set(value):
 		input_disabled += int(value) * 2 - 1
 		set_process_unhandled_input(!input_disabled)
-var team: int = 0:
-	set(value):
-		team = value
-		set_collision_layer_value(value, true)
-		set_collision_mask_value(value, true)
+var team: StringName
+var mask_resolver: PhysicsMaskResolver
 var effects = preload("uid://gco7nrbbf05b").new()
 
 
@@ -46,11 +43,24 @@ func _ready():
 func ready():
 	pass
 
+func setup_team(team: StringName, mask_resolver: PhysicsMaskResolver) -> void:
+	self.team = team
+	self.mask_resolver = mask_resolver
+	config_physics(
+		mask_resolver.get_layer(team, PhysicsSublayer.Type.CHARACTER),
+		mask_resolver.get_mask(team, PhysicsSublayer.Type.CHARACTER)
+	)
+
+func config_physics(collision_layer: int, collision_mask: int) -> void:
+	self.collision_layer = collision_layer
+	self.collision_mask = collision_mask
+
 func apply_config(config: CharacterConfig) -> void:
 	var character_stats: CharacterStats = config.stats
 	
 	#health.current = character_stats.health
 	#health.maximum = character_stats.health
+	#...
 	
 	ability_system.setup_abilities(config.slot_abilities, config.passive_abilities)
 

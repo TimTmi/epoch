@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PhysicsLayerController" format=3 uid="uid://cfhx6doy7vscw"]
+
+[ext_resource type="Script" uid="uid://chet5mvx2lkbi" path="res://physics/physics_layer_controller.gd" id="1_sjfto"]
+
+[resource]
+script = ExtResource("1_sjfto")
+metadata/_custom_type_script = "uid://chet5mvx2lkbi"

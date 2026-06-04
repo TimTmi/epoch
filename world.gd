@@ -1,21 +1,22 @@
-extends Node2D
+class_name World extends Node2D
 
 
 const CAMERA = preload("uid://dskry0mydaydk")
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @export var character_registry: CharacterRegistry
+@export var layer_controller: PhysicsLayerController
+@export var mask_resolver: PhysicsMaskResolver
 
 @export var teams: Array[TeamConfig]
-@export var player_team: int
+@export var player_team: StringName
 @export var player_character: StringName
 
 @onready var global_manager = get_node("/root/GlobalManager")
+@onready var characters_container: Node2D = $Characters
+@onready var projectiles_container: Node2D = $Projectiles
+@onready var spawner: Spawner = $Spawner
 @onready var UI = $CanvasLayer/UI
-
-var player: String = "quickfist"
-var enemies: Array[String] = ["enemy"]
-#var characters = ["quickfist"]
 
 
 func _ready():
@@ -23,36 +24,25 @@ func _ready():
 	
 	global_manager.world = self
 	
+	spawner.setup(mask_resolver, characters_container, projectiles_container)
+	register_teams()
+	
 	for team: TeamConfig in teams:
 		for id: StringName in team.members:
 			var config: CharacterConfig = character_registry.get_character(id)
 			var character: Character = config.scene.instantiate()
-			add_character(character, team.id)
+			add_character(character, team.name)
 			character.apply_config(config)
 			
-			if player_team == team.id and player_character == config.id:
+			if player_team == team.name and player_character == config.id:
 				var camera = CAMERA.instantiate()
 				character.add_child(camera)
 				character.add_to_group("player")
-	
-	#var character = load("res://characters/%s.tscn" %player).instantiate()
-	#var camera = preload("uid://dskry0mydaydk").instantiate()
-	#character.add_child(camera)
-	#character.add_to_group("player")
-	#add_character(character, 1)
-	#
-	#$MovingDummy.team = 2
-	
-	#for i in enemies:
-		#var enemy = load("res://characters/%s.tscn" %i).instantiate()
-		#enemy.position = character.position + Vector2(randi_range(60,130), 0).rotated(randf_range(0, PI*2))
-		#enemy.get_node("Controller").is_player = false
-		#add_character(enemy, 2)
-		
-		#enemy.team = 2
-		#add_child(enemy)
 
-func add_character(character: Character, team: int):
-	character.team = team
-	add_child(character)
+func register_teams() -> void:
+	for team: TeamConfig in teams:
+		layer_controller.add_layer(team.name)
+
+func add_character(character: Character, team: StringName):
+	spawner.spawn_character(character, team)
 	UI.add_character_info(character)

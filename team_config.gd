@@ -1,5 +1,5 @@
 class_name TeamConfig extends Resource
 
 
-@export var id: int
+@export var name: StringName
 @export var members: Array[StringName]

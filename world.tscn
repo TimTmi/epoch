@@ -5,17 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://4ab6q6foyl0h" path="res://sprites/wall.png" id="2_kvf0d"]
 [ext_resource type="Script" uid="uid://b34p0l8ius8jc" path="res://team_config.gd" id="2_pkg7o"]
 [ext_resource type="Script" uid="uid://bmr4vxb8120wk" path="res://NavigationRegion.gd" id="3_1t8f1"]
+[ext_resource type="Resource" uid="uid://dyc2nw1g5x0iv" path="res://physics/physics_mask_resolver.tres" id="3_gbfbk"]
+[ext_resource type="Resource" uid="uid://cfhx6doy7vscw" path="res://physics/physics_layer_controller.tres" id="3_ioo17"]
 [ext_resource type="Script" uid="uid://cvb4q82ib0exx" path="res://UI.gd" id="5_serjb"]
+[ext_resource type="Script" uid="uid://msk3spq6not0" path="res://spawner.gd" id="6_pkg7o"]
 
 [sub_resource type="Resource" id="Resource_gbfbk"]
 script = ExtResource("2_pkg7o")
-id = 1
+name = &"team_1"
 members = Array[StringName]([&"quickfist"])
 metadata/_custom_type_script = "uid://b34p0l8ius8jc"
 
 [sub_resource type="Resource" id="Resource_ioo17"]
 script = ExtResource("2_pkg7o")
-id = 2
+name = &"team_2"
 members = Array[StringName]([&"moving_dummy"])
 metadata/_custom_type_script = "uid://b34p0l8ius8jc"
 
@@ -39,8 +42,10 @@ agent_radius = 4.0
 [node name="World" type="Node2D" unique_id=1838541832]
 script = ExtResource("1_5qxuo")
 character_registry = ExtResource("2_gbfbk")
+layer_controller = ExtResource("3_ioo17")
+mask_resolver = ExtResource("3_gbfbk")
 teams = Array[ExtResource("2_pkg7o")]([SubResource("Resource_gbfbk"), SubResource("Resource_ioo17")])
-player_team = 1
+player_team = &"team_1"
 player_character = &"quickfist"
 
 [node name="Walls" type="TileMap" parent="." unique_id=506168131]
@@ -55,6 +60,13 @@ navigation_polygon = SubResource("NavigationPolygon_tfq1u")
 use_edge_connections = false
 script = ExtResource("3_1t8f1")
 metadata/_edit_lock_ = true
+
+[node name="Characters" type="Node2D" parent="." unique_id=28715786]
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=69813411]
+
+[node name="Spawner" type="Node" parent="." unique_id=1924543495]
+script = ExtResource("6_pkg7o")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1572184448]
 
