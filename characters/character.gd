@@ -17,10 +17,7 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 @onready var speed: float = init_speed
 var positions : PackedVector2Array = []
 var time_scale: float = 1
-var input_disabled: int = 0:
-	set(value):
-		input_disabled += int(value) * 2 - 1
-		set_process_unhandled_input(!input_disabled)
+var input_locks: int = 0
 var team: StringName
 var mask_resolver: PhysicsMaskResolver
 var effects = preload("uid://gco7nrbbf05b").new()
@@ -67,8 +64,18 @@ func apply_config(config: CharacterConfig) -> void:
 func get_effective_delta(delta: float) -> float:
 	return delta * time_scale
 
-func set_input(enable: bool) -> void:
-	input_disabled = !enable
+func lock_input() -> void:
+	input_locks += 1
+	set_process_unhandled_input(true)
+
+func unlock_input() -> void:
+	input_locks -= 1
+	
+	if input_locks < 0:
+		push_warning("Input lock count below 0")
+		input_locks = 0
+	
+	set_process_unhandled_input(input_locks == 0)
 
 func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
 	ability_system.try_activate_ability(ability, intent, self)
@@ -82,6 +89,32 @@ func push(force: Vector2):
 func move(direction: Vector2) -> void:
 	direction = direction.normalized() * speed * time_scale
 	apply_central_force(direction)
+
+func spawn_hitbox(scene: PackedScene) -> Hitbox:
+	var hitbox: Hitbox = scene.instantiate()
+	if hitbox == null:
+		return null
+	
+	#TODO: physics setup
+	
+	add_child(hitbox)
+	return hitbox
+
+func spawn_projectile(scene: PackedScene) -> Projectile:
+	var projectile: Projectile = scene.instantiate()
+	if projectile == null:
+		return null
+	
+	#TODO: physics setup
+	
+	add_child(projectile)
+	return projectile
+
+func spawn_vfx(scene: PackedScene) -> Node2D:
+	var vfx = scene.instantiate()
+	
+	add_child(vfx)
+	return vfx
 
 func set_health(value: float) -> void:
 	$SetHealth.function.call(value, self)

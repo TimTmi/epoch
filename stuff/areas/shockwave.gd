@@ -1,4 +1,4 @@
-class_name Shockwave extends Area2D
+class_name Shockwave extends Hitbox
 
 
 @onready var collision = $Collision
@@ -11,6 +11,9 @@ class_name Shockwave extends Area2D
 
 @onready var velocity: float = radius / time * (2 ** damping)
 @onready var internal_damping: float = int(damping > 0) * (velocity ** 2) * 0.5 / radius
+
+
+signal finished
 
 
 func _ready():
@@ -32,4 +35,5 @@ func _physics_process(delta):
 	set_physics_process(velocity > 0)
 
 func _on_timer_timeout():
+	finished.emit()
 	queue_free()

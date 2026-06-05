@@ -1,4 +1,7 @@
-class_name CircleStrike extends Area2D
+class_name CircleStrike extends Hitbox
+
+
+@onready var collision: CollisionShape2D = $Collision
 
 
 func set_radius(radius: float = 2):

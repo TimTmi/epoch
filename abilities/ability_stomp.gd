@@ -6,31 +6,30 @@ const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 
 @export var damage: int = 10
 @export var radius: int = 32
-@export var time: float = 0.5
+@export var duration: float = 0.5
 @export var knockback_force: int = 300
 @export var stun_duration: float = 1
 
 
 func activate(context: AbilityContext) -> void:
-	var user: Character = context.user
+	var caster: AbilityCaster = context.caster
 	
-	var shockwave: Shockwave = SHOCKWAVE.instantiate()
-	var tween: Tween = user.create_tween()
-	shockwave.body_entered.connect(_on_body_entered.bind(user))
-	user.set_input(false)
-	user.add_child(shockwave)
-	tween.tween_interval(time)
-	tween.tween_callback(user.set_input.bind(true))
-	
-	await tween.finished
+	var shockwave: Shockwave = caster.spawn_hitbox(SHOCKWAVE)
+	shockwave.body_entered.connect(_on_body_entered.bind(caster))
+	caster.lock_input()
+	await shockwave.finished
+	caster.unlock_input()
 
-func _on_body_entered(body, user: Character):
-	if not body is Character or body.team == user.team:
+func _on_body_entered(body: Node, caster: AbilityCaster):
+	if not body is Character or caster.is_same_team(body):
 		return
 	
-	user.deal_damage(damage, body)
-	var direction = (body.position - user.position).normalized()
-	body.push(direction * (knockback_force ** 2) / user.position.distance_squared_to(body.position))
+	var target: Character = body
+	var caster_global_position: Vector2 = caster.get_global_position()
+	var direction = (target.global_position - caster_global_position).normalized()
 	var stun_effect = STUN_EFFECT.instantiate()
+	
+	caster.deal_damage(damage, target)
+	caster.push(target, direction * (knockback_force ** 2) / caster_global_position.distance_squared_to(target.global_position))
 	stun_effect.wait_time = stun_duration
-	body.apply_effect(stun_effect)
+	caster.apply_effect(target, stun_effect)

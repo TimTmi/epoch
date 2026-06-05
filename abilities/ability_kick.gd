@@ -13,33 +13,35 @@ const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 
 
 func activate(context: AbilityContext) -> void:
-	var user: Character = context.user
-	var direction: Vector2 = context.get_target_direction()
+	var caster: AbilityCaster = context.caster
+	var direction: Vector2 = context.targeting.get_target_direction()
 	if direction == Vector2.INF:
 		return
 	
-	var kick: CircleStrike = KICK.instantiate()
+	var kick: CircleStrike = caster.spawn_hitbox(KICK)
 	
 	kick.set_radius(6)
-	user.set_input(false)
-	user.add_child(kick)
-	user.apply_central_impulse(direction * dash_distance)
+	caster.lock_input()
+	caster.impulse(direction * dash_distance)
 	
-	var tween = user.create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
+	var tween = kick.create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.tween_property(kick, "position", direction * distance, duration).as_relative()
-	tween.tween_callback(user.set_input.bind(true))
 	tween.tween_callback(kick.queue_free)
 	
-	kick.body_entered.connect(_on_body_entered.bind(user))
+	kick.body_entered.connect(_on_body_entered.bind(caster))
 	
 	await tween.finished
+	caster.unlock_input()
 
-func _on_body_entered(body, user: Character):
-	if not body is Character or body.team == user.team:
+func _on_body_entered(body: Node, caster: AbilityCaster):
+	if not body is Character or caster.is_same_team(body):
 		return
-	user.deal_damage(damage, body)
-	var direction = (body.position - user.position).normalized()
-	body.push(direction * knockback_force)
+	
+	var target: Character = body
+	var direction: Vector2 = (target.global_position - caster.get_global_position()).normalized()
 	var stun_effect = STUN_EFFECT.instantiate()
+	
+	caster.deal_damage(damage, target)
+	caster.push(target, direction * knockback_force)
 	stun_effect.wait_time = stun_duration
-	body.apply_effect(stun_effect)
+	caster.apply_effect(target, stun_effect)

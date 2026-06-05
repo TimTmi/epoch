@@ -62,7 +62,7 @@ func move_to(movement_target: Vector2):
 	navigation_agent.set_velocity(new_velocity)
 
 func _physics_process(_delta):
-	if character.input_disabled:
+	if character.input_locks > 0:
 		return
 	if is_player:
 		_player_controller()
