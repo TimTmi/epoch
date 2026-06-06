@@ -12,7 +12,6 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 @export var player_team: StringName
 @export var player_character: StringName
 
-@onready var global_manager = get_node("/root/GlobalManager")
 @onready var characters_container: Node2D = $Characters
 @onready var projectiles_container: Node2D = $Projectiles
 @onready var spawner: Spawner = $Spawner
@@ -21,8 +20,6 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 func _ready():
 	randomize()
-	
-	global_manager.world = self
 	
 	spawner.setup(mask_resolver, characters_container, projectiles_container)
 	register_teams()
