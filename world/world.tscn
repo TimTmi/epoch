@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://cfhx6doy7vscw" path="res://world/physics/physics_layer_controller.tres" id="3_ioo17"]
 [ext_resource type="Script" uid="uid://cvb4q82ib0exx" path="res://presentation/ui/UI.gd" id="5_serjb"]
 [ext_resource type="Script" uid="uid://msk3spq6not0" path="res://world/spawning/spawner.gd" id="6_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://dskry0mydaydk" path="res://presentation/camera/camera.tscn" id="10_fyhu2"]
 
 [sub_resource type="Resource" id="Resource_gbfbk"]
 script = ExtResource("2_pkg7o")
@@ -93,3 +94,5 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 alignment = 1
+
+[node name="Camera" parent="." unique_id=1069038491 instance=ExtResource("10_fyhu2")]

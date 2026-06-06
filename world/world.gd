@@ -1,7 +1,6 @@
 class_name World extends Node2D
 
 
-const CAMERA = preload("uid://dskry0mydaydk")
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @export var character_registry: CharacterRegistry
@@ -32,8 +31,6 @@ func _ready():
 			character.apply_config(config)
 			
 			if player_team == team.name and player_character == config.id:
-				var camera = CAMERA.instantiate()
-				character.add_child(camera)
 				character.add_to_group("player")
 
 func register_teams() -> void:
