@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://c3tvfuihy0bxv" path="res://characters/base_character_registry.tres" id="2_gbfbk"]
 [ext_resource type="Texture2D" uid="uid://4ab6q6foyl0h" path="res://presentation/sprites/wall.png" id="2_kvf0d"]
 [ext_resource type="Script" uid="uid://b34p0l8ius8jc" path="res://world/teams/team_config.gd" id="2_pkg7o"]
-[ext_resource type="Script" uid="uid://bmr4vxb8120wk" path="res://world/navigation/NavigationRegion.gd" id="3_1t8f1"]
+[ext_resource type="Script" uid="uid://bmr4vxb8120wk" path="res://world/navigation/navigation_region.gd" id="3_1t8f1"]
 [ext_resource type="Resource" uid="uid://dyc2nw1g5x0iv" path="res://world/physics/physics_mask_resolver.tres" id="3_gbfbk"]
 [ext_resource type="Resource" uid="uid://cfhx6doy7vscw" path="res://world/physics/physics_layer_controller.tres" id="3_ioo17"]
 [ext_resource type="Script" uid="uid://cvb4q82ib0exx" path="res://presentation/ui/UI.gd" id="5_serjb"]
