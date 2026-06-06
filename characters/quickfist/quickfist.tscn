@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://beuj7q8inxk7r"]
 
 [ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_g3edd"]
-[ext_resource type="Script" uid="uid://41q628hsfkar" path="res://input_controllers/input_controller_quickfist.gd" id="3_da4ym"]
+[ext_resource type="Script" uid="uid://41q628hsfkar" path="res://characters/input_controllers/input_controller_quickfist.gd" id="3_da4ym"]
 
 [node name="Quickfist" unique_id=524260012 instance=ExtResource("1_g3edd")]
 

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PhysicsMaskResolver" format=3 uid="uid://dyc2nw1g5x0iv"]
+
+[ext_resource type="Script" uid="uid://cw3vxuuj88nbf" path="res://world/physics/physics_mask_resolver.gd" id="1_8g2ne"]
+[ext_resource type="Resource" uid="uid://cfhx6doy7vscw" path="res://world/physics/physics_layer_controller.tres" id="1_33kj8"]
+[ext_resource type="Resource" uid="uid://lfpn575jr3ff" path="res://world/physics/physics_interaction_ruleset.tres" id="2_7p4ds"]
+
+[resource]
+script = ExtResource("1_8g2ne")
+layer_controller = ExtResource("1_33kj8")
+ruleset = ExtResource("2_7p4ds")
+metadata/_custom_type_script = "uid://cw3vxuuj88nbf"

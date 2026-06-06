@@ -15,17 +15,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Epoch"
-run/main_scene="res://world.tscn"
+run/main_scene="res://world/world.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/stretch_mode=0
 boot_splash/use_filter=false
-boot_splash/image="res://sprites/icon.png"
-config/icon="res://sprites/icon.svg"
-config/windows_native_icon="res://sprites/icon.ico"
-
-[autoload]
-
-GlobalManager="*res://global_manager.gd"
+boot_splash/image="res://presentation/sprites/icon.png"
+config/icon="res://presentation/sprites/icon.svg"
+config/windows_native_icon="res://presentation/sprites/icon.ico"
 
 [display]
 
@@ -35,7 +31,7 @@ window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
-mouse_cursor/custom_image="res://sprites/cursor.png"
+mouse_cursor/custom_image="res://presentation/sprites/cursor.png"
 
 [editor_plugins]
 
@@ -51,8 +47,8 @@ fonts/dynamic_fonts/use_oversampling=false
 theme/default_font_antialiasing=0
 theme/default_font_hinting=0
 theme/default_font_subpixel_positioning=0
-theme/custom="res://theme.tres"
-theme/custom_font="res://fonts/04B_03__.TTF"
+theme/custom="res://presentation/themes/theme.tres"
+theme/custom_font="res://presentation/fonts/04B_03__.TTF"
 
 [input]
 

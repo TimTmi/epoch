@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cm4mxmbml4olx"]
+
+[ext_resource type="Script" uid="uid://cymr4yummw5hq" path="res://world/world.gd" id="1_5qxuo"]
+[ext_resource type="Resource" uid="uid://c3tvfuihy0bxv" path="res://characters/base_character_registry.tres" id="2_gbfbk"]
+[ext_resource type="Texture2D" uid="uid://4ab6q6foyl0h" path="res://presentation/sprites/wall.png" id="2_kvf0d"]
+[ext_resource type="Script" uid="uid://b34p0l8ius8jc" path="res://world/teams/team_config.gd" id="2_pkg7o"]
+[ext_resource type="Script" uid="uid://bmr4vxb8120wk" path="res://world/navigation/NavigationRegion.gd" id="3_1t8f1"]
+[ext_resource type="Resource" uid="uid://dyc2nw1g5x0iv" path="res://world/physics/physics_mask_resolver.tres" id="3_gbfbk"]
+[ext_resource type="Resource" uid="uid://cfhx6doy7vscw" path="res://world/physics/physics_layer_controller.tres" id="3_ioo17"]
+[ext_resource type="Script" uid="uid://cvb4q82ib0exx" path="res://presentation/ui/UI.gd" id="5_serjb"]
+[ext_resource type="Script" uid="uid://msk3spq6not0" path="res://world/spawning/spawner.gd" id="6_pkg7o"]
+
+[sub_resource type="Resource" id="Resource_gbfbk"]
+script = ExtResource("2_pkg7o")
+name = &"team_1"
+members = Array[StringName]([&"quickfist"])
+metadata/_custom_type_script = "uid://b34p0l8ius8jc"
+
+[sub_resource type="Resource" id="Resource_ioo17"]
+script = ExtResource("2_pkg7o")
+name = &"team_2"
+members = Array[StringName]([&"moving_dummy"])
+metadata/_custom_type_script = "uid://b34p0l8ius8jc"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q7boi"]
+resource_name = "wall"
+texture = ExtResource("2_kvf0d")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_jng6c"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_q7boi")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_tfq1u"]
+outlines = Array[PackedVector2Array]([PackedVector2Array(-256, -128, 256, -128, 256, 128, -256, 128)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 4.0
+
+[node name="World" type="Node2D" unique_id=1838541832]
+script = ExtResource("1_5qxuo")
+character_registry = ExtResource("2_gbfbk")
+layer_controller = ExtResource("3_ioo17")
+mask_resolver = ExtResource("3_gbfbk")
+teams = Array[ExtResource("2_pkg7o")]([SubResource("Resource_gbfbk"), SubResource("Resource_ioo17")])
+player_team = &"team_1"
+player_character = &"quickfist"
+
+[node name="Walls" type="TileMap" parent="." unique_id=506168131]
+tile_set = SubResource("TileSet_jng6c")
+rendering_quadrant_size = 64
+format = 2
+layer_0/tile_data = PackedInt32Array(-262153, 0, 0, -262152, 0, 0, -262151, 0, 0, -262150, 0, 0, -262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 0, 0, -262136, 0, 0, -196600, 0, 0, -131064, 0, 0, -65528, 0, 0, 8, 0, 0, 65544, 0, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 262151, 0, 0, 262150, 0, 0, 262149, 0, 0, 262148, 0, 0, 262147, 0, 0, 262146, 0, 0, 262145, 0, 0, 262144, 0, 0, 327679, 0, 0, 327678, 0, 0, 327677, 0, 0, 327676, 0, 0, 327675, 0, 0, 327674, 0, 0, 327673, 0, 0, 327672, 0, 0, 327671, 0, 0, 262135, 0, 0, -131081, 0, 0, -196617, 0, 0, -65545, 0, 0, -9, 0, 0, 65527, 0, 0, 131063, 0, 0, 196599, 0, 0, -327688, 0, 0, -327686, 0, 0, -327684, 0, 0, -327682, 0, 0, -393216, 0, 0, -393214, 0, 0, -393212, 0, 0, -393210, 0, 0)
+metadata/_edit_lock_ = true
+
+[node name="NavigationRegion" type="NavigationRegion2D" parent="." unique_id=1980622690]
+navigation_polygon = SubResource("NavigationPolygon_tfq1u")
+use_edge_connections = false
+script = ExtResource("3_1t8f1")
+metadata/_edit_lock_ = true
+
+[node name="Characters" type="Node2D" parent="." unique_id=28715786]
+
+[node name="Projectiles" type="Node2D" parent="." unique_id=69813411]
+
+[node name="Spawner" type="Node" parent="." unique_id=1924543495]
+script = ExtResource("6_pkg7o")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1572184448]
+
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=781222651]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_serjb")
+metadata/_edit_lock_ = true
+
+[node name="TeamInfo" type="HBoxContainer" parent="CanvasLayer/UI" unique_id=991489781]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -44.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+alignment = 1
