@@ -13,6 +13,8 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @onready var characters_container: Node2D = $Characters
 @onready var projectiles_container: Node2D = $Projectiles
+@onready var hitboxes_container: Node2D = $Hitboxes
+@onready var floating_texts_container: Node2D = $Effects/FloatingTexts
 @onready var spawner: Spawner = $Spawner
 @onready var UI = $CanvasLayer/UI
 
@@ -20,7 +22,10 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 func _ready():
 	randomize()
 	
-	spawner.setup(mask_resolver, characters_container, projectiles_container)
+	var spawn_service: SpawnService = SpawnService.new(spawner)
+	var world_context: WorldContext = WorldContext.new(self, spawn_service)
+	
+	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container)
 	register_teams()
 	
 	for team: TeamConfig in teams:

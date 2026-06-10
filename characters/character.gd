@@ -4,7 +4,6 @@ class_name Character
 
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
-@onready var world = get_parent()
 @onready var controller: InputController = $InputController
 @onready var health: Stat = $Health
 @onready var attack_percent: Stat = $AttackPercent
@@ -15,12 +14,17 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @export var init_speed: float = 1000
 @onready var speed: float = init_speed
+
 var positions : PackedVector2Array = []
 var time_scale: float = 1
+
 var input_locks: int = 0
+
 var team: StringName
 var mask_resolver: PhysicsMaskResolver
 var effects = preload("uid://gco7nrbbf05b").new()
+
+var world_context: WorldContext
 
 
 #signal health_changed(old_value: int, new_value: int)
@@ -40,7 +44,8 @@ func _ready():
 func ready():
 	pass
 
-func setup_team(team: StringName, mask_resolver: PhysicsMaskResolver) -> void:
+func setup(world_context: WorldContext, team: StringName, mask_resolver: PhysicsMaskResolver) -> void:
+	self.world_context = world_context
 	self.team = team
 	self.mask_resolver = mask_resolver
 	config_physics(
@@ -135,7 +140,7 @@ func _on_health_changed(old_value: int, new_value: int):
 	var damage_text = DAMAGE_TEXT.instantiate()
 	damage_text.text = str(old_value - new_value)
 	damage_text.position = position - damage_text.size / 2
-	world.add_child(damage_text)
+	world_context.world.add_child(damage_text)
 	if new_value == 0:
 		dead.emit()
 
