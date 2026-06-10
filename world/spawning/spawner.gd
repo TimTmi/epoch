@@ -13,6 +13,9 @@ func setup(world_context: WorldContext, mask_resolver: PhysicsMaskResolver, char
 	self.characters_container = characters_container
 	self.projectiles_container = projectiles_container
 
-func spawn_character(character: Character, team: StringName) -> void:
-	character.setup(world_context, team, mask_resolver)
+func spawn_character(config: CharacterConfig, team: StringName) -> Character:
+	var character: Character = config.scene.instantiate()
 	characters_container.add_child(character)
+	character.apply_config(config)
+	character.initialize(world_context, config, team, mask_resolver)
+	return character

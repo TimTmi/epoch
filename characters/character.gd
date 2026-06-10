@@ -44,14 +44,17 @@ func _ready():
 func ready():
 	pass
 
-func setup(world_context: WorldContext, team: StringName, mask_resolver: PhysicsMaskResolver) -> void:
+func initialize(world_context: WorldContext, config: CharacterConfig, team: StringName, mask_resolver: PhysicsMaskResolver) -> void:
 	self.world_context = world_context
 	self.team = team
 	self.mask_resolver = mask_resolver
+	
 	config_physics(
 		mask_resolver.get_layer(team, PhysicsSublayer.Type.CHARACTER),
 		mask_resolver.get_mask(team, PhysicsSublayer.Type.CHARACTER)
 	)
+	
+	apply_config(config)
 
 func config_physics(collision_layer: int, collision_mask: int) -> void:
 	self.collision_layer = collision_layer

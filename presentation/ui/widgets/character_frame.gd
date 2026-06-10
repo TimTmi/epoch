@@ -9,7 +9,7 @@ const ABILITY_CARD = preload("uid://cm35bklqb0tb1")
 
 
 func set_up_info(character: Character):
-	await character.ability_system.abilities_setup_finished
+	#await character.initialized
 	
 	character_name.text = character.name
 	health.custom_minimum_size.x = character.health.value

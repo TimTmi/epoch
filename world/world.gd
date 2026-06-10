@@ -22,7 +22,7 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 func _ready():
 	randomize()
 	
-	var spawn_service: SpawnService = SpawnService.new(spawner)
+	var spawn_service: SpawnService = SpawnService.new(self)
 	var world_context: WorldContext = WorldContext.new(self, spawn_service)
 	
 	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container)
@@ -31,9 +31,7 @@ func _ready():
 	for team: TeamConfig in teams:
 		for id: StringName in team.members:
 			var config: CharacterConfig = character_registry.get_character(id)
-			var character: Character = config.scene.instantiate()
-			add_character(character, team.name)
-			character.apply_config(config)
+			var character: Character = spawn_character(config, team.name)
 			
 			if player_team == team.name and player_character == config.id:
 				character.add_to_group("player")
@@ -42,6 +40,7 @@ func register_teams() -> void:
 	for team: TeamConfig in teams:
 		layer_controller.add_layer(team.name)
 
-func add_character(character: Character, team: StringName):
-	spawner.spawn_character(character, team)
+func spawn_character(config: CharacterConfig, team: StringName) -> Character:
+	var character: Character = spawner.spawn_character(config, team)
 	UI.add_character_info(character)
+	return character

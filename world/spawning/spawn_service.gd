@@ -1,11 +1,11 @@
 class_name SpawnService
 
 
-var spawner: Spawner
+var world: World
 
 
-func _init(spawner: Spawner) -> void:
-	self.spawner = spawner
+func _init(world: World) -> void:
+	self.world = world
 
-func spawn_character(character: Character, team: StringName) -> void:
-	spawner.spawn_character(character, team)
+func spawn_character(config: CharacterConfig, team: StringName) -> void:
+	world.spawn_character(config, team)
