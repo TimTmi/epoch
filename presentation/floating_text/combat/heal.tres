@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FloatingTextConfig" format=3 uid="uid://c30c2aw73e2tv"]
+
+[ext_resource type="Script" uid="uid://dk2g5pjtxc2dy" path="res://presentation/floating_text/floating_text_config.gd" id="1_bh0xv"]
+
+[resource]
+script = ExtResource("1_bh0xv")
+color = Color(0.23529412, 1, 0.50980395, 1)
+lifetime = 0.6
+offset = Vector2(0, -8)
+direction = Vector2(0, 1)
+distance = 32.0
+spread = 0.785
+metadata/_custom_type_script = "uid://dk2g5pjtxc2dy"

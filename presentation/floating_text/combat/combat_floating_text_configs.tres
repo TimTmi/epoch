@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CombatFloatingTextConfigs" format=3 uid="uid://bn6yqpd10d1ao"]
+
+[ext_resource type="Resource" uid="uid://c1p7y7hvagx40" path="res://presentation/floating_text/combat/damage.tres" id="1_70nla"]
+[ext_resource type="Script" uid="uid://cjaodaaw2w5uq" path="res://presentation/floating_text/combat/combat_floating_text_configs.gd" id="1_mkwfy"]
+[ext_resource type="Resource" uid="uid://c30c2aw73e2tv" path="res://presentation/floating_text/combat/heal.tres" id="2_nysp2"]
+
+[resource]
+script = ExtResource("1_mkwfy")
+damage = ExtResource("1_70nla")
+heal = ExtResource("2_nysp2")
+metadata/_custom_type_script = "uid://cjaodaaw2w5uq"

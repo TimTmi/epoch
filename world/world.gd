@@ -1,11 +1,10 @@
 class_name World extends Node2D
 
 
-const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
-
 @export var character_registry: CharacterRegistry
 @export var layer_controller: PhysicsLayerController
 @export var mask_resolver: PhysicsMaskResolver
+@export var combat_floating_text_configs: CombatFloatingTextConfigs
 
 @export var teams: Array[TeamConfig]
 @export var player_team: StringName
@@ -20,7 +19,8 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 var spawn_service: SpawnService
 var combat_system: CombatSystem
-var floating_text_service: FloatingTextService
+var floating_text_presenter: FloatingTextPresenter
+var combat_floating_text_presenter: CombatFloatingTextPresenter
 var world_context: WorldContext
 
 
@@ -33,11 +33,15 @@ func _ready() -> void:
 func setup_services() -> void:
 	spawn_service = SpawnService.new(self)
 	combat_system = CombatSystem.new()
-	floating_text_service = FloatingTextService.new(floating_texts_container)
+	floating_text_presenter = FloatingTextPresenter.new(floating_texts_container)
+	combat_floating_text_presenter = CombatFloatingTextPresenter.new(floating_text_presenter, combat_floating_text_configs)
 	world_context = WorldContext.new(self, spawn_service, combat_system)
 
 func setup_spawner() -> void:
 	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container)
+
+func bind_combat_floating_text_presenter() -> void:
+	combat_floating_text_presenter.bind(combat_system)
 
 func setup_teams() -> void:
 	for team: TeamConfig in teams:

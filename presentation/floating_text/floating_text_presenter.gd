@@ -1,4 +1,4 @@
-class_name FloatingTextService
+class_name FloatingTextPresenter
 
 
 var FLOATING_TEXT: PackedScene = preload("uid://b3vndm3ppg4d3")
