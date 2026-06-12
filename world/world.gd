@@ -24,22 +24,30 @@ var floating_text_service: FloatingTextService
 var world_context: WorldContext
 
 
-func _ready():
+func _ready() -> void:
 	randomize()
-	
+	setup_services()
+	setup_spawner()
+	setup_teams()
+ 
+func setup_services() -> void:
 	spawn_service = SpawnService.new(self)
 	combat_system = CombatSystem.new()
 	floating_text_service = FloatingTextService.new(floating_texts_container)
-	world_context = WorldContext.new(self, spawn_service, CombatSystem.new())
-	
+	world_context = WorldContext.new(self, spawn_service, combat_system)
+
+func setup_spawner() -> void:
 	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container)
-	
+
+func setup_teams() -> void:
 	for team: TeamConfig in teams:
 		register_team(team.name)
-		
-		for id: StringName in team.members:
-			var config: CharacterConfig = character_registry.get_character(id)
-			spawn_team_member(config, team.name)
+		spawn_team(team)
+
+func spawn_team(team: TeamConfig) -> void:
+	for id: StringName in team.members:
+		var config: CharacterConfig = character_registry.get_character(id)
+		spawn_team_member(config, team.name)
 
 func spawn_team_member(config: CharacterConfig, team_name: StringName) -> Character:
 	var character: Character = spawn_character(config, team_name)
