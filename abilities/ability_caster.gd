@@ -10,8 +10,8 @@ func _init(character: Character) -> void:
 func get_global_position() -> Vector2:
 	return character.global_position
 
-func spawn_hitbox(scene: PackedScene) -> Hitbox:
-	return character.spawn_hitbox(scene)
+func spawn_local_hitbox(scene: PackedScene) -> Hitbox:
+	return character.spawn_local_hitbox(scene)
 
 func spawn_projectile(scene: PackedScene) -> Projectile:
 	return character.spawn_projectile(scene)

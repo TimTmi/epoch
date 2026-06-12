@@ -14,7 +14,7 @@ const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 func activate(context: AbilityContext) -> void:
 	var caster: AbilityCaster = context.caster
 	
-	var shockwave: Shockwave = caster.spawn_hitbox(SHOCKWAVE)
+	var shockwave: Shockwave = caster.spawn_local_hitbox(SHOCKWAVE)
 	shockwave.body_entered.connect(_on_body_entered.bind(caster))
 	caster.lock_input()
 	await shockwave.finished

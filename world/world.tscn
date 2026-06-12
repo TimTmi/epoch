@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bmr4vxb8120wk" path="res://world/navigation/navigation_region.gd" id="3_1t8f1"]
 [ext_resource type="Resource" uid="uid://dyc2nw1g5x0iv" path="res://world/physics/physics_mask_resolver.tres" id="3_gbfbk"]
 [ext_resource type="Resource" uid="uid://cfhx6doy7vscw" path="res://world/physics/physics_layer_controller.tres" id="3_ioo17"]
+[ext_resource type="Resource" uid="uid://bn6yqpd10d1ao" path="res://presentation/floating_text/combat/combat_floating_text_configs.tres" id="5_ov2xu"]
 [ext_resource type="Script" uid="uid://cvb4q82ib0exx" path="res://presentation/ui/UI.gd" id="5_serjb"]
 [ext_resource type="Script" uid="uid://msk3spq6not0" path="res://world/spawning/spawner.gd" id="6_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://dskry0mydaydk" path="res://presentation/camera/camera.tscn" id="10_fyhu2"]
@@ -45,6 +46,7 @@ script = ExtResource("1_5qxuo")
 character_registry = ExtResource("2_gbfbk")
 layer_controller = ExtResource("3_ioo17")
 mask_resolver = ExtResource("3_gbfbk")
+combat_floating_text_configs = ExtResource("5_ov2xu")
 teams = Array[ExtResource("2_pkg7o")]([SubResource("Resource_gbfbk"), SubResource("Resource_ioo17")])
 player_team = &"team_1"
 player_character = &"quickfist"

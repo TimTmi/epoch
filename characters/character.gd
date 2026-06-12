@@ -98,7 +98,7 @@ func move(direction: Vector2) -> void:
 	direction = direction.normalized() * speed * time_scale
 	apply_central_force(direction)
 
-func spawn_hitbox(scene: PackedScene) -> Hitbox:
+func spawn_local_hitbox(scene: PackedScene) -> Hitbox:
 	var hitbox: Hitbox = scene.instantiate()
 	if hitbox == null:
 		return null
@@ -107,6 +107,9 @@ func spawn_hitbox(scene: PackedScene) -> Hitbox:
 	
 	add_child(hitbox)
 	return hitbox
+
+func spawn_global_hitbox(scene: PackedScene) -> Hitbox:
+	return world_context.spawn.spawn_hitbox(scene, team)
 
 func spawn_projectile(scene: PackedScene) -> Projectile:
 	var projectile: Projectile = scene.instantiate()
@@ -140,10 +143,10 @@ func apply_effect(effect: Effect) -> void:
 	effects.apply_effect(effect)
 
 func _on_health_changed(old_value: int, new_value: int):
-	var damage_text = DAMAGE_TEXT.instantiate()
-	damage_text.text = str(old_value - new_value)
-	damage_text.position = position - damage_text.size / 2
-	world_context.world.add_child(damage_text)
+	#var damage_text = DAMAGE_TEXT.instantiate()
+	#damage_text.text = str(old_value - new_value)
+	#damage_text.position = position - damage_text.size / 2
+	#world_context.world.add_child(damage_text)
 	if new_value == 0:
 		dead.emit()
 

@@ -1,11 +1,22 @@
 class_name SpawnService
 
 
-var world: World
+var spawner: Spawner
 
 
-func _init(world: World) -> void:
-	self.world = world
+signal character_spawned(character: Character)
+signal projectile_spawned(projectile: Projectile)
+signal hitbox_spawned(hitbox: Hitbox)
 
-func spawn_character(config: CharacterConfig, team: StringName) -> void:
-	world.spawn_character(config, team)
+
+func _init(spawner: Spawner) -> void:
+	self.spawner = spawner
+
+func spawn_character(config: CharacterConfig, team: StringName) -> Character:
+	return spawner.spawn_character(config, team)
+
+func spawn_projectile(scene: PackedScene, team: StringName) -> Projectile:
+	return spawner.spawn_projectile(scene, team)
+
+func spawn_hitbox(scene: PackedScene, team: StringName) -> Hitbox:
+	return 

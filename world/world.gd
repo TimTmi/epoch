@@ -29,18 +29,20 @@ func _ready() -> void:
 	setup_services()
 	setup_spawner()
 	setup_teams()
+	connect_events()
  
 func setup_services() -> void:
-	spawn_service = SpawnService.new(self)
+	spawn_service = SpawnService.new(spawner)
 	combat_system = CombatSystem.new()
 	floating_text_presenter = FloatingTextPresenter.new(floating_texts_container)
 	combat_floating_text_presenter = CombatFloatingTextPresenter.new(floating_text_presenter, combat_floating_text_configs)
 	world_context = WorldContext.new(self, spawn_service, combat_system)
 
 func setup_spawner() -> void:
-	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container)
+	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container, hitboxes_container)
 
-func bind_combat_floating_text_presenter() -> void:
+func connect_events() -> void:
+	spawn_service.character_spawned.connect(_on_character_spawned)
 	combat_floating_text_presenter.bind(combat_system)
 
 func setup_teams() -> void:
@@ -54,7 +56,7 @@ func spawn_team(team: TeamConfig) -> void:
 		spawn_team_member(config, team.name)
 
 func spawn_team_member(config: CharacterConfig, team_name: StringName) -> Character:
-	var character: Character = spawn_character(config, team_name)
+	var character: Character = spawn_service.spawn_character(config, team_name)
 	
 	if is_player_character(config, team_name):
 		character.add_to_group("player")
@@ -67,7 +69,5 @@ func is_player_character(config: CharacterConfig, team_name: StringName) -> bool
 func register_team(team_name: StringName) -> bool:
 	return layer_controller.add_layer(team_name)
 
-func spawn_character(config: CharacterConfig, team: StringName) -> Character:
-	var character: Character = spawner.spawn_character(config, team)
+func _on_character_spawned(character: Character) -> void:
 	UI.add_character_info(character)
-	return character
