@@ -18,27 +18,42 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 @onready var spawner: Spawner = $Spawner
 @onready var UI = $CanvasLayer/UI
 
+var spawn_service: SpawnService
+var combat_system: CombatSystem
+var floating_text_service: FloatingTextService
+var world_context: WorldContext
+
 
 func _ready():
 	randomize()
 	
-	var spawn_service: SpawnService = SpawnService.new(self)
-	var world_context: WorldContext = WorldContext.new(self, spawn_service)
+	spawn_service = SpawnService.new(self)
+	combat_system = CombatSystem.new()
+	floating_text_service = FloatingTextService.new(floating_texts_container)
+	world_context = WorldContext.new(self, spawn_service, CombatSystem.new())
 	
 	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container)
-	register_teams()
 	
 	for team: TeamConfig in teams:
+		register_team(team.name)
+		
 		for id: StringName in team.members:
 			var config: CharacterConfig = character_registry.get_character(id)
-			var character: Character = spawn_character(config, team.name)
-			
-			if player_team == team.name and player_character == config.id:
-				character.add_to_group("player")
+			spawn_team_member(config, team.name)
 
-func register_teams() -> void:
-	for team: TeamConfig in teams:
-		layer_controller.add_layer(team.name)
+func spawn_team_member(config: CharacterConfig, team_name: StringName) -> Character:
+	var character: Character = spawn_character(config, team_name)
+	
+	if is_player_character(config, team_name):
+		character.add_to_group("player")
+	
+	return character
+
+func is_player_character(config: CharacterConfig, team_name: StringName) -> bool:
+	return player_team == team_name and player_character == config.id
+
+func register_team(team_name: StringName) -> bool:
+	return layer_controller.add_layer(team_name)
 
 func spawn_character(config: CharacterConfig, team: StringName) -> Character:
 	var character: Character = spawner.spawn_character(config, team)
