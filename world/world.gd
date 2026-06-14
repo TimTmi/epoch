@@ -46,8 +46,8 @@ func connect_events() -> void:
 	combat_floating_text_presenter.bind(combat_system)
 
 func setup_teams() -> void:
+	register_teams()
 	for team: TeamConfig in teams:
-		register_team(team.name)
 		spawn_team(team)
 
 func spawn_team(team: TeamConfig) -> void:
@@ -65,6 +65,10 @@ func spawn_team_member(config: CharacterConfig, team_name: StringName) -> Charac
 
 func is_player_character(config: CharacterConfig, team_name: StringName) -> bool:
 	return player_team == team_name and player_character == config.id
+
+func register_teams() -> void:
+	for team: TeamConfig in teams:
+		register_team(team.name)
 
 func register_team(team_name: StringName) -> bool:
 	return layer_controller.add_layer(team_name)
