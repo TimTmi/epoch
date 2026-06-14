@@ -21,7 +21,7 @@ var time_scale: float = 1
 var input_locks: int = 0
 
 var team: StringName
-var mask_resolver: PhysicsMaskResolver
+var physics_profile: PhysicsProfile
 var effects = preload("uid://gco7nrbbf05b").new()
 
 var world_context: WorldContext
@@ -44,21 +44,18 @@ func _ready():
 func ready():
 	pass
 
-func initialize(world_context: WorldContext, config: CharacterConfig, team: StringName, mask_resolver: PhysicsMaskResolver) -> void:
+func initialize(world_context: WorldContext, config: CharacterConfig, team: StringName, physics_profile: PhysicsProfile) -> void:
 	self.world_context = world_context
 	self.team = team
-	self.mask_resolver = mask_resolver
+	self.physics_profile = physics_profile
 	
-	config_physics(
-		mask_resolver.get_layer(team, PhysicsSublayer.Type.CHARACTER),
-		mask_resolver.get_mask(team, PhysicsSublayer.Type.CHARACTER)
-	)
+	config_physics(physics_profile)
 	
 	apply_config(config)
 
-func config_physics(collision_layer: int, collision_mask: int) -> void:
-	self.collision_layer = collision_layer
-	self.collision_mask = collision_mask
+func config_physics(physics_profile: PhysicsProfile) -> void:
+	self.collision_layer = physics_profile.character_layer
+	self.collision_mask = physics_profile.character_mask
 
 func apply_config(config: CharacterConfig) -> void:
 	var character_stats: CharacterStats = config.stats
@@ -103,7 +100,7 @@ func spawn_local_hitbox(scene: PackedScene) -> Hitbox:
 	if hitbox == null:
 		return null
 	
-	#TODO: physics setup
+	hitbox.setup_physics(physics_profile)
 	
 	add_child(hitbox)
 	return hitbox

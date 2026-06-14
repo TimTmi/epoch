@@ -17,9 +17,11 @@ func setup(world_context: WorldContext, mask_resolver: PhysicsMaskResolver, char
 
 func spawn_character(config: CharacterConfig, team: StringName) -> Character:
 	var character: Character = config.scene.instantiate()
+	if character == null:
+		return null
+	
 	characters_container.add_child(character)
-	character.apply_config(config)
-	character.initialize(world_context, config, team, mask_resolver)
+	character.initialize(world_context, config, team, mask_resolver.get_profile(team))
 	return character
 
 func spawn_projectile(scene: PackedScene, team: StringName) -> Projectile:

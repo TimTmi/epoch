@@ -28,8 +28,8 @@ func _ready() -> void:
 	randomize()
 	setup_services()
 	setup_spawner()
-	setup_teams()
 	connect_events()
+	setup_teams()
  
 func setup_services() -> void:
 	spawn_service = SpawnService.new(spawner)

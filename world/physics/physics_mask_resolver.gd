@@ -48,3 +48,17 @@ func get_mask(source_team: StringName, source_sublayer: PhysicsSublayer.Type, ov
 	mask |= same_team_mask << layer_controller.get_layer_offset(source_team)
 	
 	return mask
+
+func get_profile(team: StringName) -> PhysicsProfile:
+	var profile := PhysicsProfile.new()
+	
+	profile.character_layer = get_layer(team, PhysicsSublayer.Type.CHARACTER)
+	profile.character_mask = get_mask(team, PhysicsSublayer.Type.CHARACTER)
+	
+	profile.projectile_layer = get_layer(team, PhysicsSublayer.Type.PROJECTILE)
+	profile.projectile_mask = get_mask(team, PhysicsSublayer.Type.PROJECTILE)
+	
+	profile.hitbox_layer = get_layer(team, PhysicsSublayer.Type.HITBOX)
+	profile.hitbox_mask = get_mask(team, PhysicsSublayer.Type.HITBOX)
+	
+	return profile

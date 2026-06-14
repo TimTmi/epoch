@@ -13,10 +13,25 @@ func _init(spawner: Spawner) -> void:
 	self.spawner = spawner
 
 func spawn_character(config: CharacterConfig, team: StringName) -> Character:
-	return spawner.spawn_character(config, team)
+	var character: Character = spawner.spawn_character(config, team)
+	if character == null:
+		return null
+	
+	character_spawned.emit(character)
+	return character
 
 func spawn_projectile(scene: PackedScene, team: StringName) -> Projectile:
-	return spawner.spawn_projectile(scene, team)
+	var projectile: Projectile = spawner.spawn_projectile(scene, team)
+	if projectile == null:
+		return null
+	
+	projectile_spawned.emit(projectile)
+	return projectile
 
 func spawn_hitbox(scene: PackedScene, team: StringName) -> Hitbox:
-	return 
+	var hitbox: Hitbox = spawner.spawn_hitbox(scene, team)
+	if hitbox == null:
+		return null
+	
+	hitbox_spawned.emit(hitbox)
+	return hitbox
