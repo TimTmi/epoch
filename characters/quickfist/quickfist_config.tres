@@ -17,14 +17,12 @@
 
 [sub_resource type="Resource" id="Resource_1amtr"]
 script = ExtResource("5_fmbpl")
-knockback_force = 1000.0
 icon = ExtResource("4_dkmb8")
 cooldown = 0.2
 metadata/_custom_type_script = "uid://bn027ie5mw1i8"
 
 [sub_resource type="Resource" id="Resource_fmngg"]
 script = ExtResource("6_ahvqm")
-knockback_force = 6000.0
 icon = ExtResource("6_m3qy4")
 cooldown = 3.0
 metadata/_custom_type_script = "uid://cnltbdm12rskg"
