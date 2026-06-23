@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterConfig" format=3 uid="uid://b278s2mebyppr"]
 
-[ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/ability.gd" id="1_jgash"]
+[ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_jgash"]
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://characters/character_config.gd" id="2_fgqdg"]
 [ext_resource type="PackedScene" uid="uid://dlwp8mtpiaq5j" path="res://characters/moving_dummy/moving_dummy.tscn" id="2_tjtki"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://characters/stats_config.gd" id="4_mp4hp"]
