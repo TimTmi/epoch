@@ -1,23 +1,20 @@
-class_name AbilitySystem extends Node
+class_name AbilitySystem
 
 
 enum CommandSlot { PRIMARY, SECONDARY, UTILITY, SPECIAL, ULTIMATE, EXTRA_1, EXTRA_2, EXTRA_3 }
-
-@export var slot_abilities: Dictionary[CommandSlot, Ability]
-@export var passive_abilities: Array[Ability]
 
 var slot_ability_instances: Dictionary[CommandSlot, AbilityInstance] = {}
 var passive_ability_instances: Array[AbilityInstance] = []
 
 
-func _ready() -> void:
+func setup_abilities(slot_abilities: Dictionary[CommandSlot, Ability], passive_abilities: Array[Ability]) -> void:
 	for slot: CommandSlot in slot_abilities:
 		slot_ability_instances[slot] = AbilityInstance.new(slot_abilities.get(slot))
 	
 	for ability: Ability in passive_abilities:
 		passive_ability_instances.append(AbilityInstance.new(ability))
 
-func _process(delta: float) -> void:
+func tick(delta: float) -> void:
 	for instance: AbilityInstance in slot_ability_instances.values():
 		instance.tick(delta)
 	

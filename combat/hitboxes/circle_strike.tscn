@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dyflk7p2dlcdc"]
+
+[ext_resource type="Script" uid="uid://cl7pwstu7wn0d" path="res://combat/hitboxes/circle_strike.gd" id="1_m5tjy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yjuvy"]
+radius = 2.0
+
+[sub_resource type="Curve" id="Curve_gj3am"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t4lfe"]
+curve = SubResource("Curve_gj3am")
+
+[sub_resource type="Curve" id="Curve_oihv4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vlx20"]
+curve = SubResource("Curve_oihv4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2vff0"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+angle_min = -720.0
+angle_max = 720.0
+angle_curve = SubResource("CurveTexture_t4lfe")
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_vlx20")
+
+[node name="CircleStrike" type="Area2D" unique_id=494390561]
+linear_damp = 10.0
+script = ExtResource("1_m5tjy")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1711204671]
+shape = SubResource("CircleShape2D_yjuvy")
+
+[node name="Particles" type="GPUParticles2D" parent="Collision" unique_id=1115851789]
+show_behind_parent = true
+amount = 32
+lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_2vff0")
+
+[node name="Timer" type="Timer" parent="." unique_id=515595907]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]

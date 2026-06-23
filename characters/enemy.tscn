@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://wqq7q8t8ish0" path="res://characters/enemy.gd" id="1_cb2mb"]
 [ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://characters/character.tscn" id="1_ep8ut"]
-[ext_resource type="Script" uid="uid://c78v0ig6crqst" path="res://input_controllers/input_controller_enemy.gd" id="3_hkupn"]
+[ext_resource type="Script" uid="uid://c78v0ig6crqst" path="res://characters/input_controllers/input_controller_enemy.gd" id="3_hkupn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r06cu"]
 
 [node name="Enemy" unique_id=1463307526 instance=ExtResource("1_ep8ut")]
 script = ExtResource("1_cb2mb")
 
-[node name="Controller" parent="." index="2" unique_id=919348798]
+[node name="InputController" parent="." index="2" unique_id=919348798]
 script = ExtResource("3_hkupn")
 
 [node name="PunchArea" type="Area2D" parent="." index="5" unique_id=2082474333]

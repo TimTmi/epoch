@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bgtgir2b55nv4"]
+
+[ext_resource type="Script" uid="uid://bqbjey4npax2w" path="res://combat/hitboxes/shockwave.gd" id="1_tvxow"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hs7ki"]
+resource_local_to_scene = true
+radius = 0.01
+
+[sub_resource type="Curve" id="Curve_rckcs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Shockwave" type="Area2D" unique_id=1681415193]
+monitorable = false
+script = ExtResource("1_tvxow")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1148737706]
+shape = SubResource("CircleShape2D_hs7ki")
+
+[node name="Particles" type="CPUParticles2D" parent="." unique_id=2060023462]
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+damping_min = 64.0
+damping_max = 64.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_rckcs")
+
+[node name="Timer" type="Timer" parent="." unique_id=1282558489]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -5,8 +5,9 @@ class_name Dash extends Ability
 
 
 func activate(context: AbilityContext) -> void:
-	var direction: Vector2 = context.get_target_direction()
+	var caster: AbilityCaster = context.caster
+	var direction: Vector2 = context.targeting.get_target_direction()
 	if direction == Vector2.INF:
 		return
 	
-	context.user.push(direction * force)
+	caster.impulse(direction * force)

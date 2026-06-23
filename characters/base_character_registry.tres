@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterRegistry" format=3 uid="uid://c3tvfuihy0bxv"]
+
+[ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://characters/character_config.gd" id="1_0g8vs"]
+[ext_resource type="Resource" uid="uid://w6vjoac7iwjl" path="res://characters/quickfist/quickfist_config.tres" id="2_pnd6x"]
+[ext_resource type="Script" uid="uid://dwgwjlud6mpu" path="res://characters/character_registry.gd" id="2_w3x36"]
+[ext_resource type="Resource" uid="uid://b278s2mebyppr" path="res://characters/moving_dummy/moving_dummy_config.tres" id="3_pnd6x"]
+
+[resource]
+script = ExtResource("2_w3x36")
+characters = Array[ExtResource("1_0g8vs")]([ExtResource("2_pnd6x"), ExtResource("3_pnd6x")])
+metadata/_custom_type_script = "uid://dwgwjlud6mpu"

@@ -2,7 +2,6 @@ class_name Punch extends Ability
 
 
 const PUNCH = preload("uid://dyflk7p2dlcdc")
-const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 
 @export var distance: int = 10
 @export var duration: float = 0.2
@@ -16,51 +15,39 @@ var clockwise = randi_range(0, 1) * 2 - 1
 
 
 func activate(context: AbilityContext) -> void:
-	var user: Character = context.user
-	var direction: Vector2 = context.get_target_direction()
+	var caster: AbilityCaster = context.caster
+	var direction: Vector2 = context.targeting.get_target_direction()
 	if direction == Vector2.INF:
 		return
 	
-	var punch: CircleStrike = PUNCH.instantiate()
-	var punch_collision = punch.get_node("Collision")
+	var punch: CircleStrike = caster.spawn_local_hitbox(PUNCH)
 	var angle = PI/2 * -clockwise
-	user.set_input(false)
-	punch_collision.position.x = distance
-	punch.look_at(direction)
+	punch.collision.position.x = distance
+	punch.rotation = direction.angle()
 	punch.rotate(angle)
 	
-	#punch.position = (direction * distance).rotated(angle)
-	#joint.position = user.position
-	
-	user.add_child(punch)
-	#user.add_child(joint)
-	
-	#joint.node_a = user.get_path()
-	#joint.node_b = punch.get_path()
-	
-	user.apply_central_impulse(direction * dash_distance)
-	#punch.apply_central_impulse(direction * dash_distance * 3)
-	#punch.apply_central_impulse((direction * dash_distance).rotated(PI / 2 * clockwise))
+	caster.lock_input()
+	caster.impulse(direction * dash_distance)
 	
 	var tween = punch.create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	#print(punch.get_children())
 	tween.tween_property(punch, "rotation", PI * clockwise, duration).as_relative()
-	#tween.tween_interval(duration)
-	tween.tween_callback(user.set_input.bind(true))
-	#tween.tween_callback(joint.queue_free)
 	tween.tween_callback(punch.queue_free)
 	
 	clockwise = -clockwise
-	punch.body_entered.connect(_on_body_entered.bind(user))
+	punch.body_entered.connect(_on_body_entered.bind(caster))
 	
 	await tween.finished
+	caster.unlock_input()
 
-func _on_body_entered(body, user: Character):
-	if not body is Character or body.team == user.team:
+func _on_body_entered(body: Node, caster: AbilityCaster):
+	if not body is Character or caster.is_same_team(body):
 		return
-	user.deal_damage(damage, body)
-	var direction = (body.position - user.position).normalized()
-	body.push(direction * knockback_force)
-	var stun_effect = STUN_EFFECT.instantiate()
-	stun_effect.wait_time = stun_duration
-	body.apply_effect(stun_effect)
+	
+	var target: Character = body
+	var direction: Vector2 = (target.global_position - caster.get_global_position()).normalized()
+	
+	caster.deal_damage(damage, target)
+	caster.push(target, direction * knockback_force)
+	
+	var stun: StatusEffect = Stun.new(stun_duration)
+	caster.apply_effect(stun, target)
