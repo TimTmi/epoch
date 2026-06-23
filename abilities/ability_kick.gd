@@ -2,7 +2,6 @@ class_name Kick extends Ability
 
 
 const KICK = preload("uid://dyflk7p2dlcdc")
-const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 
 @export var distance: int = 0
 @export var duration: float = 0.2
@@ -39,9 +38,9 @@ func _on_body_entered(body: Node, caster: AbilityCaster):
 	
 	var target: Character = body
 	var direction: Vector2 = (target.global_position - caster.get_global_position()).normalized()
-	var stun_effect = STUN_EFFECT.instantiate()
 	
 	caster.deal_damage(damage, target)
 	caster.push(target, direction * knockback_force)
-	stun_effect.wait_time = stun_duration
-	caster.apply_effect(target, stun_effect)
+	
+	var stun: StatusEffect = Stun.new(stun_duration)
+	caster.apply_effect(stun, target)

@@ -2,7 +2,6 @@ class_name Stomp extends Ability
 
 
 const SHOCKWAVE = preload("uid://bgtgir2b55nv4")
-const STUN_EFFECT = preload("uid://dc5fedov07j4c")
 
 @export var damage: int = 10
 @export var radius: int = 32
@@ -27,9 +26,9 @@ func _on_body_entered(body: Node, caster: AbilityCaster):
 	var target: Character = body
 	var caster_global_position: Vector2 = caster.get_global_position()
 	var direction = (target.global_position - caster_global_position).normalized()
-	var stun_effect = STUN_EFFECT.instantiate()
 	
 	caster.deal_damage(damage, target)
 	caster.push(target, direction * (knockback_force ** 2) / caster_global_position.distance_squared_to(target.global_position))
-	stun_effect.wait_time = stun_duration
-	caster.apply_effect(target, stun_effect)
+	
+	var stun: StatusEffect = Stun.new(stun_duration)
+	caster.apply_effect(stun, target)

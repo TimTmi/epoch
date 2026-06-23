@@ -14,3 +14,6 @@ func deal_damage(amount: float, source: Character, target: Character) -> void:
 func heal(amount: float, source: Character, target: Character) -> void:
 	target.heal(amount, source)
 	healed.emit(amount, target, source)
+
+func apply_effect(effect: StatusEffect, source: Character, target: Character) -> void:
+	target.status_effect_system.apply_effect(effect, source)

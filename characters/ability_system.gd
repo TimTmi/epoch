@@ -1,4 +1,4 @@
-class_name AbilitySystem extends Node
+class_name AbilitySystem
 
 
 enum CommandSlot { PRIMARY, SECONDARY, UTILITY, SPECIAL, ULTIMATE, EXTRA_1, EXTRA_2, EXTRA_3 }
@@ -14,7 +14,7 @@ func setup_abilities(slot_abilities: Dictionary[CommandSlot, Ability], passive_a
 	for ability: Ability in passive_abilities:
 		passive_ability_instances.append(AbilityInstance.new(ability))
 
-func _process(delta: float) -> void:
+func tick(delta: float) -> void:
 	for instance: AbilityInstance in slot_ability_instances.values():
 		instance.tick(delta)
 	

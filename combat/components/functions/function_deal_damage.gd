@@ -5,10 +5,10 @@ var multiplier: float = 1
 var flat_modifier: float = 0
 
 
-var function: Callable = func(amount: float, attacker: Character, target: Character):
+var function: Callable = func(amount: float, attacker: Character, target: Character, world_context: WorldContext):
 	amount = amount * multiplier + flat_modifier
 	amount = handle(amount)
-	target.take_damage(amount, attacker)
+	world_context.combat.deal_damage(amount, attacker, target)
 	damage_dealt.emit(amount, target)
 
 

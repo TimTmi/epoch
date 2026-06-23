@@ -48,5 +48,5 @@ func damage_self(amount: float) -> void:
 func push(target: Character, force: Vector2) -> void:
 	target.push(force)
 
-func apply_effect(target: Character, effect: Effect) -> void:
-	target.apply_effect(effect)
+func apply_effect(effect: StatusEffect, target: Character) -> void:
+	character.apply_effect(effect, target)

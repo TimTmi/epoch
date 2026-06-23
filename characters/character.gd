@@ -10,10 +10,12 @@ const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 @onready var attack_flat: Stat = $AttackFlat
 @onready var defense_percent: Stat = $DefensePercent
 @onready var defense_flat: Stat = $DefenseFlat
-@onready var ability_system: AbilitySystem = $AbilitySystem
 
 @export var init_speed: float = 1000
 @onready var speed: float = init_speed
+
+var ability_system: AbilitySystem = AbilitySystem.new()
+var status_effect_system: StatusEffectSystem = StatusEffectSystem.new(self)
 
 var positions : PackedVector2Array = []
 var time_scale: float = 1
@@ -22,7 +24,6 @@ var input_locks: int = 0
 
 var team: StringName
 var physics_profile: PhysicsProfile
-var effects = preload("uid://gco7nrbbf05b").new()
 
 var world_context: WorldContext
 
@@ -35,8 +36,6 @@ signal dead
 
 
 func _ready():
-	effects.name = "Effects"
-	add_child(effects)
 	add_to_group("characters")
 	#get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFERRED, "characters", "_character_added", self)
 	ready()
@@ -128,7 +127,7 @@ func set_health(value: float) -> void:
 	$SetHealth.function.call(value, self)
 
 func deal_damage(amount: float, target: Character) -> void:
-	$DealDamage.function.call(amount, self, target)
+	$DealDamage.function.call(amount, self, target, world_context)
 
 func take_damage(amount: float, attacker: Character) -> void:
 	$TakeDamage.function.call(amount, attacker, self)
@@ -136,8 +135,12 @@ func take_damage(amount: float, attacker: Character) -> void:
 func heal(amount: float, healer: Character = self) -> void:
 	$Heal.function.call(amount, healer, self)
 
-func apply_effect(effect: Effect) -> void:
-	effects.apply_effect(effect)
+func apply_effect(effect: StatusEffect, target: Character) -> void:
+	world_context.combat.apply_effect(effect, self, target)
+
+func _physics_process(delta: float) -> void:
+	ability_system.tick(delta)
+	status_effect_system.tick(delta)
 
 func _on_health_changed(old_value: int, new_value: int):
 	#var damage_text = DAMAGE_TEXT.instantiate()
