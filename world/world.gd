@@ -59,6 +59,7 @@ func spawn_team_member(config: CharacterConfig, team_name: StringName) -> Charac
 	var character: Character = spawn_service.spawn_character(config, team_name)
 	
 	if is_player_character(config, team_name):
+		character.input_controller.is_player = true
 		character.add_to_group("player")
 	
 	return character

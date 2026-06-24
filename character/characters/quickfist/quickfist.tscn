@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://pghqsbm0alj2"]
+
+[ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://character/core/character.tscn" id="1_ly46j"]
+
+[node name="Quickfist" unique_id=1388713911 instance=ExtResource("1_ly46j")]
+
+[node name="InputController" parent="." index="2" unique_id=919348798]
+is_player = true

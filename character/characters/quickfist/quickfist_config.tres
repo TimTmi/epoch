@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="CharacterConfig" format=3 uid="uid://w6vjoac7iwjl"]
+
+[ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_luryc"]
+[ext_resource type="PackedScene" uid="uid://pghqsbm0alj2" path="res://character/characters/quickfist/quickfist.tscn" id="2_luryc"]
+[ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="3_yv12g"]
+[ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://presentation/sprites/ability_icons/punch.png" id="4_a480b"]
+[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/abilities/punch.gd" id="5_mficc"]
+[ext_resource type="Texture2D" uid="uid://cvo8mstq6igi4" path="res://presentation/sprites/ability_icons/kick.png" id="6_jclvc"]
+[ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://abilities/abilities/kick.gd" id="7_jmw53"]
+[ext_resource type="Texture2D" uid="uid://btmhq8ugnrrru" path="res://presentation/sprites/ability_icons/dash.png" id="8_kxiee"]
+[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="9_0omy6"]
+[ext_resource type="Texture2D" uid="uid://buf1msnrt8wib" path="res://presentation/sprites/ability_icons/stomp.png" id="10_3avks"]
+[ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://abilities/abilities/stomp.gd" id="11_madxb"]
+[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="12_60adk"]
+[ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://abilities/abilities/rage.gd" id="13_2qhk4"]
+[ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="14_kpty0"]
+
+[sub_resource type="Resource" id="Resource_cli6e"]
+script = ExtResource("5_mficc")
+icon = ExtResource("4_a480b")
+metadata/_custom_type_script = "uid://bn027ie5mw1i8"
+
+[sub_resource type="Resource" id="Resource_ue7k2"]
+script = ExtResource("7_jmw53")
+icon = ExtResource("6_jclvc")
+metadata/_custom_type_script = "uid://cnltbdm12rskg"
+
+[sub_resource type="Resource" id="Resource_1amtr"]
+script = ExtResource("9_0omy6")
+icon = ExtResource("8_kxiee")
+metadata/_custom_type_script = "uid://fu3wehw686tb"
+
+[sub_resource type="Resource" id="Resource_fmngg"]
+script = ExtResource("11_madxb")
+icon = ExtResource("10_3avks")
+metadata/_custom_type_script = "uid://pb88iskxrcgt"
+
+[sub_resource type="Resource" id="Resource_dkmb8"]
+script = ExtResource("13_2qhk4")
+metadata/_custom_type_script = "uid://bl37x7k5tv5yn"
+
+[sub_resource type="Resource" id="Resource_ry0nd"]
+script = ExtResource("14_kpty0")
+metadata/_custom_type_script = "uid://d4eq8sddlmlgr"
+
+[resource]
+script = ExtResource("3_yv12g")
+id = &"quickfist"
+scene = ExtResource("2_luryc")
+stats = SubResource("Resource_ry0nd")
+slot_abilities = Dictionary[int, ExtResource("1_luryc")]({
+0: SubResource("Resource_cli6e"),
+1: SubResource("Resource_ue7k2"),
+2: SubResource("Resource_1amtr"),
+3: SubResource("Resource_fmngg"),
+4: SubResource("Resource_dkmb8")
+})
+metadata/_custom_type_script = "uid://cpa2omn7pxm38"

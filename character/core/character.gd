@@ -4,7 +4,7 @@ class_name Character
 
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
-@onready var controller: InputController = $InputController
+@onready var input_controller: InputController = $InputController
 @onready var health: Stat = $Health
 @onready var attack_percent: Stat = $AttackPercent
 @onready var attack_flat: Stat = $AttackFlat
