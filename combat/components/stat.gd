@@ -1,16 +1,9 @@
-extends Component
 class_name Stat
 
 
-@export var minimum: float = 0
-@export var maximum: float = 100
-@export var value: float = 100
-
-var initial: float = 100:
-	set(value):
-		initial = value
-		current = initial
-var current: float = initial:
+var minimum: float = 0
+var maximum: float = 100
+var current: float:
 	set(value):
 		var new = clamp(value, minimum, maximum)
 		if current != new:
@@ -21,5 +14,7 @@ var current: float = initial:
 signal stat_changed(old_stat: float, new_stat: float)
 
 
-func _ready():
-	set.call_deferred("initial", value)
+func _init(minimum: float, maximum: float, current: float) -> void:
+	self.minimum = minimum
+	self.maximum = maximum
+	self.current = current
