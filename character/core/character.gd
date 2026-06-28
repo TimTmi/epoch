@@ -5,17 +5,14 @@ class_name Character
 const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
 
 @onready var input_controller: InputController = $InputController
-@onready var health: Stat = $Health
-@onready var attack_percent: Stat = $AttackPercent
-@onready var attack_flat: Stat = $AttackFlat
-@onready var defense_percent: Stat = $DefensePercent
-@onready var defense_flat: Stat = $DefenseFlat
 
-@export var init_speed: float = 1000
-@onready var speed: float = init_speed
+var health: Stat
+var speed: Stat
 
 var ability_system: AbilitySystem = AbilitySystem.new()
 var status_effect_system: StatusEffectSystem = StatusEffectSystem.new(self)
+
+var effects: Array[Effect]
 
 var positions : PackedVector2Array = []
 var time_scale: float = 1
@@ -48,22 +45,18 @@ func initialize(world_context: WorldContext, config: CharacterConfig, team: Stri
 	self.team = team
 	self.physics_profile = physics_profile
 	
+	config_stats(config.stats)
 	config_physics(physics_profile)
 	
-	apply_config(config)
+	ability_system.setup_abilities(config.slot_abilities, config.passive_abilities)
+
+func config_stats(stats: CharacterStats) -> void:
+	health = Stat.new(stats.health)
+	speed = Stat.new(stats.speed)
 
 func config_physics(physics_profile: PhysicsProfile) -> void:
 	self.collision_layer = physics_profile.character_layer
 	self.collision_mask = physics_profile.character_mask
-
-func apply_config(config: CharacterConfig) -> void:
-	var character_stats: CharacterStats = config.stats
-	
-	#health.current = character_stats.health
-	#health.maximum = character_stats.health
-	#...
-	
-	ability_system.setup_abilities(config.slot_abilities, config.passive_abilities)
 
 func get_effective_delta(delta: float) -> float:
 	return delta * time_scale
@@ -81,17 +74,26 @@ func unlock_input() -> void:
 	
 	set_process_unhandled_input(input_locks == 0)
 
-func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
-	ability_system.try_activate_ability(ability, intent, self)
+#func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
+	#ability_system.try_activate_ability(ability, intent, self)
 
 func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent) -> void:
-	ability_system.try_activate_slot(slot, intent, self)
+	ability_system.try_activate_slot(slot, intent, self, world_context.combat)
 
-func push(force: Vector2):
-	apply_central_impulse(force * time_scale)
+func add_effect(effect: Effect) -> void:
+	world_context.combat.add_effect(self, effect)
+
+func remove_effect(effect: Effect) -> void:
+	world_context.combat.remove_effect(self, effect)
+
+func is_same_team(character: Character) -> bool:
+	return team == character.team
+
+func push(target: Character, force: Vector2):
+	target.apply_central_impulse(force * time_scale)
 
 func move(direction: Vector2) -> void:
-	direction = direction.normalized() * speed * time_scale
+	direction = direction.normalized() * speed.current * time_scale
 	apply_central_force(direction)
 
 func spawn_local_hitbox(scene: PackedScene) -> Hitbox:
@@ -122,21 +124,6 @@ func spawn_vfx(scene: PackedScene) -> Node2D:
 	
 	add_child(vfx)
 	return vfx
-
-func set_health(value: float) -> void:
-	$SetHealth.function.call(value, self)
-
-func deal_damage(amount: float, target: Character) -> void:
-	$DealDamage.function.call(amount, self, target, world_context)
-
-func take_damage(amount: float, attacker: Character) -> void:
-	$TakeDamage.function.call(amount, attacker, self)
-
-func heal(amount: float, healer: Character = self) -> void:
-	$Heal.function.call(amount, healer, self)
-
-func apply_effect(effect: StatusEffect, target: Character) -> void:
-	world_context.combat.apply_effect(effect, self, target)
 
 func _physics_process(delta: float) -> void:
 	ability_system.tick(delta)

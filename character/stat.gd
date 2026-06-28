@@ -14,7 +14,7 @@ var current: float:
 signal stat_changed(old_stat: float, new_stat: float)
 
 
-func _init(minimum: float, maximum: float, current: float) -> void:
-	self.minimum = minimum
-	self.maximum = maximum
-	self.current = current
+func _init(config: StatConfig) -> void:
+	self.minimum = config.minimum
+	self.maximum = config.maximum
+	self.current = config.current

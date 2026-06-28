@@ -12,9 +12,9 @@ func set_up_info(character: Character):
 	#await character.initialized
 	
 	character_name.text = character.name
-	health.custom_minimum_size.x = character.health.value
-	health.max_value = character.health.value
-	health.value = character.health.value
+	health.custom_minimum_size.x = character.health.maximum
+	health.max_value = character.health.maximum
+	health.value = character.health.current
 	character.health.stat_changed.connect(_on_health_changed)
 	
 	for slot: AbilitySystem.CommandSlot in character.ability_system.slot_ability_instances:

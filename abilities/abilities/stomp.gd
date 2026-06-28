@@ -11,24 +11,25 @@ const SHOCKWAVE = preload("uid://bgtgir2b55nv4")
 
 
 func activate(context: AbilityContext) -> void:
-	var caster: AbilityCaster = context.caster
+	var user: Character = context.user
+	var combat: CombatSystem = context.combat
 	
-	var shockwave: Shockwave = caster.spawn_local_hitbox(SHOCKWAVE)
-	shockwave.body_entered.connect(_on_body_entered.bind(caster))
-	caster.lock_input()
+	var shockwave: Shockwave = user.spawn_local_hitbox(SHOCKWAVE)
+	shockwave.body_entered.connect(_on_body_entered.bind(user, combat))
+	user.lock_input()
 	await shockwave.finished
-	caster.unlock_input()
+	user.unlock_input()
 
-func _on_body_entered(body: Node, caster: AbilityCaster):
-	if not body is Character or caster.is_same_team(body):
+func _on_body_entered(body: Node, user: Character, combat: CombatSystem):
+	if not body is Character or user.is_same_team(body):
 		return
 	
 	var target: Character = body
-	var caster_global_position: Vector2 = caster.get_global_position()
-	var direction = (target.global_position - caster_global_position).normalized()
+	var user_global_position: Vector2 = user.get_global_position()
+	var direction = (target.global_position - user_global_position).normalized()
 	
-	caster.deal_damage(damage, target)
-	caster.push(target, direction * (knockback_force ** 2) / caster_global_position.distance_squared_to(target.global_position))
+	combat.deal_damage(user, target, damage)
+	user.push(target, direction * (knockback_force ** 2) / user_global_position.distance_squared_to(target.global_position))
 	
 	var stun: StatusEffect = Stun.new(stun_duration)
-	caster.apply_effect(stun, target)
+	combat.apply_effect(user, target, stun)

@@ -3,11 +3,6 @@
 [ext_resource type="Script" uid="uid://bb4wbo1lhj1h8" path="res://character/core/character.gd" id="1_bspgh"]
 [ext_resource type="Texture2D" uid="uid://dbbtku7b5kc8i" path="res://presentation/sprites/ball.png" id="2_iayqh"]
 [ext_resource type="Script" uid="uid://dcc6au7kosgf1" path="res://character/input/input_controller.gd" id="3_lby2s"]
-[ext_resource type="Script" uid="uid://cdphqoewvgi1w" path="res://combat/components/stat.gd" id="4_5sdcf"]
-[ext_resource type="Script" uid="uid://dui35sr605rdj" path="res://combat/components/functions/function_set_health.gd" id="5_nwrc1"]
-[ext_resource type="Script" uid="uid://dbx5mntwqhm84" path="res://combat/components/functions/function_take_damage.gd" id="6_p58i0"]
-[ext_resource type="Script" uid="uid://cn5m2q8ajrcu" path="res://combat/components/functions/function_deal_damage.gd" id="7_2losn"]
-[ext_resource type="Script" uid="uid://divettjah5q1i" path="res://combat/components/functions/function_heal.gd" id="8_8xr87"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fshvy"]
 radius = 4.0
@@ -32,48 +27,4 @@ shape = SubResource("CircleShape2D_fshvy")
 script = ExtResource("3_lby2s")
 character = NodePath("..")
 
-[node name="Health" type="Node" parent="." unique_id=1727725242]
-script = ExtResource("4_5sdcf")
-
-[node name="AttackPercent" type="Node" parent="." unique_id=895692068]
-script = ExtResource("4_5sdcf")
-minimum = -100.0
-value = 0.0
-
-[node name="AttackFlat" type="Node" parent="." unique_id=425194810]
-script = ExtResource("4_5sdcf")
-minimum = -100.0
-value = 0.0
-
-[node name="DefensePercent" type="Node" parent="." unique_id=52221767]
-script = ExtResource("4_5sdcf")
-minimum = -100.0
-value = 0.0
-
-[node name="DefenseFlat" type="Node" parent="." unique_id=1166171224]
-script = ExtResource("4_5sdcf")
-minimum = -100.0
-value = 0.0
-
-[node name="SetHealth" type="Node" parent="." unique_id=178028005 node_paths=PackedStringArray("health")]
-script = ExtResource("5_nwrc1")
-health = NodePath("../Health")
-
-[node name="TakeDamage" type="Node" parent="." unique_id=50723274]
-script = ExtResource("6_p58i0")
-
-[node name="DealDamage" type="Node" parent="." unique_id=601410577]
-script = ExtResource("7_2losn")
-
-[node name="Heal" type="Node" parent="." unique_id=1796543689]
-script = ExtResource("8_8xr87")
-
 [connection signal="dead" from="." to="." method="_on_dead"]
-[connection signal="stat_changed" from="Health" to="." method="_on_health_changed"]
-[connection signal="stat_changed" from="AttackPercent" to="." method="_on_attack_percent_changed"]
-[connection signal="stat_changed" from="AttackFlat" to="." method="_on_attack_flat_changed"]
-[connection signal="stat_changed" from="DefensePercent" to="." method="_on_defense_percent_changed"]
-[connection signal="stat_changed" from="DefenseFlat" to="." method="_on_defense_flat_changed"]
-[connection signal="damage_taken" from="TakeDamage" to="." method="_on_damage_taken"]
-[connection signal="damage_dealt" from="DealDamage" to="." method="_on_damage_dealt"]
-[connection signal="healed" from="Heal" to="." method="_on_healed"]

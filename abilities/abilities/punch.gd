@@ -15,39 +15,40 @@ var clockwise = randi_range(0, 1) * 2 - 1
 
 
 func activate(context: AbilityContext) -> void:
-	var caster: AbilityCaster = context.caster
+	var user: Character = context.user
+	var combat: CombatSystem = context.combat
 	var direction: Vector2 = context.targeting.get_target_direction()
 	if direction == Vector2.INF:
 		return
 	
-	var punch: CircleStrike = caster.spawn_local_hitbox(PUNCH)
+	var punch: CircleStrike = user.spawn_local_hitbox(PUNCH)
 	var angle = PI/2 * -clockwise
 	punch.collision.position.x = distance
 	punch.rotation = direction.angle()
 	punch.rotate(angle)
 	
-	caster.lock_input()
-	caster.impulse(direction * dash_distance)
+	user.lock_input()
+	user.push(user, direction * dash_distance)
 	
 	var tween = punch.create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.tween_property(punch, "rotation", PI * clockwise, duration).as_relative()
 	tween.tween_callback(punch.queue_free)
 	
 	clockwise = -clockwise
-	punch.body_entered.connect(_on_body_entered.bind(caster))
+	punch.body_entered.connect(_on_body_entered.bind(user, combat))
 	
 	await tween.finished
-	caster.unlock_input()
+	user.unlock_input()
 
-func _on_body_entered(body: Node, caster: AbilityCaster):
-	if not body is Character or caster.is_same_team(body):
+func _on_body_entered(body: Node, user: Character, combat: CombatSystem):
+	if not body is Character or user.is_same_team(body):
 		return
 	
 	var target: Character = body
-	var direction: Vector2 = (target.global_position - caster.get_global_position()).normalized()
+	var direction: Vector2 = (target.global_position - user.get_global_position()).normalized()
 	
-	caster.deal_damage(damage, target)
-	caster.push(target, direction * knockback_force)
+	combat.deal_damage(user, target, damage)
+	user.push(target, direction * knockback_force)
 	
 	var stun: StatusEffect = Stun.new(stun_duration)
-	caster.apply_effect(stun, target)
+	combat.apply_effect(user, target, stun)

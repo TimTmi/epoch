@@ -4,26 +4,24 @@ class_name Rage extends Ability
 const AFTERIMAGE = preload("uid://bcph033gu3bmn")
 
 @export var duration: float = 10
-@export var damage_on_self: float = 50
+@export var self_damage: float = 50
 
 
 func activate(context: AbilityContext) -> void:
-	var caster: AbilityCaster = context.caster
+	var user: Character = context.user
+	var combat: CombatSystem = context.combat
 	
-	var afterimage = caster.spawn_vfx(AFTERIMAGE)
+	var afterimage = user.spawn_vfx(AFTERIMAGE)
 	var tween: Tween = afterimage.create_tween()
-	var damage_interval: float = duration / damage_on_self
-	var take_damage_function: ComponentFunction = caster.character.get_node("TakeDamage")
-	var take_damage_override_function = func(_value: float):
-		return 1
-	take_damage_function.add_handler(take_damage_override_function)
+	var damage_interval: float = duration / self_damage
+	var steel_skin_effect: Effect = SteelSkinEffect.new()
+	combat.add_effect(user, steel_skin_effect)
 	#take_damage_function.handlers.append(take_damage_override_function)
-	for i in damage_on_self:
-		tween.tween_callback(caster.damage_self.bind(1))
+	for i in self_damage:
+		tween.tween_callback(combat.deal_damage.bind(user, user, 1))
 		tween.tween_interval(damage_interval)
 	
-	#tween.tween_callback(take_damage_function.handlers.erase.bind(take_damage_override_function))
-	tween.tween_callback(take_damage_function.remove_handler.bind(take_damage_override_function))
+	tween.tween_callback(user.remove_effect.bind(steel_skin_effect))
 	tween.tween_callback(afterimage.queue_free)
 	
 	await tween.finished

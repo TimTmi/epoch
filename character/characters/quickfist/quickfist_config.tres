@@ -3,44 +3,49 @@
 [ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_luryc"]
 [ext_resource type="PackedScene" uid="uid://pghqsbm0alj2" path="res://character/characters/quickfist/quickfist.tscn" id="2_luryc"]
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="3_yv12g"]
-[ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://presentation/sprites/ability_icons/punch.png" id="4_a480b"]
-[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/abilities/punch.gd" id="5_mficc"]
-[ext_resource type="Texture2D" uid="uid://cvo8mstq6igi4" path="res://presentation/sprites/ability_icons/kick.png" id="6_jclvc"]
-[ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://abilities/abilities/kick.gd" id="7_jmw53"]
-[ext_resource type="Texture2D" uid="uid://btmhq8ugnrrru" path="res://presentation/sprites/ability_icons/dash.png" id="8_kxiee"]
-[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="9_0omy6"]
-[ext_resource type="Texture2D" uid="uid://buf1msnrt8wib" path="res://presentation/sprites/ability_icons/stomp.png" id="10_3avks"]
-[ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://abilities/abilities/stomp.gd" id="11_madxb"]
-[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="12_60adk"]
-[ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://abilities/abilities/rage.gd" id="13_2qhk4"]
+[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="4_5y5y0"]
+[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/abilities/punch.gd" id="5_fge5w"]
+[ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://abilities/abilities/kick.gd" id="6_cy3iv"]
+[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="7_luryc"]
+[ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://abilities/abilities/stomp.gd" id="8_ar4ke"]
+[ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://abilities/abilities/rage.gd" id="9_yv12g"]
+[ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="14_ar4ke"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="14_kpty0"]
 
-[sub_resource type="Resource" id="Resource_cli6e"]
-script = ExtResource("5_mficc")
-icon = ExtResource("4_a480b")
+[sub_resource type="Resource" id="Resource_6ioli"]
+script = ExtResource("5_fge5w")
 metadata/_custom_type_script = "uid://bn027ie5mw1i8"
 
-[sub_resource type="Resource" id="Resource_ue7k2"]
-script = ExtResource("7_jmw53")
-icon = ExtResource("6_jclvc")
+[sub_resource type="Resource" id="Resource_6kwd3"]
+script = ExtResource("6_cy3iv")
 metadata/_custom_type_script = "uid://cnltbdm12rskg"
 
-[sub_resource type="Resource" id="Resource_1amtr"]
-script = ExtResource("9_0omy6")
-icon = ExtResource("8_kxiee")
+[sub_resource type="Resource" id="Resource_061gy"]
+script = ExtResource("7_luryc")
 metadata/_custom_type_script = "uid://fu3wehw686tb"
 
-[sub_resource type="Resource" id="Resource_fmngg"]
-script = ExtResource("11_madxb")
-icon = ExtResource("10_3avks")
+[sub_resource type="Resource" id="Resource_m8xef"]
+script = ExtResource("8_ar4ke")
 metadata/_custom_type_script = "uid://pb88iskxrcgt"
 
-[sub_resource type="Resource" id="Resource_dkmb8"]
-script = ExtResource("13_2qhk4")
+[sub_resource type="Resource" id="Resource_hd0bq"]
+script = ExtResource("9_yv12g")
 metadata/_custom_type_script = "uid://bl37x7k5tv5yn"
+
+[sub_resource type="Resource" id="Resource_a480b"]
+script = ExtResource("14_ar4ke")
+metadata/_custom_type_script = "uid://dtsdhk3ysrt2l"
+
+[sub_resource type="Resource" id="Resource_82e62"]
+script = ExtResource("14_ar4ke")
+maximum = 6000.0
+current = 1000.0
+metadata/_custom_type_script = "uid://dtsdhk3ysrt2l"
 
 [sub_resource type="Resource" id="Resource_ry0nd"]
 script = ExtResource("14_kpty0")
+health = SubResource("Resource_a480b")
+speed = SubResource("Resource_82e62")
 metadata/_custom_type_script = "uid://d4eq8sddlmlgr"
 
 [resource]
@@ -49,10 +54,10 @@ id = &"quickfist"
 scene = ExtResource("2_luryc")
 stats = SubResource("Resource_ry0nd")
 slot_abilities = Dictionary[int, ExtResource("1_luryc")]({
-0: SubResource("Resource_cli6e"),
-1: SubResource("Resource_ue7k2"),
-2: SubResource("Resource_1amtr"),
-3: SubResource("Resource_fmngg"),
-4: SubResource("Resource_dkmb8")
+0: SubResource("Resource_6ioli"),
+1: SubResource("Resource_6kwd3"),
+2: SubResource("Resource_061gy"),
+3: SubResource("Resource_m8xef"),
+4: SubResource("Resource_hd0bq")
 })
 metadata/_custom_type_script = "uid://cpa2omn7pxm38"
