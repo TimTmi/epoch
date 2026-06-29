@@ -12,8 +12,6 @@ var speed: Stat
 var ability_system: AbilitySystem = AbilitySystem.new()
 var status_effect_system: StatusEffectSystem = StatusEffectSystem.new(self)
 
-var effects: Array[Effect]
-
 var positions : PackedVector2Array = []
 var time_scale: float = 1
 
@@ -80,11 +78,11 @@ func unlock_input() -> void:
 func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent) -> void:
 	ability_system.try_activate_slot(slot, intent, self, world_context.combat)
 
-func add_effect(effect: Effect) -> void:
-	world_context.combat.add_effect(self, effect)
+func add_rule(rule: CombatRule) -> void:
+	world_context.combat.add_rule(self, rule)
 
-func remove_effect(effect: Effect) -> void:
-	world_context.combat.remove_effect(self, effect)
+func remove_rule(rule: CombatRule) -> void:
+	world_context.combat.remove_rule(self, rule)
 
 func is_same_team(character: Character) -> bool:
 	return team == character.team

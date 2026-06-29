@@ -12,23 +12,23 @@
 [ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="14_ar4ke"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="14_kpty0"]
 
-[sub_resource type="Resource" id="Resource_6ioli"]
+[sub_resource type="Resource" id="Resource_6kwd3"]
 script = ExtResource("5_fge5w")
 metadata/_custom_type_script = "uid://bn027ie5mw1i8"
 
-[sub_resource type="Resource" id="Resource_6kwd3"]
+[sub_resource type="Resource" id="Resource_061gy"]
 script = ExtResource("6_cy3iv")
 metadata/_custom_type_script = "uid://cnltbdm12rskg"
 
-[sub_resource type="Resource" id="Resource_061gy"]
+[sub_resource type="Resource" id="Resource_hd0bq"]
 script = ExtResource("7_luryc")
 metadata/_custom_type_script = "uid://fu3wehw686tb"
 
-[sub_resource type="Resource" id="Resource_m8xef"]
+[sub_resource type="Resource" id="Resource_dms6x"]
 script = ExtResource("8_ar4ke")
 metadata/_custom_type_script = "uid://pb88iskxrcgt"
 
-[sub_resource type="Resource" id="Resource_hd0bq"]
+[sub_resource type="Resource" id="Resource_taleq"]
 script = ExtResource("9_yv12g")
 metadata/_custom_type_script = "uid://bl37x7k5tv5yn"
 
@@ -54,10 +54,10 @@ id = &"quickfist"
 scene = ExtResource("2_luryc")
 stats = SubResource("Resource_ry0nd")
 slot_abilities = Dictionary[int, ExtResource("1_luryc")]({
-0: SubResource("Resource_6ioli"),
-1: SubResource("Resource_6kwd3"),
-2: SubResource("Resource_061gy"),
-3: SubResource("Resource_m8xef"),
-4: SubResource("Resource_hd0bq")
+0: SubResource("Resource_6kwd3"),
+1: SubResource("Resource_061gy"),
+2: SubResource("Resource_hd0bq"),
+3: SubResource("Resource_dms6x"),
+4: SubResource("Resource_taleq")
 })
 metadata/_custom_type_script = "uid://cpa2omn7pxm38"
