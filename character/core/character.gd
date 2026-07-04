@@ -78,12 +78,6 @@ func unlock_input() -> void:
 func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent) -> void:
 	ability_system.try_activate_slot(slot, intent, self, world_context.combat)
 
-func add_rule(rule: CombatRule) -> void:
-	world_context.combat.add_rule(self, rule)
-
-func remove_rule(rule: CombatRule) -> void:
-	world_context.combat.remove_rule(self, rule)
-
 func is_same_team(character: Character) -> bool:
 	return team == character.team
 

@@ -18,17 +18,33 @@ func before_damage_dealt(context: DamageContext) -> void:
 	for rule: CombatRule in rules_by_character.get_or_add(context.source, []):
 		rule.before_damage_dealt(context)
 
+func after_damage_dealt(context: DamageContext) -> void:
+	for rule: CombatRule in rules_by_character.get_or_add(context.source, []):
+		rule.after_damage_dealt(context)
+
 func before_damage_taken(context: DamageContext) -> void:
 	for rule: CombatRule in rules_by_character.get_or_add(context.target, []):
 		rule.before_damage_taken(context)
+
+func after_damage_taken(context: DamageContext) -> void:
+	for rule: CombatRule in rules_by_character.get_or_add(context.target, []):
+		rule.after_damage_taken(context)
 
 func before_healing_given(context: HealingContext) -> void:
 	for rule: CombatRule in rules_by_character.get_or_add(context.source, []):
 		rule.before_healing_given(context)
 
+func after_healing_given(context: HealingContext) -> void:
+	for rule: CombatRule in rules_by_character.get_or_add(context.source, []):
+		rule.after_healing_given(context)
+
 func before_healing_received(context: HealingContext) -> void:
 	for rule: CombatRule in rules_by_character.get_or_add(context.target, []):
 		rule.before_healing_received(context)
+
+func after_healing_received(context: HealingContext) -> void:
+	for rule: CombatRule in rules_by_character.get_or_add(context.target, []):
+		rule.after_healing_received(context)
 
 func before_health_change(context: HealthChangeContext) -> void:
 	for rule: CombatRule in rules_by_character.get_or_add(context.character, []):
@@ -37,19 +53,19 @@ func before_health_change(context: HealthChangeContext) -> void:
 func after_health_change(context: HealthChangeContext) -> void:
 	for rule: CombatRule in rules_by_character.get_or_add(context.character, []):
 		rule.after_health_change(context)
-	
-func after_healing_received(context: HealingContext) -> void:
-	for rule: CombatRule in rules_by_character.get_or_add(context.target, []):
-		rule.after_healing_received(context)
 
-func after_healing_given(context: HealingContext) -> void:
+func before_pushing(context: PushContext) -> void:
 	for rule: CombatRule in rules_by_character.get_or_add(context.source, []):
-		rule.after_healing_given(context)
-	
-func after_damage_taken(context: DamageContext) -> void:
+		rule.before_pushing(context)
+
+func after_pushing(context: PushContext) -> void:
+	for rule: CombatRule in rules_by_character.get_or_add(context.source, []):
+		rule.after_pushing(context)
+
+func before_pushed(context: PushContext) -> void:
 	for rule: CombatRule in rules_by_character.get_or_add(context.target, []):
-		rule.after_damage_taken(context)
-	
-func after_damage_dealt(context: DamageContext) -> void:
-	for rule: CombatRule in rules_by_character.get_or_add(context.source, []):
-		rule.after_damage_dealt(context)
+		rule.before_pushed(context)
+
+func after_pushed(context: PushContext) -> void:
+	for rule: CombatRule in rules_by_character.get_or_add(context.target, []):
+		rule.before_pushed(context)
