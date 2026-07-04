@@ -16,8 +16,8 @@ func activate(context: AbilityContext) -> void:
 	var damage_interval: float = duration / self_damage
 	var rule: CombatRule = CombatRule.new(
 		RuleKey.new(user, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_TAKEN),
-		func(context: DamageContext) -> void:
-			context.amount = min(1, context.amount)
+		func(damage_context: DamageContext) -> void:
+			damage_context.amount = min(1, damage_context.amount)
 	)
 	#var rule: CombatRule = CombatRule.new(
 		#RuleKey.new(user, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_DEALT),
