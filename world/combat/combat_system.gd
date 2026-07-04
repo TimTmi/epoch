@@ -13,23 +13,25 @@ signal healed(context: HealingContext)
 signal health_changed(context: HealthChangeContext)
 
 
+func set_health(character: Character, value: float) -> void:
+	var context: HealthChangeContext = HealthChangeContext.new(self, character, character.health.current, value)
+	_process_handlers(character, RuleKey.Phase.BEFORE, RuleKey.Hook.HEALTH_CHANGED, context)
+	context.character.health.current = context.new_health
+	_process_handlers(context.character, RuleKey.Phase.AFTER, RuleKey.Hook.HEALTH_CHANGED, context)
+	health_changed.emit(context)
+
 func deal_damage(source: Character, target: Character, amount: float) -> void:
-	var damage_context: DamageContext = DamageContext.new(self, source, target, amount)
+	var context: DamageContext = DamageContext.new(self, source, target, amount)
 	
-	_process_handlers(damage_context.source, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_DEALT, damage_context)
-	_process_handlers(damage_context.target, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_TAKEN, damage_context)
-	var new_target: Character = damage_context.target
-	var health_change_context: HealthChangeContext = HealthChangeContext.new(self, new_target, new_target.health.current, new_target.health.current - damage_context.amount)
-	_process_handlers(new_target, RuleKey.Phase.BEFORE, RuleKey.Hook.HEALTH_CHANGED, health_change_context)
+	_process_handlers(context.source, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_DEALT, context)
+	_process_handlers(context.target, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_TAKEN, context)
 	
-	health_change_context.character.health.current = health_change_context.new_health
+	set_health(context.target, context.target.health.current - context.amount)
 	
-	_process_handlers(new_target, RuleKey.Phase.AFTER, RuleKey.Hook.HEALTH_CHANGED, health_change_context)
-	health_changed.emit(health_change_context)
-	_process_handlers(damage_context.target, RuleKey.Phase.AFTER, RuleKey.Hook.DAMAGE_TAKEN, damage_context)
-	damage_taken.emit(damage_context)
-	_process_handlers(damage_context.source, RuleKey.Phase.AFTER, RuleKey.Hook.DAMAGE_DEALT, damage_context)
-	damage_dealt.emit(damage_context)
+	_process_handlers(context.target, RuleKey.Phase.AFTER, RuleKey.Hook.DAMAGE_TAKEN, context)
+	damage_taken.emit(context)
+	_process_handlers(context.source, RuleKey.Phase.AFTER, RuleKey.Hook.DAMAGE_DEALT, context)
+	damage_dealt.emit(context)
 
 func heal(context: HealingContext) -> void:
 	context.target.receive_healing(context)

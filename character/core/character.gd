@@ -32,7 +32,6 @@ signal dead
 
 func _ready():
 	add_to_group("characters")
-	#get_tree().call_group_flags(SceneTree.GROUP_CALL_DEFERRED, "characters", "_character_added", self)
 	ready()
 
 func ready():
@@ -58,6 +57,8 @@ func config_physics(physics_profile: PhysicsProfile) -> void:
 
 func get_effective_delta(delta: float) -> float:
 	return delta * time_scale
+
+#---INPUT---
 
 func lock_input() -> void:
 	input_locks += 1
@@ -120,35 +121,3 @@ func spawn_vfx(scene: PackedScene) -> Node2D:
 func _physics_process(delta: float) -> void:
 	ability_system.tick(delta)
 	status_effect_system.tick(delta)
-
-func _on_health_changed(old_value: int, new_value: int):
-	#var damage_text = DAMAGE_TEXT.instantiate()
-	#damage_text.text = str(old_value - new_value)
-	#damage_text.position = position - damage_text.size / 2
-	#world_context.world.add_child(damage_text)
-	if new_value == 0:
-		dead.emit()
-
-func _on_damage_dealt(_amount: float, _character: Character):
-	pass
-
-func _on_damage_taken(_amount: float, _character: Character):
-	pass
-
-func _on_healed(_amount: float):
-	pass
-
-func _on_dead():
-	queue_free()
-
-func _on_attack_percent_changed(_old_stat, new_stat):
-	$DealDamage.multiplier = 1 + new_stat * 0.01
-
-func _on_attack_flat_changed(_old_stat, new_stat):
-	$DealDamage.flat_modifier = new_stat
-
-func _on_defense_percent_changed(_old_stat, new_stat):
-	$TakeDamage.multiplier = 1 - new_stat * 0.01
-
-func _on_defense_flat_changed(_old_stat, new_stat):
-	$TakeDamage.flat_modifier = new_stat
