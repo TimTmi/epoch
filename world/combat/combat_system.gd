@@ -11,14 +11,27 @@ signal damage_dealt(context: DamageContext)
 signal damage_taken(context: DamageContext)
 signal healed(context: HealingContext)
 signal health_changed(context: HealthChangeContext)
+signal dead(context: DeathContext)
 
+
+func kill(character: Character) -> void:
+	var context: DeathContext = DeathContext.new(character)
+	_process_handlers(context.character, RuleKey.Phase.BEFORE, RuleKey.Hook.DEATH, context)
+	_process_handlers(context.character, RuleKey.Phase.AFTER, RuleKey.Hook.DEATH, context)
+	if context.dead:
+		#do custom animation or shit
+		context.character.queue_free()
+		dead.emit(context)
 
 func set_health(character: Character, value: float) -> void:
 	var context: HealthChangeContext = HealthChangeContext.new(self, character, character.health.current, value)
-	_process_handlers(character, RuleKey.Phase.BEFORE, RuleKey.Hook.HEALTH_CHANGED, context)
+	_process_handlers(context.character, RuleKey.Phase.BEFORE, RuleKey.Hook.HEALTH_CHANGED, context)
 	context.character.health.current = context.new_health
 	_process_handlers(context.character, RuleKey.Phase.AFTER, RuleKey.Hook.HEALTH_CHANGED, context)
 	health_changed.emit(context)
+	
+	if context.character.health.current <= 0:
+		kill(context.character)
 
 func deal_damage(source: Character, target: Character, amount: float) -> void:
 	var context: DamageContext = DamageContext.new(self, source, target, amount)
