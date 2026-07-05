@@ -9,7 +9,8 @@ var ruleset: Dictionary[StringName, CallableArray]
 
 signal damage_dealt(context: DamageContext)
 signal damage_taken(context: DamageContext)
-signal healed(context: HealingContext)
+signal healing_given(context: HealingContext)
+signal healing_received(context: HealingContext)
 signal health_changed(context: HealthChangeContext)
 signal dead(context: DeathContext)
 
@@ -46,12 +47,21 @@ func deal_damage(source: Character, target: Character, amount: float) -> void:
 	_process_handlers(context.source, RuleKey.Phase.AFTER, RuleKey.Hook.DAMAGE_DEALT, context)
 	damage_dealt.emit(context)
 
-func heal(context: HealingContext) -> void:
-	context.target.receive_healing(context)
-	healed.emit(context)
+func heal(source: Character, target: Character, amount: float) -> void:
+	var context: HealingContext = HealingContext.new(self, source, target, amount)
+	
+	_process_handlers(context.source, RuleKey.Phase.BEFORE, RuleKey.Hook.HEALING_GIVEN, context)
+	_process_handlers(context.target, RuleKey.Phase.BEFORE, RuleKey.Hook.HEALING_RECEIVED, context)
+	
+	set_health(context.target, context.target.health.current + context.amount)
+	
+	_process_handlers(context.target, RuleKey.Phase.AFTER, RuleKey.Hook.HEALING_RECEIVED, context)
+	healing_received.emit(context)
+	_process_handlers(context.source, RuleKey.Phase.AFTER, RuleKey.Hook.HEALING_GIVEN, context)
+	healing_given.emit(context)
 
-func apply_effect(source: Character, target: Character, effect: StatusEffect) -> void:
-	target.status_effect_system.apply_effect(effect, source)
+func apply_status_effect(source: Character, target: Character, effect: StatusEffect) -> void:
+	target.status_effect_system.apply_status_effect(effect, source)
 
 func _get_handlers(key: RuleKey, auto_insert: bool = false) -> CallableArray:
 	if ruleset.has(key.value):

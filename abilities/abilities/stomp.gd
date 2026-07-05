@@ -32,4 +32,4 @@ func _on_body_entered(body: Node, user: Character, combat: CombatSystem):
 	user.push(target, direction * (knockback_force ** 2) / user_global_position.distance_squared_to(target.global_position))
 	
 	var stun: StatusEffect = Stun.new(stun_duration)
-	combat.apply_effect(user, target, stun)
+	combat.apply_status_effect(user, target, stun)
