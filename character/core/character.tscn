@@ -27,4 +27,10 @@ shape = SubResource("CircleShape2D_fshvy")
 script = ExtResource("3_lby2s")
 character = NodePath("..")
 
-[connection signal="dead" from="." to="." method="_on_dead"]
+[node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=2073712260]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+path_metadata_flags = 0
+avoidance_enabled = true
+neighbor_distance = 0.1
+max_neighbors = 1

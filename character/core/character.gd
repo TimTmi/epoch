@@ -2,8 +2,6 @@ extends RigidBody2D
 class_name Character
 
 
-const DAMAGE_TEXT = preload("uid://b3vndm3ppg4d3")
-
 @onready var input_controller: InputController = $InputController
 
 var health: Stat
@@ -21,13 +19,6 @@ var team: StringName
 var physics_profile: PhysicsProfile
 
 var world_context: WorldContext
-
-
-#signal health_changed(old_value: int, new_value: int)
-#signal damage_dealt(amount: float)
-#signal damage_taken(amount: float)
-#signal healed(amount: float)
-signal dead
 
 
 func _ready():

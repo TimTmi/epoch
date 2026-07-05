@@ -1,8 +1,6 @@
 class_name InputController extends Node
 
 
-const NAVIGATION_AGENT = preload("uid://c2lbr66wq6kg0")
-
 @export_group("Input")
 @export var primary_action: String = "primary"
 @export var secondary_action: String = "secondary"
@@ -45,7 +43,7 @@ func _ready():
 	ready.call_deferred()
 	if !is_player:
 		set_process_unhandled_input(false)
-		navigation_agent = NAVIGATION_AGENT.instantiate()
+		#navigation_agent = NAVIGATION_AGENT.instantiate()
 		character.add_child.call_deferred(navigation_agent)
 		navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	set_physics_process.call_deferred(true)
