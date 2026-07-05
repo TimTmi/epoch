@@ -2,7 +2,7 @@ extends RigidBody2D
 class_name Character
 
 
-@onready var input_controller: InputController = $InputController
+var input: CharacterInput
 
 var health: Stat
 var speed: Stat
@@ -33,10 +33,26 @@ func initialize(world_context: WorldContext, config: CharacterConfig, team: Stri
 	self.team = team
 	self.physics_profile = physics_profile
 	
+	setup_input(config.input_script)
+	
 	config_stats(config.stats)
 	config_physics(physics_profile)
 	
 	ability_system.setup_abilities(config.slot_abilities, config.passive_abilities)
+	
+	set_process_mode(Node.PROCESS_MODE_INHERIT)
+
+func setup_input(input_script: GDScript) -> void:
+	if input_script == null:
+		input_script = CharacterInput
+		push_error("[character %s (%s)] input script is not set" %[name, get_instance_id()])
+	
+	var object: Object = input_script.new(self)
+	if not object is CharacterInput:
+		object = CharacterInput.new(self)
+		push_error("[character %s (%s)] input script is not of type CharacterInput" %[name, get_instance_id()])
+	
+	input = object
 
 func config_stats(stats: CharacterStats) -> void:
 	health = Stat.new(stats.health)
@@ -63,6 +79,9 @@ func unlock_input() -> void:
 		input_locks = 0
 	
 	set_process_unhandled_input(input_locks == 0)
+
+func _unhandled_input(event: InputEvent) -> void:
+	input.handle_input(event)
 
 #func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
 	#ability_system.try_activate_ability(ability, intent, self)
@@ -112,3 +131,4 @@ func spawn_vfx(scene: PackedScene) -> Node2D:
 func _physics_process(delta: float) -> void:
 	ability_system.tick(delta)
 	status_effect_system.tick(delta)
+	input.tick(delta)

@@ -56,15 +56,11 @@ func spawn_team(team: TeamConfig) -> void:
 		spawn_team_member(config, team.name)
 
 func spawn_team_member(config: CharacterConfig, team_name: StringName) -> Character:
-	var character: Character = spawn_service.spawn_character(config, team_name)
-	
-	if is_player_character(config, team_name):
-		character.input_controller.is_player = true
-		character.add_to_group("player")
-	
-	return character
+	if character_is_player(config, team_name):
+		config.input_script = PlayerInput
+	return spawn_service.spawn_character(config, team_name)
 
-func is_player_character(config: CharacterConfig, team_name: StringName) -> bool:
+func character_is_player(config: CharacterConfig, team_name: StringName) -> bool:
 	return player_team == team_name and player_character == config.id
 
 func register_teams() -> void:

@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bb4wbo1lhj1h8" path="res://character/core/character.gd" id="1_bspgh"]
 [ext_resource type="Texture2D" uid="uid://dbbtku7b5kc8i" path="res://presentation/sprites/ball.png" id="2_iayqh"]
-[ext_resource type="Script" uid="uid://dcc6au7kosgf1" path="res://character/input/input_controller.gd" id="3_lby2s"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fshvy"]
 radius = 4.0
 
 [node name="Character" type="RigidBody2D" unique_id=1388713911]
+process_mode = 4
 collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
@@ -22,10 +22,6 @@ texture = ExtResource("2_iayqh")
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1728318662]
 visible = false
 shape = SubResource("CircleShape2D_fshvy")
-
-[node name="InputController" type="Node" parent="." unique_id=919348798 node_paths=PackedStringArray("character")]
-script = ExtResource("3_lby2s")
-character = NodePath("..")
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=2073712260]
 path_desired_distance = 4.0
