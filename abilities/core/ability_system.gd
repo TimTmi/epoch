@@ -7,7 +7,7 @@ var slot_ability_instances: Dictionary[CommandSlot, AbilityInstance] = {}
 var passive_ability_instances: Array[AbilityInstance] = []
 
 
-func setup_abilities(slot_abilities: Dictionary[CommandSlot, Ability], passive_abilities: Array[Ability]) -> void:
+func _init(slot_abilities: Dictionary[CommandSlot, Ability], passive_abilities: Array[Ability]) -> void:
 	for slot: CommandSlot in slot_abilities:
 		slot_ability_instances[slot] = AbilityInstance.new(slot_abilities.get(slot))
 	

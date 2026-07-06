@@ -7,7 +7,7 @@ var input: CharacterInput
 var health: Stat
 var speed: Stat
 
-var ability_system: AbilitySystem = AbilitySystem.new()
+var ability_system: AbilitySystem
 var status_effect_system: StatusEffectSystem = StatusEffectSystem.new(self)
 
 var positions : PackedVector2Array = []
@@ -38,9 +38,7 @@ func initialize(world_context: WorldContext, config: CharacterConfig, team: Stri
 	config_stats(config.stats)
 	config_physics(physics_profile)
 	
-	ability_system.setup_abilities(config.slot_abilities, config.passive_abilities)
-	
-	set_process_mode(Node.PROCESS_MODE_INHERIT)
+	ability_system = AbilitySystem.new(config.slot_abilities, config.passive_abilities)
 
 func setup_input(input_script: GDScript) -> void:
 	if input_script == null:
