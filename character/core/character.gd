@@ -79,7 +79,8 @@ func unlock_input() -> void:
 	set_process_unhandled_input(input_locks == 0)
 
 func _unhandled_input(event: InputEvent) -> void:
-	input.handle_input(event)
+	if input_locks == 0:
+		input.handle_input(event)
 
 #func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
 	#ability_system.try_activate_ability(ability, intent, self)
@@ -129,4 +130,6 @@ func spawn_vfx(scene: PackedScene) -> Node2D:
 func _physics_process(delta: float) -> void:
 	ability_system.tick(delta)
 	status_effect_system.tick(delta)
-	input.tick(delta)
+	
+	if input_locks == 0:
+		input.tick(delta)
