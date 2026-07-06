@@ -11,7 +11,7 @@ func activate(context: AbilityContext) -> void:
 	var user: Character = context.user
 	var combat: CombatSystem = context.combat
 	
-	var afterimage = user.spawn_vfx(AFTERIMAGE)
+	var afterimage = user.spawner.spawn_vfx(AFTERIMAGE)
 	var tween: Tween = afterimage.create_tween()
 	var damage_interval: float = duration / self_damage
 	var rule: CombatRule = CombatRule.new(

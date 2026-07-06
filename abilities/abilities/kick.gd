@@ -18,7 +18,7 @@ func activate(context: AbilityContext) -> void:
 	if direction == Vector2.INF:
 		return
 	
-	var kick: CircleStrike = user.spawn_local_hitbox(KICK)
+	var kick: CircleStrike = user.spawner.spawn_local_hitbox(KICK)
 	
 	kick.set_radius(6)
 	user.lock_input()

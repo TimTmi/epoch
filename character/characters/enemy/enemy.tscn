@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cljnv24xco11o"]
 
 [ext_resource type="Script" uid="uid://wqq7q8t8ish0" path="res://character/characters/enemy/enemy.gd" id="1_cb2mb"]
-[ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://character/core/character.tscn" id="1_ep8ut"]
+[ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://character/base/character.tscn" id="1_ep8ut"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r06cu"]
 

@@ -21,7 +21,7 @@ func activate(context: AbilityContext) -> void:
 	if direction == Vector2.INF:
 		return
 	
-	var punch: CircleStrike = user.spawn_local_hitbox(PUNCH)
+	var punch: CircleStrike = user.spawner.spawn_local_hitbox(PUNCH)
 	var angle = PI/2 * -clockwise
 	punch.collision.position.x = distance
 	punch.rotation = direction.angle()

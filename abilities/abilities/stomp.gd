@@ -14,7 +14,7 @@ func activate(context: AbilityContext) -> void:
 	var user: Character = context.user
 	var combat: CombatSystem = context.combat
 	
-	var shockwave: Shockwave = user.spawn_local_hitbox(SHOCKWAVE)
+	var shockwave: Shockwave = user.spawner.spawn_local_hitbox(SHOCKWAVE)
 	shockwave.body_entered.connect(_on_body_entered.bind(user, combat))
 	user.lock_input()
 	await shockwave.finished

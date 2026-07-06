@@ -2,7 +2,13 @@ extends RigidBody2D
 class_name Character
 
 
+var team: StringName
+var physics_profile: PhysicsProfile
+
+var world_context: WorldContext
+
 var input: CharacterInput
+var spawner: CharacterSpawner
 
 var health: Stat
 var speed: Stat
@@ -14,11 +20,6 @@ var positions : PackedVector2Array = []
 var time_scale: float = 1
 
 var input_locks: int = 0
-
-var team: StringName
-var physics_profile: PhysicsProfile
-
-var world_context: WorldContext
 
 
 func _ready():
@@ -32,6 +33,8 @@ func initialize(world_context: WorldContext, config: CharacterConfig, team: Stri
 	self.world_context = world_context
 	self.team = team
 	self.physics_profile = physics_profile
+	
+	spawner = CharacterSpawner.new(self, world_context)
 	
 	setup_input(config.input_script)
 	
@@ -101,35 +104,6 @@ func move(direction: Vector2) -> void:
 	
 	direction = direction.normalized() * speed.current * time_scale
 	apply_central_force(direction)
-
-func spawn_local_hitbox(scene: PackedScene) -> Hitbox:
-	var hitbox: Hitbox = scene.instantiate()
-	if hitbox == null:
-		return null
-	
-	hitbox.setup_physics(physics_profile)
-	
-	add_child(hitbox)
-	return hitbox
-
-func spawn_global_hitbox(scene: PackedScene) -> Hitbox:
-	return world_context.spawn.spawn_hitbox(scene, team)
-
-func spawn_projectile(scene: PackedScene) -> Projectile:
-	var projectile: Projectile = scene.instantiate()
-	if projectile == null:
-		return null
-	
-	#TODO: physics setup
-	
-	add_child(projectile)
-	return projectile
-
-func spawn_vfx(scene: PackedScene) -> Node2D:
-	var vfx = scene.instantiate()
-	
-	add_child(vfx)
-	return vfx
 
 func _physics_process(delta: float) -> void:
 	ability_system.tick(delta)
