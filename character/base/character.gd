@@ -7,12 +7,9 @@ var physics_profile: PhysicsProfile
 
 var world_context: WorldContext
 
+var stats: CharacterStats
 var input: CharacterInput
 var spawner: CharacterSpawner
-
-var health: Stat
-var speed: Stat
-
 var ability_system: AbilitySystem
 var status_effect_system: StatusEffectSystem = StatusEffectSystem.new(self)
 
@@ -23,7 +20,6 @@ var input_locks: int = 0
 
 
 func _ready():
-	add_to_group("characters")
 	ready()
 
 func ready():
@@ -34,12 +30,11 @@ func initialize(world_context: WorldContext, config: CharacterConfig, team: Stri
 	self.team = team
 	self.physics_profile = physics_profile
 	
+	stats = CharacterStats.new(config.stats)
 	spawner = CharacterSpawner.new(self, world_context)
 	
 	setup_input(config.input_script)
-	
-	config_stats(config.stats)
-	config_physics(physics_profile)
+	config_physics()
 	
 	ability_system = AbilitySystem.new(config.slot_abilities, config.passive_abilities)
 
@@ -55,13 +50,9 @@ func setup_input(input_script: GDScript) -> void:
 	
 	input = object
 
-func config_stats(stats: CharacterStats) -> void:
-	health = Stat.new(stats.health)
-	speed = Stat.new(stats.speed)
-
-func config_physics(physics_profile: PhysicsProfile) -> void:
-	self.collision_layer = physics_profile.character_layer
-	self.collision_mask = physics_profile.character_mask
+func config_physics() -> void:
+	collision_layer = physics_profile.character_layer
+	collision_mask = physics_profile.character_mask
 
 func get_effective_delta(delta: float) -> float:
 	return delta * time_scale
@@ -102,7 +93,7 @@ func move(direction: Vector2) -> void:
 	if input_locks > 0:
 		return
 	
-	direction = direction.normalized() * speed.current * time_scale
+	direction = direction.normalized() * stats.speed.current * time_scale
 	apply_central_force(direction)
 
 func _physics_process(delta: float) -> void:

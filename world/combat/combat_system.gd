@@ -25,13 +25,13 @@ func kill(character: Character) -> void:
 		dead.emit(context)
 
 func set_health(character: Character, value: float) -> void:
-	var context: HealthChangeContext = HealthChangeContext.new(self, character, character.health.current, value)
+	var context: HealthChangeContext = HealthChangeContext.new(self, character, character.stats.health.current, value)
 	_process_handlers(context.character, RuleKey.Phase.BEFORE, RuleKey.Hook.HEALTH_CHANGED, context)
-	context.character.health.current = context.new_health
+	context.character.stats.health.current = context.new_health
 	_process_handlers(context.character, RuleKey.Phase.AFTER, RuleKey.Hook.HEALTH_CHANGED, context)
 	health_changed.emit(context)
 	
-	if context.character.health.current <= 0:
+	if context.character.stats.health.current <= 0:
 		kill(context.character)
 
 func deal_damage(source: Character, target: Character, amount: float) -> void:
@@ -40,7 +40,7 @@ func deal_damage(source: Character, target: Character, amount: float) -> void:
 	_process_handlers(context.source, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_DEALT, context)
 	_process_handlers(context.target, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_TAKEN, context)
 	
-	set_health(context.target, context.target.health.current - context.amount)
+	set_health(context.target, context.target.stats.health.current - context.amount)
 	
 	_process_handlers(context.target, RuleKey.Phase.AFTER, RuleKey.Hook.DAMAGE_TAKEN, context)
 	damage_taken.emit(context)
