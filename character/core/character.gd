@@ -86,7 +86,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	#ability_system.try_activate_ability(ability, intent, self)
 
 func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent) -> void:
-	ability_system.try_activate_slot(slot, intent, self, world_context.combat)
+	if input_locks <= 0:
+		ability_system.try_activate_slot(slot, intent, self, world_context.combat)
 
 func is_same_team(character: Character) -> bool:
 	return team == character.team
@@ -95,6 +96,9 @@ func push(target: Character, force: Vector2):
 	target.apply_central_impulse(force * time_scale)
 
 func move(direction: Vector2) -> void:
+	if input_locks > 0:
+		return
+	
 	direction = direction.normalized() * speed.current * time_scale
 	apply_central_force(direction)
 
