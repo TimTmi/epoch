@@ -1,4 +1,4 @@
-class_name CharacterInput
+class_name InputProvider
 
 
 var character: Character

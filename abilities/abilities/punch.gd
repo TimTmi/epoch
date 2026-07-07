@@ -27,7 +27,7 @@ func activate(context: AbilityContext) -> void:
 	punch.rotation = direction.angle()
 	punch.rotate(angle)
 	
-	user.lock_input()
+	user.input.lock()
 	user.push(user, direction * dash_distance)
 	
 	var tween = punch.create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
@@ -38,7 +38,7 @@ func activate(context: AbilityContext) -> void:
 	punch.body_entered.connect(_on_body_entered.bind(user, combat))
 	
 	await tween.finished
-	user.unlock_input()
+	user.input.unlock()
 
 func _on_body_entered(body: Node, user: Character, combat: CombatSystem):
 	if not body is Character or user.is_same_team(body):

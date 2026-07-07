@@ -1,4 +1,4 @@
-class_name AIInput extends CharacterInput
+class_name AIInput extends InputProvider
 
 
 var navigation_agent: NavigationAgent2D

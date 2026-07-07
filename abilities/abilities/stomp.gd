@@ -16,9 +16,9 @@ func activate(context: AbilityContext) -> void:
 	
 	var shockwave: Shockwave = user.spawner.spawn_local_hitbox(SHOCKWAVE)
 	shockwave.body_entered.connect(_on_body_entered.bind(user, combat))
-	user.lock_input()
+	user.input.lock()
 	await shockwave.finished
-	user.unlock_input()
+	user.input.unlock()
 
 func _on_body_entered(body: Node, user: Character, combat: CombatSystem):
 	if not body is Character or user.is_same_team(body):

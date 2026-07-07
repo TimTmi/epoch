@@ -1,4 +1,4 @@
-class_name PlayerInput extends CharacterInput
+class_name PlayerInput extends InputProvider
 
 
 var move_up_action: StringName = "move_up"
