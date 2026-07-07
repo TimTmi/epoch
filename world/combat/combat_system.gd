@@ -61,7 +61,7 @@ func heal(source: Character, target: Character, amount: float) -> void:
 	healing_given.emit(context)
 
 func apply_status_effect(source: Character, target: Character, effect: StatusEffect) -> void:
-	target.status_effect_system.apply_status_effect(effect, source)
+	target.status_effects.apply_status_effect(effect, source)
 
 func _get_handlers(key: RuleKey, auto_insert: bool = false) -> CallableArray:
 	if ruleset.has(key.value):

@@ -10,8 +10,8 @@ var world_context: WorldContext
 var stats: CharacterStats
 var input: CharacterInput
 var spawner: CharacterSpawner
-var ability_system: AbilitySystem
-var status_effect_system: StatusEffectSystem = StatusEffectSystem.new(self)
+var abilities: AbilitySystem
+var status_effects: StatusEffectSystem = StatusEffectSystem.new(self)
 
 var positions : PackedVector2Array = []
 var time_scale: float = 1
@@ -34,7 +34,7 @@ func initialize(world_context: WorldContext, config: CharacterConfig, team: Stri
 	
 	config_physics()
 	
-	ability_system = AbilitySystem.new(config.slot_abilities, config.passive_abilities)
+	abilities = AbilitySystem.new(config.slot_abilities, config.passive_abilities)
 
 func config_physics() -> void:
 	collision_layer = physics_profile.character_layer
@@ -47,10 +47,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	input.handle_input(event)
 
 #func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
-	#ability_system.try_activate_ability(ability, intent, self)
+	#abilities.try_activate_ability(ability, intent, self)
 
 func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent) -> void:
-	ability_system.try_activate_slot(slot, intent, self, world_context.combat)
+	abilities.try_activate_slot(slot, intent, self, world_context.combat)
 
 func is_same_team(character: Character) -> bool:
 	return team == character.team
@@ -63,7 +63,7 @@ func move(direction: Vector2) -> void:
 	apply_central_force(direction)
 
 func _physics_process(delta: float) -> void:
-	ability_system.tick(delta)
-	status_effect_system.tick(delta)
+	abilities.tick(delta)
+	status_effects.tick(delta)
 	
 	input.tick(delta)

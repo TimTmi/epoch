@@ -17,8 +17,8 @@ func set_up_info(character: Character):
 	health.value = character.stats.health.current
 	character.stats.health.stat_changed.connect(_on_health_changed)
 	
-	for slot: AbilitySystem.CommandSlot in character.ability_system.slot_ability_instances:
-		var instance: AbilityInstance = character.ability_system.slot_ability_instances.get(slot)
+	for slot: AbilitySystem.CommandSlot in character.abilities.slot_ability_instances:
+		var instance: AbilityInstance = character.abilities.slot_ability_instances.get(slot)
 		
 		var card: AbilityCard = ABILITY_CARD.instantiate()
 		abilities.add_child(card)
