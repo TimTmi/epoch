@@ -12,10 +12,10 @@ func set_up_info(character: Character):
 	#await character.initialized
 	
 	character_name.text = character.name
-	health.custom_minimum_size.x = character.stats.health.maximum
-	health.max_value = character.stats.health.maximum
-	health.value = character.stats.health.current
-	character.stats.health.stat_changed.connect(_on_health_changed)
+	health.custom_minimum_size.x = character.health.maximum
+	health.max_value = character.health.maximum
+	health.value = character.health.current
+	character.health.changed.connect(_on_health_changed)
 	
 	for slot: AbilitySystem.CommandSlot in character.abilities.slot_ability_instances:
 		var instance: AbilityInstance = character.abilities.slot_ability_instances.get(slot)
@@ -24,5 +24,5 @@ func set_up_info(character: Character):
 		abilities.add_child(card)
 		card.setup(instance)
 
-func _on_health_changed(_old_value: float, new_value: float):
-	health.value = new_value
+func _on_health_changed(context: StatChangeContext):
+	health.value = context.new_stat

@@ -3,10 +3,10 @@ class_name WorldContext
 
 var world: World
 var spawn: SpawnService
-var combat: CombatSystem
+var combat_events: CombatEvents
 
 
-func _init(world: World, spawn_service: SpawnService, combat_system: CombatSystem) -> void:
+func _init(world: World, spawn_service: SpawnService, combat_events: CombatEvents) -> void:
 	self.world = world
-	spawn = spawn_service
-	combat = combat_system
+	self.spawn = spawn_service
+	self.combat_events = combat_events

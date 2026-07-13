@@ -21,8 +21,8 @@ func tick(delta: float) -> void:
 	for instance: AbilityInstance in passive_ability_instances:
 		instance.tick(delta)
 
-func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityIntent, user: Character, combat: CombatSystem) -> bool:
-	var context: AbilityContext = AbilityContext.new(intent, user, self, instance, combat)
+func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityIntent, user: Character, combat_events: CombatEvents) -> bool:
+	var context: AbilityContext = AbilityContext.new(intent, user, self, instance, combat_events)
 	
 	if instance.can_activate(context):
 		instance.activate(context)
@@ -30,9 +30,9 @@ func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityInt
 	
 	return false
 
-func try_activate_slot(slot: CommandSlot, intent: AbilityIntent, user: Character, combat: CombatSystem) -> bool:
+func try_activate_slot(slot: CommandSlot, intent: AbilityIntent, user: Character, combat_events: CombatEvents) -> bool:
 	var instance: AbilityInstance = slot_ability_instances.get(slot)
 	if instance == null:
 		return false
 	
-	return try_activate_ability_instance(instance, intent, user, combat)
+	return try_activate_ability_instance(instance, intent, user, combat_events)

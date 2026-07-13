@@ -4,23 +4,23 @@
 [ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_j3svt"]
 [ext_resource type="PackedScene" uid="uid://dlwp8mtpiaq5j" path="res://character/characters/moving_dummy/moving_dummy.tscn" id="2_iaeeb"]
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="3_ek0fb"]
-[ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="4_iaeeb"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="4_ycsvh"]
+[ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="5_ek0fb"]
 
-[sub_resource type="Resource" id="Resource_6ioli"]
-script = ExtResource("4_iaeeb")
+[sub_resource type="Resource" id="Resource_3vhu7"]
+script = ExtResource("5_ek0fb")
 metadata/_custom_type_script = "uid://dtsdhk3ysrt2l"
 
-[sub_resource type="Resource" id="Resource_iaeeb"]
-script = ExtResource("4_iaeeb")
-maximum = 6000.0
+[sub_resource type="Resource" id="Resource_a6ujl"]
+script = ExtResource("5_ek0fb")
+maximum = 1000.0
 current = 1000.0
 metadata/_custom_type_script = "uid://dtsdhk3ysrt2l"
 
 [sub_resource type="Resource" id="Resource_5jinu"]
 script = ExtResource("4_ycsvh")
-health = SubResource("Resource_6ioli")
-speed = SubResource("Resource_iaeeb")
+health = SubResource("Resource_3vhu7")
+speed = SubResource("Resource_a6ujl")
 metadata/_custom_type_script = "uid://d4eq8sddlmlgr"
 
 [resource]

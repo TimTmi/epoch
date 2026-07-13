@@ -16,7 +16,6 @@ var clockwise = randi_range(0, 1) * 2 - 1
 
 func activate(context: AbilityContext) -> void:
 	var user: Character = context.user
-	var combat: CombatSystem = context.combat
 	var direction: Vector2 = context.targeting.get_target_direction()
 	if direction == Vector2.INF:
 		return
@@ -35,20 +34,20 @@ func activate(context: AbilityContext) -> void:
 	tween.tween_callback(punch.queue_free)
 	
 	clockwise = -clockwise
-	punch.body_entered.connect(_on_body_entered.bind(user, combat))
+	punch.body_entered.connect(_on_body_entered.bind(user))
 	
 	await tween.finished
 	user.input.unlock()
 
-func _on_body_entered(body: Node, user: Character, combat: CombatSystem):
+func _on_body_entered(body: Node, user: Character):
 	if not body is Character or user.is_same_team(body):
 		return
 	
 	var target: Character = body
 	var direction: Vector2 = (target.global_position - user.get_global_position()).normalized()
 	
-	combat.deal_damage(user, target, damage)
+	user.deal_damage(target, damage)
 	user.push(target, direction * knockback_force)
 	
 	var stun: StatusEffect = Stun.new(stun_duration)
-	combat.apply_status_effect(user, target, stun)
+	user.apply_status_effect(target, stun)
