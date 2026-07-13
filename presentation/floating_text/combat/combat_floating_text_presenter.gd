@@ -15,4 +15,4 @@ func bind(combat: CombatEvents) -> void:
 func _on_health_changed(context: StatChangeContext) -> void:
 	var change: float = context.new_stat - context.old_stat
 	var config: FloatingTextConfig = configs.heal if change > 0 else configs.damage
-	presenter.show_text(str(snappedf(absf(change), 0.1)), config, context.character.global_position)
+	presenter.show_text(str(roundi(absf(change))), config, context.character.global_position)

@@ -7,7 +7,6 @@ var physics_profile: PhysicsProfile
 
 var world_context: WorldContext
 
-#var stats: CharacterStats
 var health: CharacterStat
 var speed: CharacterStat
 var input: CharacterInput
