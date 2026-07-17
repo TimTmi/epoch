@@ -25,6 +25,11 @@ var world_context: WorldContext
 
 
 func _ready() -> void:
+	var script: GDScript = MovingDummyAI
+	print(script == InputProvider)
+	
+	#CharacterStat.What.CHANGED
+	
 	randomize()
 	setup_services()
 	setup_spawner()

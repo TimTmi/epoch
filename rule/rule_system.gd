@@ -1,46 +1,57 @@
 class_name RuleSystem
 
 
-var before_rules: Dictionary[Callable, CallableArray]
-var after_rules: Dictionary[Callable, CallableArray]
-
-
-func _get_rules_by_phase(phase: Rule.Phase) -> Dictionary[Callable, CallableArray]:
-	match phase:
-		Rule.Phase.BEFORE:
-			return before_rules
-		Rule.Phase.AFTER:
-			return after_rules
-		_:
-			push_error("invalid phase: %s" %phase)
-			return {}
-
-func _get_actions(phase: Rule.Phase, trigger: Callable, auto_insert: bool = false) -> CallableArray:
-	var rules: Dictionary[Callable, CallableArray] = _get_rules_by_phase(phase)
-	if rules.has(trigger):
-		return rules.get(trigger)
+class RuleInstanceArray:
+	var array: Array[RuleInstance] = []
 	
-	var empty_array: CallableArray = CallableArray.new()
+	
+	func append(instance: RuleInstance) -> void:
+		array.append(instance)
+
+	func erase(instance: RuleInstance) -> void:
+		array.erase(instance)
+		
+	func apply_all(trigger: Character, event_context: Variant) -> void:
+		for instance: RuleInstance in array:
+			instance.rule.apply(RuleContext.new(instance.owner, trigger, event_context))
+	
+	func _to_string() -> String:
+		return str(array)
+
+
+var rules: Dictionary[StringName, RuleInstanceArray]
+
+
+func _get_rules(event: RuleEvent, auto_insert: bool = false) -> RuleInstanceArray:
+	var key: StringName = event.key
+	if rules.has(key):
+		return rules.get(key)
+	
+	var empty_array: RuleInstanceArray = RuleInstanceArray.new()
 	if auto_insert:
-		rules.set(trigger, empty_array)
+		rules.set(key, empty_array)
 	return empty_array
 
-func process_actions(phase: Rule.Phase, trigger: Callable, ...args) -> void:
-	var actions: CallableArray = _get_actions(phase, trigger)
-	actions.call_all.callv(args)
+func process(trigger: Character, script: GDScript, id: int, event_context: Variant, operation: Callable) -> void:
+	_get_rules(RuleEvent.new(RuleEvent.Phase.BEFORE, script, id)).apply_all(trigger, event_context)
+	operation.call(event_context)
+	_get_rules(RuleEvent.new(RuleEvent.Phase.AFTER, script, id)).apply_all(trigger, event_context)
 
-func add_rule(rule: Rule) -> void:
-	var actions: CallableArray = _get_actions(rule.phase, rule.trigger, true)
-	actions.append(rule.action)
+func add_rule(instance: RuleInstance) -> void:
+	var rule: Rule = instance.rule
+	var rules: RuleInstanceArray = _get_rules(rule.event, true)
+	rules.append(instance)
+	print(rules)
 
-func add_rules(rules: Array[Rule]) -> void:
-	for rule: Rule in rules:
-		add_rule(rule)
+func add_rules(instances: Array[RuleInstance]) -> void:
+	for instance: RuleInstance in instances:
+		add_rule(instance)
 
-func remove_rule(rule: Rule) -> void:
-	var actions: CallableArray = _get_actions(rule.phase, rule.trigger)
-	actions.erase(rule.action)
+func remove_rule(instance: RuleInstance) -> void:
+	var rule: Rule = instance.rule
+	var rules: RuleInstanceArray = _get_rules(rule.event)
+	rules.erase(instance)
 
-func remove_rules(rules: Array[Rule]) -> void:
-	for rule: Rule in rules:
-		remove_rule(rule)
+func remove_rules(instances: Array[RuleInstance]) -> void:
+	for instance: RuleInstance in instances:
+		remove_rule(instance)

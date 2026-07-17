@@ -14,25 +14,22 @@ func activate(context: AbilityContext) -> void:
 	var tween: Tween = afterimage.create_tween()
 	var damage_interval: float = duration / self_damage
 	var rule: Rule = Rule.new(
-		Rule.Phase.BEFORE,
-		user.deal_damage,
-		func(damage_context: DamageContext) -> void:
-			damage_context.amount = min(1, damage_context.amount)
+		user,
+		RuleEvent.new(RuleEvent.Phase.BEFORE, Character, Character.Event.DAMAGE_DEALT),
+		Rule.Target.ENEMY,
+		[],
+		[MultiplyDamageDealt.new(2.0)]
 	)
-	#var rule: Rule = Rule.new(
-		#RuleKey.new(user, RuleKey.Phase.BEFORE, RuleKey.Hook.DAMAGE_DEALT),
-		#func(context: DamageContext) -> void:
-			#context.amount *= 2
-	#)
+	var rule_instance: RuleInstance = RuleInstance.new(user, rule)
 	var rules: Array[Rule] = [rule]
 	#combat.add_rules(rules)
-	user.health.rule_system.add_rule(rule)
+	user.rules.add_rule(rule_instance)
 	#take_damage_function.handlers.append(take_damage_override_function)
 	for i in self_damage:
 		tween.tween_callback(user.health.lose.bind(1))
 		tween.tween_interval(damage_interval)
 	
-	tween.tween_callback(user.health.rule_system.remove_rule.bind(rule))
+	tween.tween_callback(user.rules.remove_rule.bind(rule_instance))
 	tween.tween_callback(afterimage.queue_free)
 	
 	await tween.finished

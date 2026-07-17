@@ -12,7 +12,9 @@ func _init(character: Character) -> void:
 func has_status_effect(effect_name: StringName) -> bool:
 	return effect_name in status_effects
 
-func apply_status_effect(source: Character, effect: StatusEffect) -> void:
+func apply_status_effect(context: StatusEffectApplicationContext) -> void:
+	var source: Character = context.source
+	var effect: StatusEffect = context.effect
 	var effect_array: Array = status_effects.get_or_add(effect.get_name(), [])
 	
 	if effect_array.is_empty():

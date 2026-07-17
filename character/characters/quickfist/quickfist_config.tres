@@ -3,33 +3,33 @@
 [ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_luryc"]
 [ext_resource type="PackedScene" uid="uid://pghqsbm0alj2" path="res://character/characters/quickfist/quickfist.tscn" id="2_luryc"]
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="3_yv12g"]
-[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="4_fbkpp"]
-[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/abilities/punch.gd" id="5_5y5y0"]
-[ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://abilities/abilities/kick.gd" id="6_fge5w"]
-[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="7_cy3iv"]
-[ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://abilities/abilities/stomp.gd" id="8_luryc"]
-[ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://abilities/abilities/rage.gd" id="9_ar4ke"]
+[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="4_5y5y0"]
+[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/abilities/punch.gd" id="5_fge5w"]
+[ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://abilities/abilities/kick.gd" id="6_cy3iv"]
+[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="7_luryc"]
+[ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://abilities/abilities/stomp.gd" id="8_ar4ke"]
+[ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://abilities/abilities/rage.gd" id="9_yv12g"]
 [ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="10_5y5y0"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="14_kpty0"]
 
-[sub_resource type="Resource" id="Resource_iaeeb"]
-script = ExtResource("5_5y5y0")
+[sub_resource type="Resource" id="Resource_m6n7r"]
+script = ExtResource("5_fge5w")
 metadata/_custom_type_script = "uid://bn027ie5mw1i8"
 
-[sub_resource type="Resource" id="Resource_ek0fb"]
-script = ExtResource("6_fge5w")
+[sub_resource type="Resource" id="Resource_23bli"]
+script = ExtResource("6_cy3iv")
 metadata/_custom_type_script = "uid://cnltbdm12rskg"
 
-[sub_resource type="Resource" id="Resource_ycsvh"]
-script = ExtResource("7_cy3iv")
+[sub_resource type="Resource" id="Resource_8gh11"]
+script = ExtResource("7_luryc")
 metadata/_custom_type_script = "uid://fu3wehw686tb"
 
-[sub_resource type="Resource" id="Resource_b0h4o"]
-script = ExtResource("8_luryc")
+[sub_resource type="Resource" id="Resource_t4pwu"]
+script = ExtResource("8_ar4ke")
 metadata/_custom_type_script = "uid://pb88iskxrcgt"
 
-[sub_resource type="Resource" id="Resource_h0isq"]
-script = ExtResource("9_ar4ke")
+[sub_resource type="Resource" id="Resource_uuj2w"]
+script = ExtResource("9_yv12g")
 metadata/_custom_type_script = "uid://bl37x7k5tv5yn"
 
 [sub_resource type="Resource" id="Resource_fge5w"]
@@ -54,10 +54,10 @@ id = &"quickfist"
 scene = ExtResource("2_luryc")
 stats = SubResource("Resource_luryc")
 slot_abilities = Dictionary[int, ExtResource("1_luryc")]({
-0: SubResource("Resource_iaeeb"),
-1: SubResource("Resource_ek0fb"),
-2: SubResource("Resource_ycsvh"),
-3: SubResource("Resource_b0h4o"),
-4: SubResource("Resource_h0isq")
+0: SubResource("Resource_m6n7r"),
+1: SubResource("Resource_23bli"),
+2: SubResource("Resource_8gh11"),
+3: SubResource("Resource_t4pwu"),
+4: SubResource("Resource_uuj2w")
 })
 metadata/_custom_type_script = "uid://cpa2omn7pxm38"
