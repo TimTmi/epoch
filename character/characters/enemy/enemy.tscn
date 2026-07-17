@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cljnv24xco11o"]
+
+[ext_resource type="Script" uid="uid://wqq7q8t8ish0" path="res://character/characters/enemy/enemy.gd" id="1_cb2mb"]
+[ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://character/base/character.tscn" id="1_ep8ut"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r06cu"]
+
+[node name="Enemy" unique_id=1463307526 instance=ExtResource("1_ep8ut")]
+script = ExtResource("1_cb2mb")
+
+[node name="PunchArea" type="Area2D" parent="." index="3" unique_id=2082474333]
+visible = false
+
+[node name="Collision" type="CollisionShape2D" parent="PunchArea" index="0" unique_id=121794133]
+shape = SubResource("CircleShape2D_r06cu")
+
+[connection signal="body_entered" from="PunchArea" to="." method="_on_body_entered_punch_area"]
+[connection signal="body_exited" from="PunchArea" to="." method="_on_body_exited_punch_area"]

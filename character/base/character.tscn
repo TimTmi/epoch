@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cddjgr22gtrxr"]
+
+[ext_resource type="Script" uid="uid://bb4wbo1lhj1h8" path="res://character/base/character.gd" id="1_3vhu7"]
+[ext_resource type="Texture2D" uid="uid://dbbtku7b5kc8i" path="res://presentation/sprites/ball.png" id="2_a6ujl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fshvy"]
+radius = 4.0
+
+[node name="Character" type="RigidBody2D" unique_id=1388713911]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 10.0
+script = ExtResource("1_3vhu7")
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1187355946]
+texture = ExtResource("2_a6ujl")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1728318662]
+visible = false
+shape = SubResource("CircleShape2D_fshvy")
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="." unique_id=2073712260]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+path_metadata_flags = 0
+avoidance_enabled = true
+neighbor_distance = 0.1
+max_neighbors = 1

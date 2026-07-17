@@ -18,13 +18,18 @@ class_name World extends Node2D
 @onready var UI = $CanvasLayer/UI
 
 var spawn_service: SpawnService
-var combat_system: CombatSystem
+var combat_events: CombatEvents
 var floating_text_presenter: FloatingTextPresenter
 var combat_floating_text_presenter: CombatFloatingTextPresenter
 var world_context: WorldContext
 
 
 func _ready() -> void:
+	var script: GDScript = MovingDummyAI
+	print(script == InputProvider)
+	
+	#CharacterStat.What.CHANGED
+	
 	randomize()
 	setup_services()
 	setup_spawner()
@@ -33,17 +38,17 @@ func _ready() -> void:
  
 func setup_services() -> void:
 	spawn_service = SpawnService.new(spawner)
-	combat_system = CombatSystem.new()
+	combat_events = CombatEvents.new()
 	floating_text_presenter = FloatingTextPresenter.new(floating_texts_container)
 	combat_floating_text_presenter = CombatFloatingTextPresenter.new(floating_text_presenter, combat_floating_text_configs)
-	world_context = WorldContext.new(self, spawn_service, combat_system)
+	world_context = WorldContext.new(self, spawn_service, combat_events)
 
 func setup_spawner() -> void:
 	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container, hitboxes_container)
 
 func connect_events() -> void:
 	spawn_service.character_spawned.connect(_on_character_spawned)
-	combat_floating_text_presenter.bind(combat_system)
+	combat_floating_text_presenter.bind(combat_events)
 
 func setup_teams() -> void:
 	register_teams()
@@ -56,14 +61,11 @@ func spawn_team(team: TeamConfig) -> void:
 		spawn_team_member(config, team.name)
 
 func spawn_team_member(config: CharacterConfig, team_name: StringName) -> Character:
-	var character: Character = spawn_service.spawn_character(config, team_name)
-	
-	if is_player_character(config, team_name):
-		character.add_to_group("player")
-	
-	return character
+	if character_is_player(config, team_name):
+		config.input_script = PlayerInput
+	return spawn_service.spawn_character(config, team_name)
 
-func is_player_character(config: CharacterConfig, team_name: StringName) -> bool:
+func character_is_player(config: CharacterConfig, team_name: StringName) -> bool:
 	return player_team == team_name and player_character == config.id
 
 func register_teams() -> void:

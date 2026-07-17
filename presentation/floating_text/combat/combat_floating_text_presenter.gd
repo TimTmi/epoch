@@ -9,12 +9,10 @@ func _init(presenter: FloatingTextPresenter, configs: CombatFloatingTextConfigs)
 	self.presenter = presenter
 	self.configs = configs
 
-func bind(combat: CombatSystem) -> void:
-	combat.damage_taken.connect(_on_damage_taken)
-	combat.healed.connect(_on_healed)
+func bind(combat: CombatEvents) -> void:
+	combat.health_changed.connect(_on_health_changed)
 
-func _on_damage_taken(amount: float, target: Character, _source: Character) -> void:
-	presenter.show_text(str(roundi(amount)), configs.damage, target.global_position)
-
-func _on_healed(amount: float, target: Character, _source: Character) -> void:
-	presenter.show_text(str(roundi(amount)), configs.heal, target.global_position)
+func _on_health_changed(context: StatChangeContext) -> void:
+	var change: float = context.new_stat - context.old_stat
+	var config: FloatingTextConfig = configs.heal if change > 0 else configs.damage
+	presenter.show_text(str(roundi(absf(change))), config, context.character.global_position)

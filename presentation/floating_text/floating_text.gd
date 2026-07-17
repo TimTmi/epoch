@@ -13,6 +13,6 @@ func display(text: String, config: FloatingTextConfig) -> void:
 	var direction: Vector2 = config.direction.rotated(angle_offset)
 	
 	var tween = create_tween().set_parallel()
-	tween.tween_property(self, "position", direction * config.distance, config.lifetime)
+	tween.tween_property(self, "position", direction * config.distance, config.lifetime).as_relative()
 	tween.tween_property(self, "modulate:a", 0, config.lifetime)
 	tween.chain().tween_callback(queue_free)
