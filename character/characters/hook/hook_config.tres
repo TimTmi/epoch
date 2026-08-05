@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="CharacterConfig" format=3 uid="uid://burdk2aso1tfe"]
+
+[ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_s74cr"]
+[ext_resource type="PackedScene" uid="uid://bq04uuo0oqiot" path="res://character/characters/hook/hook.tscn" id="2_ox0i8"]
+[ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="2_qcp15"]
+[ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="4_y5grx"]
+[ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="5_5rqih"]
+
+[sub_resource type="Resource" id="Resource_ox0i8"]
+script = ExtResource("4_y5grx")
+metadata/_custom_type_script = "uid://dtsdhk3ysrt2l"
+
+[sub_resource type="Resource" id="Resource_y2xfd"]
+script = ExtResource("4_y5grx")
+maximum = 1000.0
+current = 1000.0
+metadata/_custom_type_script = "uid://dtsdhk3ysrt2l"
+
+[sub_resource type="Resource" id="Resource_n0rq4"]
+script = ExtResource("5_5rqih")
+health = SubResource("Resource_ox0i8")
+speed = SubResource("Resource_y2xfd")
+metadata/_custom_type_script = "uid://d4eq8sddlmlgr"
+
+[resource]
+script = ExtResource("2_qcp15")
+id = &"hook"
+scene = ExtResource("2_ox0i8")
+stats = SubResource("Resource_n0rq4")
+metadata/_custom_type_script = "uid://cpa2omn7pxm38"

@@ -1,8 +1,9 @@
-class_name StrandConfig
+class_name StrandConfig extends Resource
 
 
-var start_position: Vector2
-var end_position: Vector2
-var segment_count: int
-var iterations: int
-var gravity: Vector2
+@export var start_position: Vector2
+@export var end_position: Vector2
+@export var formation: StrandFormation
+@export var segment_length: float
+@export var iterations: int
+@export var gravity: Vector2

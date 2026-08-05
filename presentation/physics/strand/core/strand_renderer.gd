@@ -1,5 +1,10 @@
-class_name StrandRenderer extends Node2D
+@abstract class_name StrandRenderer extends Node2D
 
 
-func render(simulation: StrandSimulation) -> void:
-	pass
+var config: StrandRendererConfig
+
+
+func _init(_config: StrandRendererConfig) -> void:
+	config = _config
+
+@abstract func render(points: PackedVector2Array) -> void

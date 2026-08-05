@@ -1,4 +1,4 @@
-class_name StrandSolver
+class_name StrandSolver extends Resource
 
 
 func simulate(simulation: StrandSimulation, delta: float) -> void:
