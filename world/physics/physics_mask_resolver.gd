@@ -50,7 +50,7 @@ func get_mask(source_team: StringName, source_sublayer: PhysicsSublayer.Type, ov
 	return mask
 
 func get_profile(team: StringName) -> PhysicsProfile:
-	var profile := PhysicsProfile.new()
+	var profile: PhysicsProfile = PhysicsProfile.new()
 	
 	profile.character_layer = get_layer(team, PhysicsSublayer.Type.CHARACTER)
 	profile.character_mask = get_mask(team, PhysicsSublayer.Type.CHARACTER)

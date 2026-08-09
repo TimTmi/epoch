@@ -16,6 +16,8 @@ func activate(context: AbilityContext) -> void:
 	var strand: Strand = Strand.new(strand_config)
 	
 	var hook: Hook = user.spawner.spawn_projectile(HOOK)
+	print(hook.collision_layer)
+	print(hook.collision_mask)
 	strand.attach_start(RigidStrandBody.new(user))
 	strand.attach_end(RigidStrandBody.new(hook))
 	
