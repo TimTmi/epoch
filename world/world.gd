@@ -16,7 +16,7 @@ class_name World extends Node2D
 @onready var floating_texts_container: Node2D = $Effects/FloatingTexts
 @onready var spawner: Spawner = $Spawner
 @onready var UI: Control = $CanvasLayer/UI
-@onready var walls: TileMap = $Walls
+@onready var walls: TileMapLayer = $Walls
 
 var spawn_service: SpawnService
 var combat_events: CombatEvents
@@ -48,15 +48,11 @@ func connect_events() -> void:
 	combat_floating_text_presenter.bind(combat_events)
 
 func setup_environment() -> void:
+	layer_controller.add_layer(&"environment")
 	var tile_set: TileSet = walls.tile_set
-	#tile_set.add_physics_layer(0)
-	print(tile_set)
-	print(mask_resolver.get_layer(&"environment", PhysicsSublayer.Type.WALL))
-	print(mask_resolver.get_mask(&"environment", PhysicsSublayer.Type.WALL))
-	tile_set.set_physics_layer_collision_layer(0, 31)
-	tile_set.set_physics_layer_collision_mask(0, 31)
+	tile_set.add_physics_layer(0)
 	tile_set.set_physics_layer_collision_layer(0, mask_resolver.get_layer(&"environment", PhysicsSublayer.Type.WALL))
-	#tile_set.set_physics_layer_collision_mask(0, mask_resolver.get_mask(&"environment", PhysicsSublayer.Type.WALL))
+	tile_set.set_physics_layer_collision_mask(0, mask_resolver.get_mask(&"environment", PhysicsSublayer.Type.WALL))
 
 func setup_teams() -> void:
 	register_teams()
