@@ -15,7 +15,8 @@ class_name World extends Node2D
 @onready var hitboxes_container: Node2D = $Hitboxes
 @onready var floating_texts_container: Node2D = $Effects/FloatingTexts
 @onready var spawner: Spawner = $Spawner
-@onready var UI = $CanvasLayer/UI
+@onready var UI: Control = $CanvasLayer/UI
+@onready var walls: TileMap = $Walls
 
 var spawn_service: SpawnService
 var combat_events: CombatEvents
@@ -25,17 +26,13 @@ var world_context: WorldContext
 
 
 func _ready() -> void:
-	var script: GDScript = MovingDummyAI
-	print(script == InputProvider)
-	
-	#CharacterStat.What.CHANGED
-	
 	randomize()
 	setup_services()
 	setup_spawner()
 	connect_events()
+	setup_environment()
 	setup_teams()
- 
+
 func setup_services() -> void:
 	spawn_service = SpawnService.new(spawner)
 	combat_events = CombatEvents.new()
@@ -49,6 +46,17 @@ func setup_spawner() -> void:
 func connect_events() -> void:
 	spawn_service.character_spawned.connect(_on_character_spawned)
 	combat_floating_text_presenter.bind(combat_events)
+
+func setup_environment() -> void:
+	var tile_set: TileSet = walls.tile_set
+	#tile_set.add_physics_layer(0)
+	print(tile_set)
+	print(mask_resolver.get_layer(&"environment", PhysicsSublayer.Type.WALL))
+	print(mask_resolver.get_mask(&"environment", PhysicsSublayer.Type.WALL))
+	tile_set.set_physics_layer_collision_layer(0, 31)
+	tile_set.set_physics_layer_collision_mask(0, 31)
+	tile_set.set_physics_layer_collision_layer(0, mask_resolver.get_layer(&"environment", PhysicsSublayer.Type.WALL))
+	#tile_set.set_physics_layer_collision_mask(0, mask_resolver.get_mask(&"environment", PhysicsSublayer.Type.WALL))
 
 func setup_teams() -> void:
 	register_teams()

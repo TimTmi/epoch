@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://bq04uuo0oqiot"]
-
-[ext_resource type="PackedScene" uid="uid://cddjgr22gtrxr" path="res://character/base/character.tscn" id="1_nb1pf"]
-
-[node name="Hook" unique_id=1388713911 instance=ExtResource("1_nb1pf")]

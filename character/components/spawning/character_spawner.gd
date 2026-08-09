@@ -27,7 +27,7 @@ func spawn_projectile(scene: PackedScene) -> Projectile:
 	if projectile == null:
 		return null
 	
-	#TODO: physics setup
+	projectile.setup_physics(character.physics_profile)
 	
 	character.add_child(projectile)
 	return projectile

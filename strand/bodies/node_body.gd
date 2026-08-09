@@ -1,4 +1,4 @@
-class_name NodeBody extends StrandBody
+class_name NodeStrandBody extends StrandBody
 
 
 var body: Node2D

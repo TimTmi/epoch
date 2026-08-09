@@ -12,10 +12,14 @@
 [ext_resource type="Script" uid="uid://msk3spq6not0" path="res://world/spawning/spawner.gd" id="6_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://dskry0mydaydk" path="res://presentation/camera/camera.tscn" id="10_fyhu2"]
 
+[sub_resource type="Resource" id="Resource_ov2xu"]
+script = ExtResource("2_pkg7o")
+metadata/_custom_type_script = "uid://b34p0l8ius8jc"
+
 [sub_resource type="Resource" id="Resource_gbfbk"]
 script = ExtResource("2_pkg7o")
 name = &"team_1"
-members = Array[StringName]([&"quickfist"])
+members = Array[StringName]([&"huk"])
 metadata/_custom_type_script = "uid://b34p0l8ius8jc"
 
 [sub_resource type="Resource" id="Resource_ioo17"]
@@ -33,7 +37,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_jng6c"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_q7boi")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tfq1u"]
@@ -47,9 +52,9 @@ character_registry = ExtResource("2_gbfbk")
 layer_controller = ExtResource("3_ioo17")
 mask_resolver = ExtResource("3_gbfbk")
 combat_floating_text_configs = ExtResource("5_ov2xu")
-teams = Array[ExtResource("2_pkg7o")]([SubResource("Resource_gbfbk"), SubResource("Resource_ioo17")])
+teams = Array[ExtResource("2_pkg7o")]([SubResource("Resource_ov2xu"), SubResource("Resource_gbfbk"), SubResource("Resource_ioo17")])
 player_team = &"team_1"
-player_character = &"quickfist"
+player_character = &"huk"
 
 [node name="Walls" type="TileMap" parent="." unique_id=506168131]
 tile_set = SubResource("TileSet_jng6c")

@@ -8,7 +8,9 @@ var _simulation: StrandSimulation
 var _points: PackedVector2Array
 
 
-func _init() -> void:
+func _init(_config: StrandConfig = StrandConfig.new(), _solver: StrandSolver = VerletStrandSolver.new()) -> void:
+	config = _config
+	solver = _solver
 	_simulation = StrandSimulation.new(config, solver)
 
 func _draw() -> void:
