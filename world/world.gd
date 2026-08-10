@@ -50,16 +50,8 @@ func connect_events() -> void:
 func setup_environment() -> void:
 	layer_controller.add_layer(&"environment")
 	var tile_set: TileSet = walls.tile_set
-	#tile_set.add_physics_layer(0)
-	
 	tile_set.set_physics_layer_collision_layer(0, mask_resolver.get_layer(&"environment", PhysicsSublayer.Type.WALL))
 	tile_set.set_physics_layer_collision_mask(0, mask_resolver.get_mask(&"environment", PhysicsSublayer.Type.WALL))
-	
-	#tile_set.set_physics_layer_collision_layer(0, 32767)
-	#tile_set.set_physics_layer_collision_mask(0, 32767)
-	
-	print(tile_set.get_physics_layer_collision_layer(0))
-	print(tile_set.get_physics_layer_collision_mask(0))
 
 func setup_teams() -> void:
 	register_teams()
