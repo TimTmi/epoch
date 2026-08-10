@@ -16,7 +16,7 @@ enum Event {
 var team: StringName
 var physics_profile: PhysicsProfile
 
-var world_context: WorldContext
+var world_services: WorldServices
 
 var health: CharacterHealth
 var speed: CharacterStat
@@ -30,16 +30,16 @@ var positions : PackedVector2Array = []
 var time_scale: float = 1
 
 
-func initialize(world_context: WorldContext, config: CharacterConfig, team: StringName, physics_profile: PhysicsProfile) -> void:
-	self.world_context = world_context
+func initialize(world_services: WorldServices, config: CharacterConfig, team: StringName, physics_profile: PhysicsProfile) -> void:
+	self.world_services = world_services
 	self.team = team
 	self.physics_profile = physics_profile
 	
 	config_physics()
 	setup_stats(config.stats)
 	input = CharacterInput.new(self, config.input_script)
-	spawner = CharacterSpawner.new(self, world_context)
-	abilities = AbilitySystem.new(config.slot_abilities, config.passive_abilities)
+	spawner = CharacterSpawner.new(self, world_services)
+	abilities = AbilitySystem.new(self, world_services, config.slot_abilities, config.passive_abilities)
 	status_effects = StatusEffectSystem.new(self)
 	rules = RuleSystem.new()
 
@@ -53,7 +53,7 @@ func setup_stats(config: StatsConfig) -> void:
 
 func setup_health(config: StatConfig) -> void:
 	health = CharacterHealth.new(self, config)
-	health.changed.connect(world_context.combat_events.health_changed.emit)
+	health.changed.connect(world_services.combat_events.health_changed.emit)
 	health.changed.connect(_on_health_changed)
 
 func get_effective_delta(delta: float) -> float:
@@ -111,11 +111,11 @@ func receive_status_effect(context: StatusEffectApplicationContext) -> void:
 				context.target.status_effects.apply_status_effect(context)
 	)
 
-func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
-	abilities.try_activate_ability(ability, intent, self)
+#func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
+	#abilities.try_activate_ability(ability, intent, self)
 
 func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent) -> void:
-	abilities.try_activate_slot(slot, intent, self, world_context.combat_events)
+	abilities.try_activate_slot(slot, intent)
 
 func is_same_team(character: Character) -> bool:
 	return team == character.team

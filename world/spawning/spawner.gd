@@ -1,15 +1,15 @@
 class_name Spawner extends Node
 
 
-var world_context: WorldContext
+var world_services: WorldServices
 var mask_resolver: PhysicsMaskResolver
 var characters_container: Node2D
 var projectiles_container: Node2D
 var hitboxes_container: Node2D
 
 
-func setup(world_context: WorldContext, mask_resolver: PhysicsMaskResolver, characters_container: Node2D, projectiles_container: Node2D, hitboxes_container: Node2D):
-	self.world_context = world_context
+func setup(world_services: WorldServices, mask_resolver: PhysicsMaskResolver, characters_container: Node2D, projectiles_container: Node2D, hitboxes_container: Node2D):
+	self.world_services = world_services
 	self.mask_resolver = mask_resolver
 	self.characters_container = characters_container
 	self.projectiles_container = projectiles_container
@@ -21,7 +21,7 @@ func spawn_character(config: CharacterConfig, team: StringName) -> Character:
 		return null
 	
 	characters_container.add_child(character)
-	character.initialize(world_context, config, team, mask_resolver.get_profile(team))
+	character.initialize(world_services, config, team, mask_resolver.get_profile(team))
 	return character
 
 func spawn_projectile(scene: PackedScene, team: StringName) -> Projectile:

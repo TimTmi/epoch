@@ -3,11 +3,17 @@ class_name AbilitySystem
 
 enum CommandSlot { PRIMARY, SECONDARY, UTILITY, SPECIAL, ULTIMATE, EXTRA_1, EXTRA_2, EXTRA_3 }
 
+var _owner: Character
+var _world_services: WorldServices
+
 var slot_ability_instances: Dictionary[CommandSlot, AbilityInstance] = {}
 var passive_ability_instances: Array[AbilityInstance] = []
 
 
-func _init(slot_abilities: Dictionary[CommandSlot, Ability], passive_abilities: Array[Ability]) -> void:
+func _init(owner: Character, world_services: WorldServices, slot_abilities: Dictionary[CommandSlot, Ability], passive_abilities: Array[Ability]) -> void:
+	_owner = owner
+	_world_services = world_services
+	
 	for slot: CommandSlot in slot_abilities:
 		slot_ability_instances[slot] = AbilityInstance.new(slot_abilities.get(slot))
 	
@@ -21,8 +27,8 @@ func tick(delta: float) -> void:
 	for instance: AbilityInstance in passive_ability_instances:
 		instance.tick(delta)
 
-func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityIntent, user: Character, combat_events: CombatEvents) -> bool:
-	var context: AbilityContext = AbilityContext.new(intent, user, self, instance, combat_events)
+func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityIntent) -> bool:
+	var context: AbilityContext = AbilityContext.new(intent, _owner, self, instance, _world_services)
 	
 	if instance.can_activate(context):
 		instance.activate(context)
@@ -30,9 +36,9 @@ func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityInt
 	
 	return false
 
-func try_activate_slot(slot: CommandSlot, intent: AbilityIntent, user: Character, combat_events: CombatEvents) -> bool:
+func try_activate_slot(slot: CommandSlot, intent: AbilityIntent) -> bool:
 	var instance: AbilityInstance = slot_ability_instances.get(slot)
 	if instance == null:
 		return false
 	
-	return try_activate_ability_instance(instance, intent, user, combat_events)
+	return try_activate_ability_instance(instance, intent)

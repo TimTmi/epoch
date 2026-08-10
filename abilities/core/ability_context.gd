@@ -5,12 +5,12 @@ var targeting: AbilityTargeting
 var instance: AbilityInstance
 var user: Character
 var abilities: AbilitySystem
-var combat_events: CombatEvents
+var world_services: WorldServices
 
 
-func _init(intent: AbilityIntent, user: Character, abilities: AbilitySystem, instance: AbilityInstance, combat_events: CombatEvents) -> void:
-	self.targeting = AbilityTargeting.new(intent, user.global_position)
-	self.instance = instance
-	self.user = user
-	self.abilities = abilities
-	self.combat_events = combat_events
+func _init(_intent: AbilityIntent, _user: Character, _abilities: AbilitySystem, _instance: AbilityInstance, _world_services: WorldServices) -> void:
+	targeting = AbilityTargeting.new(_intent, _user.global_position)
+	instance = _instance
+	user = _user
+	abilities = _abilities
+	world_services = _world_services

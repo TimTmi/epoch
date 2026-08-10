@@ -2,12 +2,12 @@ class_name CharacterSpawner
 
 
 var character: Character
-var world_context: WorldContext
+var world_services: WorldServices
 
 
-func _init(character: Character, world_context: WorldContext) -> void:
+func _init(character: Character, world_services: WorldServices) -> void:
 	self.character = character
-	self.world_context = world_context
+	self.world_services = world_services
 
 func spawn_local_hitbox(scene: PackedScene) -> Hitbox:
 	var hitbox: Hitbox = scene.instantiate()
@@ -20,16 +20,15 @@ func spawn_local_hitbox(scene: PackedScene) -> Hitbox:
 	return hitbox
 
 func spawn_global_hitbox(scene: PackedScene) -> Hitbox:
-	return world_context.spawn.spawn_hitbox(scene, character.team)
+	return world_services.spawn.spawn_hitbox(scene, character.team)
 
 func spawn_projectile(scene: PackedScene) -> Projectile:
-	var projectile: Projectile = scene.instantiate()
+	var projectile: Projectile = world_services.spawn.spawn_projectile(scene, character.team)
 	if projectile == null:
 		return null
 	
 	projectile.setup_physics(character.physics_profile)
 	
-	character.add_child(projectile)
 	return projectile
 
 func spawn_vfx(scene: PackedScene) -> Node2D:

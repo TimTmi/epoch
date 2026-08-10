@@ -22,7 +22,7 @@ var spawn_service: SpawnService
 var combat_events: CombatEvents
 var floating_text_presenter: FloatingTextPresenter
 var combat_floating_text_presenter: CombatFloatingTextPresenter
-var world_context: WorldContext
+var world_services: WorldServices
 
 
 func _ready() -> void:
@@ -38,10 +38,10 @@ func setup_services() -> void:
 	combat_events = CombatEvents.new()
 	floating_text_presenter = FloatingTextPresenter.new(floating_texts_container)
 	combat_floating_text_presenter = CombatFloatingTextPresenter.new(floating_text_presenter, combat_floating_text_configs)
-	world_context = WorldContext.new(self, spawn_service, combat_events)
+	world_services = WorldServices.new(self, spawn_service, combat_events)
 
 func setup_spawner() -> void:
-	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container, hitboxes_container)
+	spawner.setup(world_services, mask_resolver, characters_container, projectiles_container, hitboxes_container)
 
 func connect_events() -> void:
 	spawn_service.character_spawned.connect(_on_character_spawned)
