@@ -1,4 +1,4 @@
-class_name WorldContext
+class_name WorldServices
 
 
 var world: World

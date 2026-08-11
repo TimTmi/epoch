@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cg6acq1r6qadi"]
+
+[ext_resource type="Texture2D" uid="uid://ccbxfm0iqfmbf" path="res://combat/projectiles/hook/hook.png" id="1_5mucd"]
+[ext_resource type="Shader" uid="uid://rm3d08ij7ox" path="res://combat/projectiles/hook/hook.gdshader" id="1_i4vug"]
+[ext_resource type="Script" uid="uid://cijc0aoejatq1" path="res://combat/projectiles/hook/hook.gd" id="1_u2cn6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1igbg"]
+shader = ExtResource("1_i4vug")
+shader_parameter/stream_count = 3
+shader_parameter/stream_jitter = 0.3
+shader_parameter/group_rotation_speed = 6.0
+shader_parameter/swirl_speed = 3.0
+shader_parameter/base_radius = 0.0
+shader_parameter/radius_bottom_scale = 0.35
+shader_parameter/radius_top_scale = 0.15
+shader_parameter/wobble_amount = 8.0
+shader_parameter/wobble_speed = 2.0
+shader_parameter/flow_direction = Vector2(-1, 0)
+shader_parameter/rise_speed = 13.0
+shader_parameter/emitter_origin = Vector2(0, 0)
+shader_parameter/lifetime_sec = 4.0
+shader_parameter/scale_min = 0.5
+shader_parameter/scale_max = 1.2
+shader_parameter/scale_end = 0.3
+shader_parameter/min_scale_depth = 0.55
+shader_parameter/color_start = Color(15.3, 15.3, 16.216, 1)
+shader_parameter/color_mid = Color(17.131433, 17.131433, 17.976582, 1)
+shader_parameter/color_end = Color(0.6, 0.6, 0.6509804, 1)
+shader_parameter/min_alpha_depth = 0.35
+
+[node name="Hook" type="RigidBody2D" unique_id=1917771655]
+gravity_scale = 0.0
+script = ExtResource("1_u2cn6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1884286648]
+texture = ExtResource("1_5mucd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=941879833]
+visible = false
+amount = 13
+local_coords = true
+process_material = SubResource("ShaderMaterial_1igbg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=552402354]
+polygon = PackedVector2Array(4, 0, -2, -3, -2, 3)

@@ -15,40 +15,43 @@ class_name World extends Node2D
 @onready var hitboxes_container: Node2D = $Hitboxes
 @onready var floating_texts_container: Node2D = $Effects/FloatingTexts
 @onready var spawner: Spawner = $Spawner
-@onready var UI = $CanvasLayer/UI
+@onready var UI: Control = $CanvasLayer/UI
+@onready var walls: TileMapLayer = $Walls
 
 var spawn_service: SpawnService
 var combat_events: CombatEvents
 var floating_text_presenter: FloatingTextPresenter
 var combat_floating_text_presenter: CombatFloatingTextPresenter
-var world_context: WorldContext
+var world_services: WorldServices
 
 
 func _ready() -> void:
-	var script: GDScript = MovingDummyAI
-	print(script == InputProvider)
-	
-	#CharacterStat.What.CHANGED
-	
 	randomize()
 	setup_services()
 	setup_spawner()
 	connect_events()
+	setup_environment()
 	setup_teams()
- 
+
 func setup_services() -> void:
 	spawn_service = SpawnService.new(spawner)
 	combat_events = CombatEvents.new()
 	floating_text_presenter = FloatingTextPresenter.new(floating_texts_container)
 	combat_floating_text_presenter = CombatFloatingTextPresenter.new(floating_text_presenter, combat_floating_text_configs)
-	world_context = WorldContext.new(self, spawn_service, combat_events)
+	world_services = WorldServices.new(self, spawn_service, combat_events)
 
 func setup_spawner() -> void:
-	spawner.setup(world_context, mask_resolver, characters_container, projectiles_container, hitboxes_container)
+	spawner.setup(world_services, mask_resolver, characters_container, projectiles_container, hitboxes_container)
 
 func connect_events() -> void:
 	spawn_service.character_spawned.connect(_on_character_spawned)
 	combat_floating_text_presenter.bind(combat_events)
+
+func setup_environment() -> void:
+	layer_controller.add_layer(&"environment")
+	var tile_set: TileSet = walls.tile_set
+	tile_set.set_physics_layer_collision_layer(0, mask_resolver.get_layer(&"environment", PhysicsSublayer.Type.WALL))
+	tile_set.set_physics_layer_collision_mask(0, mask_resolver.get_mask(&"environment", PhysicsSublayer.Type.WALL))
 
 func setup_teams() -> void:
 	register_teams()

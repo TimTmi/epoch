@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cm4mxmbml4olx"]
+[gd_scene format=4 uid="uid://cm4mxmbml4olx"]
 
 [ext_resource type="Script" uid="uid://cymr4yummw5hq" path="res://world/world.gd" id="1_5qxuo"]
 [ext_resource type="Resource" uid="uid://c3tvfuihy0bxv" path="res://character/registry/base_character_registry.tres" id="2_gbfbk"]
@@ -15,7 +15,7 @@
 [sub_resource type="Resource" id="Resource_gbfbk"]
 script = ExtResource("2_pkg7o")
 name = &"team_1"
-members = Array[StringName]([&"quickfist"])
+members = Array[StringName]([&"huk"])
 metadata/_custom_type_script = "uid://b34p0l8ius8jc"
 
 [sub_resource type="Resource" id="Resource_ioo17"]
@@ -33,7 +33,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_jng6c"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_q7boi")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_tfq1u"]
@@ -49,14 +50,13 @@ mask_resolver = ExtResource("3_gbfbk")
 combat_floating_text_configs = ExtResource("5_ov2xu")
 teams = Array[ExtResource("2_pkg7o")]([SubResource("Resource_gbfbk"), SubResource("Resource_ioo17")])
 player_team = &"team_1"
-player_character = &"quickfist"
+player_character = &"huk"
 
-[node name="Walls" type="TileMap" parent="." unique_id=506168131]
+[node name="Walls" type="TileMapLayer" parent="." unique_id=961445052]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD4//v/AAAAAAAAAAD5//v/AAAAAAAAAAD6//v/AAAAAAAAAAD7//v/AAAAAAAAAAD8//v/AAAAAAAAAAD9//v/AAAAAAAAAAD+//v/AAAAAAAAAAD///v/AAAAAAAAAAAAAPv/AAAAAAAAAAABAPv/AAAAAAAAAAACAPv/AAAAAAAAAAADAPv/AAAAAAAAAAAEAPv/AAAAAAAAAAAFAPv/AAAAAAAAAAAGAPv/AAAAAAAAAAAHAPv/AAAAAAAAAAAIAPv/AAAAAAAAAAAIAPz/AAAAAAAAAAAIAP3/AAAAAAAAAAAIAP7/AAAAAAAAAAAIAP//AAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAADAAQAAAAAAAAAAAACAAQAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD9/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAD7/wQAAAAAAAAAAAD6/wQAAAAAAAAAAAD5/wQAAAAAAAAAAAD4/wQAAAAAAAAAAAD3/wQAAAAAAAAAAAD3/wMAAAAAAAAAAAD3//3/AAAAAAAAAAD3//z/AAAAAAAAAAD3//7/AAAAAAAAAAD3////AAAAAAAAAAD3/wAAAAAAAAAAAAD3/wEAAAAAAAAAAAD3/wIAAAAAAAAAAAD4//r/AAAAAAAAAAD6//r/AAAAAAAAAAD8//r/AAAAAAAAAAD+//r/AAAAAAAAAAAAAPr/AAAAAAAAAAACAPr/AAAAAAAAAAAEAPr/AAAAAAAAAAAGAPr/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_jng6c")
 rendering_quadrant_size = 64
-format = 2
-layer_0/tile_data = PackedInt32Array(-262153, 0, 0, -262152, 0, 0, -262151, 0, 0, -262150, 0, 0, -262149, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 0, 0, -327672, 0, 0, -262136, 0, 0, -196600, 0, 0, -131064, 0, 0, -65528, 0, 0, 8, 0, 0, 65544, 0, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 262151, 0, 0, 262150, 0, 0, 262149, 0, 0, 262148, 0, 0, 262147, 0, 0, 262146, 0, 0, 262145, 0, 0, 262144, 0, 0, 327679, 0, 0, 327678, 0, 0, 327677, 0, 0, 327676, 0, 0, 327675, 0, 0, 327674, 0, 0, 327673, 0, 0, 327672, 0, 0, 327671, 0, 0, 262135, 0, 0, -131081, 0, 0, -196617, 0, 0, -65545, 0, 0, -9, 0, 0, 65527, 0, 0, 131063, 0, 0, 196599, 0, 0, -327688, 0, 0, -327686, 0, 0, -327684, 0, 0, -327682, 0, 0, -393216, 0, 0, -393214, 0, 0, -393212, 0, 0, -393210, 0, 0)
-metadata/_edit_lock_ = true
 
 [node name="NavigationRegion" type="NavigationRegion2D" parent="." unique_id=1980622690]
 navigation_polygon = SubResource("NavigationPolygon_tfq1u")
