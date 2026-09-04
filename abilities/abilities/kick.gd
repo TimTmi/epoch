@@ -12,10 +12,10 @@ const KICK = preload("uid://dyflk7p2dlcdc")
 
 
 func activate(context: AbilityContext) -> void:
-	var user: Character = context.user
 	var direction: Vector2 = context.targeting.get_target_direction()
 	if direction == Vector2.INF:
 		return
+	var user: Character = context.user
 	
 	var kick: CircleStrike = user.spawner.spawn_local_hitbox(KICK)
 	

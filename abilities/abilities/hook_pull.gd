@@ -9,13 +9,16 @@ const HOOK: PackedScene = preload("res://combat/projectiles/hook/hook.tscn")
 
 func activate(context: AbilityContext) -> void:
 	var direction: Vector2 = context.targeting.get_target_direction()
+	if direction == Vector2.INF:
+		return
 	var user: Character = context.user
+	var spawn: SpawnService = context.world_services.spawn
 	
 	var strand_formation: StrandFormation = SpiralFormation.new(user.position, 0.0, 16.0)
 	var strand_config: StrandConfig = StrandConfig.new(strand_formation, 4)
 	var strand: Strand = Strand.new(strand_config)
 	
-	var hook: Hook = user.spawner.spawn_projectile(HOOK)
+	var hook: Hook = spawn.spawn_projectile(HOOK, user.team)
 	strand.attach_start(RigidStrandBody.new(user))
 	strand.attach_end(RigidStrandBody.new(hook))
 	
