@@ -7,6 +7,7 @@ var _spawner: Spawner
 signal character_spawned(character: Character)
 signal projectile_spawned(projectile: Projectile)
 signal hitbox_spawned(hitbox: Hitbox)
+signal strand_spawned(strand: Strand)
 
 
 func _init(_spawner: Spawner) -> void:
@@ -35,3 +36,8 @@ func spawn_hitbox(scene: PackedScene, team: StringName) -> Hitbox:
 	
 	hitbox_spawned.emit(hitbox)
 	return hitbox
+
+func spawn_strand(strand: Strand) -> Strand:
+	_spawner.spawn_strand(strand)
+	strand_spawned.emit(strand)
+	return strand
