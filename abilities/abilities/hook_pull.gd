@@ -17,8 +17,7 @@ func activate(context: AbilityContext) -> void:
 	
 	var hook: Hook = spawn.spawn_projectile(HOOK, user.team, user.position)
 	
-	var strand: Strand = Strand.new(strand_config)
-	spawn.spawn_strand(strand)
+	var strand: Strand = spawn.spawn_strand(strand_config)
 	strand.attach_start(RigidStrandBody.new(user))
 	strand.attach_end(RigidStrandBody.new(hook))
 	

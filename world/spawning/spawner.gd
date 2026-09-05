@@ -36,7 +36,8 @@ func spawn_projectile(scene: PackedScene, team: StringName, position: Vector2 = 
 	
 	return projectile
 
-func spawn_strand(strand: Strand) -> Strand:
+func spawn_strand(config: StrandConfig) -> Strand:
+	var strand: Strand = Strand.new(config)
 	strands_container.add_child(strand)
 	return strand
 

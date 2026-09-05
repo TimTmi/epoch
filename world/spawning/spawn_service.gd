@@ -37,7 +37,7 @@ func spawn_hitbox(scene: PackedScene, team: StringName) -> Hitbox:
 	hitbox_spawned.emit(hitbox)
 	return hitbox
 
-func spawn_strand(strand: Strand) -> Strand:
-	_spawner.spawn_strand(strand)
+func spawn_strand(config: StrandConfig) -> Strand:
+	var strand: Strand = _spawner.spawn_strand(config)
 	strand_spawned.emit(strand)
 	return strand
