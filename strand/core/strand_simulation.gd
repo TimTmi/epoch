@@ -31,7 +31,8 @@ func _init(_config: StrandConfig, _solver: StrandSolver) -> void:
 				StrandDistanceConstraint.new(
 					particles[i - 1],
 					particles[i],
-					rest_length
+					rest_length,
+					config.stiffness
 				)
 			)
 

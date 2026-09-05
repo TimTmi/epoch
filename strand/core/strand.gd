@@ -21,10 +21,10 @@ func _physics_process(delta: float) -> void:
 	_render(_simulation.get_points())
 
 func attach_start(body: StrandBody) -> void:
-	_simulation.constraints.append(StrandDistanceConstraint.new(_simulation.get_start(), body, 0.0))
+	_simulation.constraints.append(StrandDistanceConstraint.new(_simulation.get_start(), body, 0.0, config.stiffness))
 
 func attach_end(body: StrandBody) -> void:
-	_simulation.constraints.append(StrandDistanceConstraint.new(_simulation.get_end(), body, 0.0))
+	_simulation.constraints.append(StrandDistanceConstraint.new(_simulation.get_end(), body, 0.0, config.stiffness))
 
 func resize_to_length(target_length: float, speed: float) -> void:
 	_simulation.resize_to_length(target_length, speed)

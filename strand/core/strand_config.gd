@@ -5,14 +5,16 @@ class_name StrandConfig extends Resource
 @export var target_segment_length: float
 @export var iterations: int
 @export var gravity: Vector2
+@export_range(0.0, 1.0) var stiffness: float = 1.0
 
 @export var color: Color = Color.WHITE
 @export var width: float = 1.0
 @export var antialiased: bool = false
 
 
-func _init(_formation: StrandFormation = StraightFormation.new(), _target_segment_length: float = 1.0, _iterations: int = 1, _gravity: Vector2 = Vector2.ZERO) -> void:
+func _init(_formation: StrandFormation = StraightFormation.new(), _target_segment_length: float = 1.0, _iterations: int = 1, _gravity: Vector2 = Vector2.ZERO, _stiffness: float = 1.0) -> void:
 	formation = _formation
 	target_segment_length = _target_segment_length
 	iterations = _iterations
 	gravity = _gravity
+	stiffness = _stiffness

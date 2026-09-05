@@ -14,7 +14,7 @@ func activate(context: AbilityContext) -> void:
 	var spawn: SpawnService = context.world_services.spawn
 	
 	var strand_formation: StrandFormation = ZigZagFormation.new(user.position, direction, hook_length, 16, 8)
-	var strand_config: StrandConfig = StrandConfig.new(strand_formation, 4)
+	var strand_config: StrandConfig = StrandConfig.new(strand_formation, 4, 20)
 	
 	var hook: Hook = spawn.spawn_projectile(HOOK, user.team, user.position)
 	
