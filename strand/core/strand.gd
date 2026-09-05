@@ -26,6 +26,9 @@ func attach_start(body: StrandBody) -> void:
 func attach_end(body: StrandBody) -> void:
 	_simulation.constraints.append(StrandDistanceConstraint.new(_simulation.get_end(), body, 0.0))
 
+func resize_to_length(target_length: float, speed: float) -> void:
+	_simulation.resize_to_length(target_length, speed)
+
 func _simulate(delta: float) -> void:
 	_simulation.simulate(delta)
 

@@ -4,6 +4,9 @@ class_name Hook extends Projectile
 var _is_stuck: bool = false
 
 
+signal stuck(body: Node2D)
+
+
 func _ready() -> void:
 	contact_monitor = true
 	max_contacts_reported = 1
@@ -14,6 +17,7 @@ func _on_body_entered(body: Node) -> void:
 		return
 	
 	_is_stuck = true
+	stuck.emit(body)
 	_stick.call_deferred(body)
 
 func _stick(body: Node) -> void:
