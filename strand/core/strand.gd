@@ -1,6 +1,8 @@
 class_name Strand extends Node2D
 
 
+signal resize_finished
+
 @export var config: StrandConfig
 @export var solver: StrandSolver
 
@@ -12,6 +14,7 @@ func _init(_config: StrandConfig = StrandConfig.new(), _solver: StrandSolver = V
 	config = _config
 	solver = _solver
 	_simulation = StrandSimulation.new(config, solver)
+	_simulation.resize_finished.connect(resize_finished.emit)
 
 func _draw() -> void:
 	draw_polyline(_points, config.color, config.width, config.antialiased)
@@ -21,10 +24,10 @@ func _physics_process(delta: float) -> void:
 	_render(_simulation.get_points())
 
 func attach_start(body: StrandBody) -> void:
-	_simulation.constraints.append(StrandDistanceConstraint.new(_simulation.get_start(), body, 0.0, config.stiffness))
+	_simulation.attach_start(body)
 
 func attach_end(body: StrandBody) -> void:
-	_simulation.constraints.append(StrandDistanceConstraint.new(_simulation.get_end(), body, 0.0, config.stiffness))
+	_simulation.attach_end(body)
 
 func resize_to_length(target_length: float, speed: float) -> void:
 	_simulation.resize_to_length(target_length, speed)

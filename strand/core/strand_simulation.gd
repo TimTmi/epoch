@@ -1,10 +1,13 @@
 class_name StrandSimulation
 
 
+signal resize_finished
+
 var config: StrandConfig
 var particles: Array[StrandParticle]
 var points: PackedVector2Array
 var constraints: Array[StrandConstraint]
+var bodies: Array[StrandBody]
 var solver: StrandSolver
 
 var _resize_target_length: float = -1.0  # negative means no active resize
@@ -22,7 +25,7 @@ func _init(_config: StrandConfig, _solver: StrandSolver) -> void:
 	for i: int in range(distances.size()):
 		var position: Vector2 = config.formation.sample(distances[i])
 		
-		particles.append(StrandParticle.new(position, 1.0))
+		particles.append(StrandParticle.new(position, 0.025))
 		
 		if i > 0:
 			var rest_length: float = particles[i - 1].position.distance_to(position)
@@ -68,6 +71,28 @@ func _build_sample_distances(formation: StrandFormation, target_segment_length: 
 func simulate(delta: float) -> void:
 	_apply_resize(delta)
 	solver.simulate(self, delta)
+	_update_bodies(delta)
+
+func _update_bodies(delta: float) -> void:
+	# While resizing, the strand drives its bodies (reel-in): corrections must
+	# become velocity so joints transfer the pull. Otherwise the strand only
+	# follows passively — e.g. a thrown hook must keep its launch momentum.
+	if _resize_target_length >= 0.0:
+		for body: StrandBody in bodies:
+			body.commit_motion(delta)
+	else:
+		for body: StrandBody in bodies:
+			body.discard_motion()
+
+func attach_start(body: StrandBody) -> void:
+	_attach(get_start(), body)
+
+func attach_end(body: StrandBody) -> void:
+	_attach(get_end(), body)
+
+func _attach(particle: StrandParticle, body: StrandBody) -> void:
+	bodies.append(body)
+	constraints.append(StrandDistanceConstraint.new(particle, body, 0.0, config.stiffness))
 
 func resize_to_length(target_length: float, speed: float) -> void:
 	if speed <= 0.0:
@@ -97,18 +122,23 @@ func _apply_resize(delta: float) -> void:
 
 	var current_length: float = get_length()
 	if is_zero_approx(current_length):
-		_resize_target_length = -1.0
+		_finish_resize()
 		return
 
 	var new_length: float = move_toward(current_length, _resize_target_length, _resize_speed * delta)
 	var new_rest_length: float = get_rest_length() * new_length / current_length
 	if is_equal_approx(new_length, _resize_target_length) or is_equal_approx(new_rest_length, _resize_target_length):
-		_resize_target_length = -1.0
+		_finish_resize()
 
 	var factor: float = new_length / current_length
 	for constraint: StrandConstraint in constraints:
 		if constraint is StrandDistanceConstraint:
 			constraint.distance *= factor
+
+func _finish_resize() -> void:
+	_resize_target_length = -1.0
+	_resize_speed = 0.0
+	resize_finished.emit()
 
 func get_points() -> PackedVector2Array:
 	points.resize(particles.size())
