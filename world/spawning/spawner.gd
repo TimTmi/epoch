@@ -15,20 +15,21 @@ func setup(world_services: WorldServices, mask_resolver: PhysicsMaskResolver, ch
 	self.projectiles_container = projectiles_container
 	self.hitboxes_container = hitboxes_container
 
-func spawn_character(config: CharacterConfig, team: StringName) -> Character:
+func spawn_character(config: CharacterConfig, team: StringName, position: Vector2 = Vector2.ZERO) -> Character:
 	var character: Character = config.scene.instantiate()
 	if character == null:
 		return null
-	
+	character.position = position
 	characters_container.add_child(character)
 	character.initialize(world_services, config, team, mask_resolver.get_profile(team))
 	return character
 
-func spawn_projectile(scene: PackedScene, team: StringName) -> Projectile:
+func spawn_projectile(scene: PackedScene, team: StringName, position: Vector2 = Vector2.ZERO) -> Projectile:
 	var projectile: Projectile = scene.instantiate()
 	if projectile == null:
 		return null
 	
+	projectile.position = position
 	projectiles_container.add_child(projectile)
 	
 	return projectile

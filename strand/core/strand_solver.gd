@@ -3,7 +3,7 @@ class_name StrandSolver extends Resource
 
 func simulate(simulation: StrandSimulation, delta: float) -> void:
 	integrate(simulation, delta)
-	for _i: int in simulation.iterations:
+	for _i: int in simulation.config.iterations:
 		solve_constraints(simulation)
 
 func integrate(simulation: StrandSimulation, delta: float) -> void:

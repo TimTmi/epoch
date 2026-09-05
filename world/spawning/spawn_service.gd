@@ -12,16 +12,16 @@ signal hitbox_spawned(hitbox: Hitbox)
 func _init(_spawner: Spawner) -> void:
 	self._spawner = _spawner
 
-func spawn_character(config: CharacterConfig, team: StringName) -> Character:
-	var character: Character = _spawner.spawn_character(config, team)
+func spawn_character(config: CharacterConfig, team: StringName, position: Vector2 = Vector2.ZERO) -> Character:
+	var character: Character = _spawner.spawn_character(config, team, position)
 	if character == null:
 		return null
 	
 	character_spawned.emit(character)
 	return character
 
-func spawn_projectile(scene: PackedScene, team: StringName) -> Projectile:
-	var projectile: Projectile = _spawner.spawn_projectile(scene, team)
+func spawn_projectile(scene: PackedScene, team: StringName, position: Vector2 = Vector2.ZERO) -> Projectile:
+	var projectile: Projectile = _spawner.spawn_projectile(scene, team, position)
 	if projectile == null:
 		return null
 	
