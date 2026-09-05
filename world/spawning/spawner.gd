@@ -32,6 +32,7 @@ func spawn_projectile(scene: PackedScene, team: StringName, position: Vector2 = 
 		return null
 	
 	projectile.position = position
+	projectile.setup_physics(mask_resolver.get_profile(team))
 	projectiles_container.add_child(projectile)
 	
 	return projectile
@@ -46,6 +47,7 @@ func spawn_hitbox(scene: PackedScene, team: StringName) -> Hitbox:
 	if hitbox == null:
 		return null
 	
+	hitbox.setup_physics(mask_resolver.get_profile(team))
 	hitboxes_container.add_child(hitbox)
-	
+
 	return hitbox
