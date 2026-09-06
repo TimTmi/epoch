@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="5_qmodq"]
 [ext_resource type="Script" uid="uid://dbv1fi7kep51m" path="res://abilities/abilities/arcane_bolt.gd" id="6_bolt"]
 [ext_resource type="Script" uid="uid://edoqyqq7rfol" path="res://abilities/core/ability_step.gd" id="7_step"]
+[ext_resource type="Script" uid="uid://df5bcewak36rq" path="res://abilities/abilities/fire_breath.gd" id="8_rwmyx"]
 [ext_resource type="Script" uid="uid://cr0h4mcgne8y4" path="res://abilities/abilities/earth_wall.gd" id="8_wall"]
 
 [sub_resource type="Resource" id="Resource_hold_step"]
@@ -15,7 +16,7 @@ script = ExtResource("7_step")
 trigger = 1
 metadata/_custom_type_script = "uid://edoqyqq7rfol"
 
-[sub_resource type="Resource" id="Resource_arcane_bolt"]
+[sub_resource type="Resource" id="Resource_nhbrr"]
 script = ExtResource("6_bolt")
 cooldown = 0.4
 hold_movement_multiplier = 0.5
@@ -27,12 +28,24 @@ script = ExtResource("7_step")
 trigger = 1
 metadata/_custom_type_script = "uid://edoqyqq7rfol"
 
-[sub_resource type="Resource" id="Resource_earth_wall"]
+[sub_resource type="Resource" id="Resource_ruu00"]
 script = ExtResource("8_wall")
 cooldown = 0.5
 hold_movement_multiplier = 0.0
 steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step_wall")])
 metadata/_custom_type_script = "uid://cr0h4mcgne8y4"
+
+[sub_resource type="Resource" id="Resource_hold_step_fire"]
+script = ExtResource("7_step")
+trigger = 1
+metadata/_custom_type_script = "uid://edoqyqq7rfol"
+
+[sub_resource type="Resource" id="Resource_wl60f"]
+script = ExtResource("8_rwmyx")
+cooldown = 0.5
+hold_movement_multiplier = 0.5
+steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step_fire")])
+metadata/_custom_type_script = "uid://df5bcewak36rq"
 
 [sub_resource type="Resource" id="Resource_fge5w"]
 script = ExtResource("4_7mcsp")
@@ -56,7 +69,8 @@ id = &"wizard"
 scene = ExtResource("2_nbq0p")
 stats = SubResource("Resource_ac50u")
 slot_abilities = Dictionary[int, ExtResource("1_xg0g0")]({
-0: SubResource("Resource_arcane_bolt"),
-1: SubResource("Resource_earth_wall")
+0: SubResource("Resource_nhbrr"),
+1: SubResource("Resource_ruu00"),
+2: SubResource("Resource_wl60f")
 })
 metadata/_custom_type_script = "uid://cpa2omn7pxm38"
