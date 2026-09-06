@@ -3,19 +3,40 @@
 [ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_oxkda"]
 [ext_resource type="PackedScene" uid="uid://bq04uuo0oqiot" path="res://character/characters/huk/huk.tscn" id="2_1wwrg"]
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="3_xjkhk"]
-[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="4_mp1gq"]
+[ext_resource type="Texture2D" uid="uid://dl2wm0662ws8w" path="res://presentation/sprites/ability_icons/punch.png" id="4_esue5"]
 [ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="4_mxwwe"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="5_2gwir"]
 [ext_resource type="Script" uid="uid://cw3p4neqsy1n5" path="res://abilities/abilities/grapple.gd" id="5_mp1gq"]
+[ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/abilities/punch.gd" id="5_xsctc"]
 [ext_resource type="Script" uid="uid://c7b8xl1ddrlrj" path="res://abilities/abilities/chain_trap.gd" id="6_q66dk"]
 [ext_resource type="Script" uid="uid://edoqyqq7rfol" path="res://abilities/core/ability_step.gd" id="6_ukif5"]
+[ext_resource type="Texture2D" uid="uid://cxyyb0pfjsypu" path="res://presentation/sprites/ability_icons/grapple.png" id="7_o8wn1"]
+[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="8_r5ksp"]
+[ext_resource type="Texture2D" uid="uid://btmhq8ugnrrru" path="res://presentation/sprites/ability_icons/dash.png" id="9_yaj2q"]
+[ext_resource type="Texture2D" uid="uid://blwystvgnfy1w" path="res://presentation/sprites/ability_icons/crossed-chains.png" id="11_7yru1"]
 
-[sub_resource type="Resource" id="Resource_3r8ps"]
+[sub_resource type="Resource" id="Resource_2og5k"]
+script = ExtResource("5_xsctc")
+icon = ExtResource("4_esue5")
+cooldown = 0.2
+metadata/_custom_type_script = "uid://bn027ie5mw1i8"
+
+[sub_resource type="Resource" id="Resource_k2uma"]
 script = ExtResource("5_mp1gq")
+icon = ExtResource("7_o8wn1")
+cooldown = 3.0
 metadata/_custom_type_script = "uid://cw3p4neqsy1n5"
 
-[sub_resource type="Resource" id="Resource_rg2f7"]
+[sub_resource type="Resource" id="Resource_vftqm"]
+script = ExtResource("8_r5ksp")
+icon = ExtResource("9_yaj2q")
+cooldown = 2.0
+metadata/_custom_type_script = "uid://fu3wehw686tb"
+
+[sub_resource type="Resource" id="Resource_0amm2"]
 script = ExtResource("6_q66dk")
+icon = ExtResource("11_7yru1")
+cooldown = 10.0
 metadata/_custom_type_script = "uid://c7b8xl1ddrlrj"
 
 [sub_resource type="Resource" id="Resource_ox0i8"]
@@ -40,7 +61,9 @@ id = &"huk"
 scene = ExtResource("2_1wwrg")
 stats = SubResource("Resource_n0rq4")
 slot_abilities = Dictionary[int, ExtResource("1_oxkda")]({
-0: SubResource("Resource_3r8ps"),
-1: SubResource("Resource_rg2f7")
+0: SubResource("Resource_2og5k"),
+1: SubResource("Resource_k2uma"),
+2: SubResource("Resource_vftqm"),
+3: SubResource("Resource_0amm2")
 })
 metadata/_custom_type_script = "uid://cpa2omn7pxm38"
