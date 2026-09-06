@@ -13,6 +13,10 @@ func can_activate(context: AbilityContext) -> bool:
 func activate(context: AbilityContext) -> void:
 	pass
 
+# Called every physics frame while a HOLD step is being held, before activation.
+func hold_tick(context: AbilityContext, hold_elapsed: float) -> void:
+	pass
+
 func step_count() -> int:
 	return maxi(steps.size(), 1)
 

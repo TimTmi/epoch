@@ -5,6 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://ds7ei0cq5rr51" path="res://character/characters/wizard/wizard.tscn" id="2_nbq0p"]
 [ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="4_7mcsp"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="5_qmodq"]
+[ext_resource type="Script" uid="uid://dbv1fi7kep51m" path="res://abilities/abilities/arcane_bolt.gd" id="6_bolt"]
+[ext_resource type="Script" uid="uid://edoqyqq7rfol" path="res://abilities/core/ability_step.gd" id="7_step"]
+
+[sub_resource type="Resource" id="Resource_hold_step"]
+script = ExtResource("7_step")
+trigger = 1
+metadata/_custom_type_script = "uid://edoqyqq7rfol"
+
+[sub_resource type="Resource" id="Resource_arcane_bolt"]
+script = ExtResource("6_bolt")
+cooldown = 0.4
+steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step")])
+metadata/_custom_type_script = "uid://dbv1fi7kep51m"
 
 [sub_resource type="Resource" id="Resource_fge5w"]
 script = ExtResource("4_7mcsp")
@@ -27,4 +40,7 @@ script = ExtResource("2_0luxa")
 id = &"wizard"
 scene = ExtResource("2_nbq0p")
 stats = SubResource("Resource_ac50u")
+slot_abilities = Dictionary[int, ExtResource("1_xg0g0")]({
+0: SubResource("Resource_arcane_bolt")
+})
 metadata/_custom_type_script = "uid://cpa2omn7pxm38"

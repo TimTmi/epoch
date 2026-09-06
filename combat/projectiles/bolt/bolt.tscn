@@ -42,7 +42,7 @@ color_ramp = SubResource("GradientTexture1D_trail")
 radius = 3.0
 
 [node name="Bolt" type="RigidBody2D"]
-mass = 0.1
+mass = 1.0
 gravity_scale = 0.0
 continuous_cd = 1
 script = ExtResource("1_bolt")

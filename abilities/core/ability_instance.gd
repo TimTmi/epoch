@@ -13,6 +13,7 @@ var is_holding: bool = false
 var hold_elapsed: float = 0.0
 var pending_step: int = 0
 var _last_context: AbilityContext = null
+var _hold_context: AbilityContext = null
 var _deferred_advance: bool = false
 
 
@@ -28,6 +29,7 @@ func tick(delta: float) -> void:
 
 	if is_holding:
 		hold_elapsed += delta
+		ability.hold_tick(_hold_context, hold_elapsed)
 	elif _is_awaiting_step():
 		pass
 	elif chain_timer > 0.0:
@@ -51,6 +53,7 @@ func press(context: AbilityContext) -> bool:
 		if not can_activate(context):
 			return false
 		pending_step = next_step
+		_hold_context = context
 		is_holding = true
 		hold_elapsed = 0.0
 		return true
