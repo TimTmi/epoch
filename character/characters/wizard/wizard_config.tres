@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterConfig" format=3 uid="uid://bkn1a6suj5m2g"]
 
+[ext_resource type="Script" path="res://character/characters/wizard/wizard_ai.gd" id="0_ai"]
 [ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_xg0g0"]
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="2_0luxa"]
 [ext_resource type="PackedScene" uid="uid://ds7ei0cq5rr51" path="res://character/characters/wizard/wizard.tscn" id="2_nbq0p"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" uid="uid://edoqyqq7rfol" path="res://abilities/core/ability_step.gd" id="7_step"]
 [ext_resource type="Script" uid="uid://df5bcewak36rq" path="res://abilities/abilities/fire_breath.gd" id="8_rwmyx"]
 [ext_resource type="Script" uid="uid://cr0h4mcgne8y4" path="res://abilities/abilities/earth_wall.gd" id="8_wall"]
+[ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="8_yd8ts"]
 
 [sub_resource type="Resource" id="Resource_hold_step"]
 script = ExtResource("7_step")
@@ -35,16 +37,24 @@ hold_movement_multiplier = 0.0
 steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step_wall")])
 metadata/_custom_type_script = "uid://cr0h4mcgne8y4"
 
-[sub_resource type="Resource" id="Resource_hold_step_fire"]
+[sub_resource type="Resource" id="Resource_4ejy1"]
+script = ExtResource("8_yd8ts")
+metadata/_custom_type_script = "uid://fu3wehw686tb"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yd8ts"]
+load_path = "res://.godot/imported/placeholder.png-ec1d84710652e474e76a43bf2dc3f0fc.ctex"
+
+[sub_resource type="Resource" id="Resource_ftc80"]
 script = ExtResource("7_step")
 trigger = 1
 metadata/_custom_type_script = "uid://edoqyqq7rfol"
 
-[sub_resource type="Resource" id="Resource_wl60f"]
+[sub_resource type="Resource" id="Resource_d5vwu"]
 script = ExtResource("8_rwmyx")
+icon = SubResource("CompressedTexture2D_yd8ts")
 cooldown = 0.5
 hold_movement_multiplier = 0.5
-steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step_fire")])
+steps = Array[ExtResource("7_step")]([SubResource("Resource_ftc80")])
 metadata/_custom_type_script = "uid://df5bcewak36rq"
 
 [sub_resource type="Resource" id="Resource_fge5w"]
@@ -67,10 +77,12 @@ metadata/_custom_type_script = "uid://d4eq8sddlmlgr"
 script = ExtResource("2_0luxa")
 id = &"wizard"
 scene = ExtResource("2_nbq0p")
+input_script = ExtResource("0_ai")
 stats = SubResource("Resource_ac50u")
 slot_abilities = Dictionary[int, ExtResource("1_xg0g0")]({
 0: SubResource("Resource_nhbrr"),
 1: SubResource("Resource_ruu00"),
-2: SubResource("Resource_wl60f")
+2: SubResource("Resource_4ejy1"),
+3: SubResource("Resource_d5vwu")
 })
 metadata/_custom_type_script = "uid://cpa2omn7pxm38"

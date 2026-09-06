@@ -17,7 +17,7 @@ var _charging_bolt: Bolt = null
 
 func hold_tick(context: AbilityContext, hold_elapsed: float) -> void:
 	var user: Character = context.user
-	var direction: Vector2 = (user.get_global_mouse_position() - user.global_position)
+	var direction: Vector2 = (user.aim_position - user.global_position)
 	if direction == Vector2.ZERO:
 		return
 	direction = direction.normalized()
