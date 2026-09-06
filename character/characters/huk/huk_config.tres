@@ -9,11 +9,11 @@
 [ext_resource type="Script" uid="uid://cw3p4neqsy1n5" path="res://abilities/abilities/grapple.gd" id="5_mp1gq"]
 [ext_resource type="Script" uid="uid://c7b8xl1ddrlrj" path="res://abilities/abilities/chain_trap.gd" id="6_q66dk"]
 
-[sub_resource type="Resource" id="Resource_q66dk"]
+[sub_resource type="Resource" id="Resource_3r8ps"]
 script = ExtResource("5_mp1gq")
 metadata/_custom_type_script = "uid://cw3p4neqsy1n5"
 
-[sub_resource type="Resource" id="Resource_ukif5"]
+[sub_resource type="Resource" id="Resource_rg2f7"]
 script = ExtResource("6_q66dk")
 metadata/_custom_type_script = "uid://c7b8xl1ddrlrj"
 
@@ -39,7 +39,7 @@ id = &"huk"
 scene = ExtResource("2_1wwrg")
 stats = SubResource("Resource_n0rq4")
 slot_abilities = Dictionary[int, ExtResource("1_oxkda")]({
-1: SubResource("Resource_q66dk"),
-4: SubResource("Resource_ukif5")
+0: SubResource("Resource_3r8ps"),
+1: SubResource("Resource_rg2f7")
 })
 metadata/_custom_type_script = "uid://cpa2omn7pxm38"
