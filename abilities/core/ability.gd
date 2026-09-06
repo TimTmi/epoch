@@ -20,3 +20,14 @@ func step_trigger(step: int) -> AbilityStep.Trigger:
 	if steps.is_empty():
 		return AbilityStep.Trigger.CLICK
 	return steps[step - 1].trigger
+
+func step_cooldown(step: int) -> float:
+	if steps.is_empty():
+		return cooldown
+	var step_cooldown: float = steps[step - 1].cooldown
+	return cooldown if step_cooldown < 0.0 else step_cooldown
+
+func step_advance_mode(step: int) -> AbilityStep.AdvanceMode:
+	if steps.is_empty():
+		return AbilityStep.AdvanceMode.DISCARD
+	return steps[step - 1].advance_mode

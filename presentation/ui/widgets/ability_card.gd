@@ -27,7 +27,8 @@ func _process(_delta) -> void:
 		set_process(false)
 
 func _on_ability_started() -> void:
-	value = instance.ability.cooldown
+	max_value = instance.cooldown_total
+	value = max_value
 
 func _on_ability_ended() -> void:
 	set_process(true)
