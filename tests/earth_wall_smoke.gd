@@ -34,7 +34,8 @@ func _run() -> void:
 		return
 	var wall: Wall = walls[0]
 	_check(wall.collision_layer != 0, "rising wall should block")
-	_check(wall._body.polygon[2].y > 10.0, "wall should expand while held")
+	_check(wall._chunks.size() >= 4, "wall should expand chunk by chunk while held")
+	_check(wall._chunks[0].get_child(0).scale.x > 0.9, "chunks should settle after rising out of the ground")
 	_check(wall._dust.emitting, "dust particles should show the expansion")
 
 	_check(wizard.abilities.try_activate_slot(slot, intent, AbilitySystem.InputPhase.RELEASE), "release should finish the wall")

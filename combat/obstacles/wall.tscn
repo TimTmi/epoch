@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://combat/obstacles/wall.gd" id="1_wall"]
+[ext_resource type="Script" uid="uid://boq8dsrqoi8cp" path="res://combat/obstacles/wall.gd" id="1_wall"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
-size = Vector2(6, 8)
+size = Vector2(6, 12)
 
 [sub_resource type="Gradient" id="Gradient_dust"]
 offsets = PackedFloat32Array(0, 1)
@@ -14,7 +14,7 @@ gradient = SubResource("Gradient_dust")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dust"]
 emission_shape = 3
-emission_box_extents = Vector3(3, 4, 0)
+emission_box_extents = Vector3(3, 6, 0)
 direction = Vector3(1, 0, 0)
 spread = 180.0
 initial_velocity_min = 6.0
@@ -28,14 +28,6 @@ color_ramp = SubResource("GradientTexture1D_dust")
 [node name="Wall" type="StaticBody2D"]
 collision_mask = 0
 script = ExtResource("1_wall")
-
-[node name="Body" type="Polygon2D" parent="."]
-color = Color(0.36, 0.26, 0.17, 1)
-polygon = PackedVector2Array(-3, -4, 3, -4, 3, 4, -3, 4)
-
-[node name="Core" type="Polygon2D" parent="Body"]
-color = Color(0.52, 0.39, 0.25, 1)
-polygon = PackedVector2Array(-2, -3, 2, -3, 2, 3, -2, 3)
 
 [node name="Dust" type="GPUParticles2D" parent="."]
 emitting = false
