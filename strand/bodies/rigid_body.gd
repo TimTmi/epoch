@@ -21,8 +21,10 @@ func move(delta: Vector2) -> void:
 
 func commit_motion(delta_time: float) -> void:
 	# Teleporting a rigid body never enters its velocity state, so joints and
-	# friction cannot act on the correction. Convert it once per frame instead.
-	body.linear_velocity += _correction / delta_time
+	# friction cannot act on the correction. Set the velocity to the frame's
+	# displacement rate instead — adding would compound across frames while the
+	# reel-in corrects every frame, launching the body.
+	body.linear_velocity = _correction / delta_time
 	_correction = Vector2.ZERO
 
 func discard_motion() -> void:

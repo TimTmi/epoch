@@ -12,6 +12,8 @@ var solver: StrandSolver
 
 var _resize_target_length: float = -1.0  # negative means no active resize
 var _resize_speed: float = 0.0
+var _start_body: StrandBody
+var _end_body: StrandBody
 
 
 func _init(_config: StrandConfig, _solver: StrandSolver) -> void:
@@ -25,7 +27,7 @@ func _init(_config: StrandConfig, _solver: StrandSolver) -> void:
 	for i: int in range(distances.size()):
 		var position: Vector2 = config.formation.sample(distances[i])
 		
-		particles.append(StrandParticle.new(position, 0.025))
+		particles.append(StrandParticle.new(position, 0.01))
 		
 		if i > 0:
 			var rest_length: float = particles[i - 1].position.distance_to(position)
@@ -69,7 +71,9 @@ func _build_sample_distances(formation: StrandFormation, target_segment_length: 
 	return distances
 
 func simulate(delta: float) -> void:
-	_apply_resize(delta)
+	var reeled_length: float = _apply_resize(delta)
+	if reeled_length > 0.0:
+		_reel_bodies(reeled_length)
 	solver.simulate(self, delta)
 	_update_bodies(delta)
 
@@ -85,9 +89,11 @@ func _update_bodies(delta: float) -> void:
 			body.discard_motion()
 
 func attach_start(body: StrandBody) -> void:
+	_start_body = body
 	_attach(get_start(), body)
 
 func attach_end(body: StrandBody) -> void:
+	_end_body = body
 	_attach(get_end(), body)
 
 func _attach(particle: StrandParticle, body: StrandBody) -> void:
@@ -116,24 +122,57 @@ func get_length() -> float:
 			total_length += constraint.a.get_position().distance_to(constraint.b.get_position())
 	return total_length
 
-func _apply_resize(delta: float) -> void:
+# Returns the length reeled in this frame (0.0 when no resize is active).
+func _apply_resize(delta: float) -> float:
 	if _resize_target_length < 0.0:
-		return
+		return 0.0
 
-	var current_length: float = get_length()
+	var current_length: float = _get_span()
 	if is_zero_approx(current_length):
 		_finish_resize()
-		return
+		return 0.0
 
 	var new_length: float = move_toward(current_length, _resize_target_length, _resize_speed * delta)
 	var new_rest_length: float = get_rest_length() * new_length / current_length
-	if is_equal_approx(new_length, _resize_target_length) or is_equal_approx(new_rest_length, _resize_target_length):
+	# The rest-length check is a fallback for jammed bodies the winch cannot move.
+	if is_equal_approx(new_length, _resize_target_length) or new_rest_length <= _resize_target_length:
 		_finish_resize()
 
 	var factor: float = new_length / current_length
 	for constraint: StrandConstraint in constraints:
 		if constraint is StrandDistanceConstraint:
 			constraint.distance *= factor
+
+	return current_length - new_length
+
+func _get_span() -> float:
+	if _start_body and _end_body:
+		return _start_body.get_position().distance_to(_end_body.get_position())
+	return get_length()
+
+func _reel_bodies(reeled_length: float) -> void:
+	# The rope particles are far lighter than the attached bodies, so the solver's
+	# mass-weighted corrections fold the rope instead of moving the bodies — the
+	# resize rate never reaches them. Drive the bodies directly instead: a winch
+	# that moves each end along the strand by its mass-weighted share of the
+	# reeled length. Goes through move() so commit_motion turns it into velocity.
+	if _start_body == null or _end_body == null:
+		return
+
+	var start_position: Vector2 = _start_body.get_position()
+	var end_position: Vector2 = _end_body.get_position()
+	var span: float = start_position.distance_to(end_position)
+	var total: float = minf(reeled_length, span - _resize_target_length)
+	if is_zero_approx(span) or total <= 0.0:
+		return
+
+	var direction: Vector2 = (end_position - start_position) / span
+	var inverse_mass_sum: float = _start_body.get_inverse_mass() + _end_body.get_inverse_mass()
+	if is_zero_approx(inverse_mass_sum):
+		return
+
+	_start_body.move(direction * total * _start_body.get_inverse_mass() / inverse_mass_sum)
+	_end_body.move(-direction * total * _end_body.get_inverse_mass() / inverse_mass_sum)
 
 func _finish_resize() -> void:
 	_resize_target_length = -1.0

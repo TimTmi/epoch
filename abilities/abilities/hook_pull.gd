@@ -5,7 +5,7 @@ const HOOK: PackedScene = preload("res://combat/projectiles/hook/hook.tscn")
 
 @export var hook_length: float = 130.0
 @export var throw_force: float = 1300.0
-@export var pull_speed: float = 600.0
+@export var pull_speed: float = 320.0
 @export var damage: float = 10.0
 @export var stun_duration: float = 0.3
 
