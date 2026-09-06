@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://menus/game_setup.gd" id="1_setup"]
+[ext_resource type="Resource" path="res://character/registry/base_character_registry.tres" id="2_registry"]
+
+[node name="GameSetup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_setup")
+character_registry = ExtResource("2_registry")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="Layout" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Margin/Layout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Choose Your Fighters"
+horizontal_alignment = 1
+
+[node name="Columns" type="HBoxContainer" parent="Margin/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 32
+
+[node name="PlayerColumn" type="VBoxContainer" parent="Margin/Layout/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="PlayerLabel" type="Label" parent="Margin/Layout/Columns/PlayerColumn"]
+layout_mode = 2
+text = "Your Fighter"
+horizontal_alignment = 1
+
+[node name="PlayerList" type="ItemList" parent="Margin/Layout/Columns/PlayerColumn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 120)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EnemyColumn" type="VBoxContainer" parent="Margin/Layout/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="EnemyLabel" type="Label" parent="Margin/Layout/Columns/EnemyColumn"]
+layout_mode = 2
+text = "Enemy"
+horizontal_alignment = 1
+
+[node name="EnemyList" type="ItemList" parent="Margin/Layout/Columns/EnemyColumn"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 120)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Back" type="Button" parent="Margin/Layout/Buttons"]
+layout_mode = 2
+text = "Back"
+
+[node name="Start" type="Button" parent="Margin/Layout/Buttons"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Start Battle"
+
+[connection signal="pressed" from="Margin/Layout/Buttons/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Margin/Layout/Buttons/Start" to="." method="_on_start_pressed"]
