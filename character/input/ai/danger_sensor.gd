@@ -1,7 +1,9 @@
 class_name DangerSensor extends RefCounted
 
-const DETECTION_RADIUS: float = 96.0
-const PATH_TOLERANCE: float = 10.0
+# How far the sensor sees incoming projectiles, and how close a projectile's
+# path must pass to count as a threat. Larger radius = earlier reaction.
+var detection_radius: float = 96.0
+var path_tolerance: float = 10.0
 
 
 var character: Character
@@ -14,7 +16,7 @@ func _init(character: Character) -> void:
 func sense_incoming() -> Projectile:
 	var query: PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
 	var shape: CircleShape2D = CircleShape2D.new()
-	shape.radius = DETECTION_RADIUS
+	shape.radius = detection_radius
 	query.shape = shape
 	query.transform = Transform2D(0.0, character.global_position)
 	query.exclude.append(character.get_rid())
@@ -40,4 +42,4 @@ func is_incoming(projectile: Projectile) -> bool:
 		return false
 	# Distance between the character and the projectile's line of travel.
 	var path_distance: float = to_character.cross(projectile.linear_velocity) / projectile.linear_velocity.length()
-	return absf(path_distance) <= PATH_TOLERANCE
+	return absf(path_distance) <= path_tolerance
