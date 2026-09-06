@@ -4,9 +4,10 @@ extends Character
 var time: float = 0
 
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	super(delta)
 	if time < 0.5:
-		time += _delta
+		time += delta
 	else:
-		health.receive_healing(HealingContext.new(self, self, 1))
+		receive_healing(HealingContext.new(self, self, 1))
 		time = 0
