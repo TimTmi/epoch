@@ -25,12 +25,13 @@ func activate(context: AbilityContext) -> void:
 	strand.attach_end(RigidStrandBody.new(hook))
 	
 	hook.stuck.connect(_on_hook_stuck.bind(user, strand, hook))
+	hook.missed.connect(_on_hook_missed.bind(strand, hook))
+	hook.max_range = hook_length
 	hook.launch(direction, throw_force)
 
 func _on_hook_stuck(body: Node2D, user: Character, strand: Strand, hook: Hook) -> void:
-	strand.resize_to_length(13.0, pull_speed)
-	strand.resize_finished.connect(_on_pull_finished.bind(strand, hook))
-	
+	_pull_back(strand, hook)
+
 	if not body is Character or user.is_same_team(body):
 		return
 	
@@ -40,6 +41,13 @@ func _on_hook_stuck(body: Node2D, user: Character, strand: Strand, hook: Hook) -
 	
 	var stun: StatusEffect = Stun.new(stun_duration)
 	user.apply_status_effect(target, stun)
+
+func _on_hook_missed(strand: Strand, hook: Hook) -> void:
+	_pull_back(strand, hook)
+
+func _pull_back(strand: Strand, hook: Hook) -> void:
+	strand.resize_to_length(13.0, pull_speed)
+	strand.resize_finished.connect(_on_pull_finished.bind(strand, hook), CONNECT_ONE_SHOT)
 
 func _on_pull_finished(strand: Strand, hook: Hook) -> void:
 	strand.queue_free()

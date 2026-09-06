@@ -1,16 +1,34 @@
 class_name Hook extends Projectile
 
 
-var _is_stuck: bool = false
-
-
 signal stuck(body: Node2D)
+signal missed
+
+var max_range: float = INF
+
+var _is_stuck: bool = false
+var _has_missed: bool = false
+var _launch_position: Vector2
 
 
 func _ready() -> void:
 	contact_monitor = true
 	max_contacts_reported = 1
 	body_entered.connect(_on_body_entered)
+
+func launch(direction: Vector2, force: float, facing_direction: bool = true) -> void:
+	_launch_position = global_position
+	super.launch(direction, force, facing_direction)
+
+func _physics_process(_delta: float) -> void:
+	if _is_stuck or _has_missed:
+		return
+
+	if global_position.distance_to(_launch_position) < max_range:
+		return
+
+	_has_missed = true
+	missed.emit()
 
 func _on_body_entered(body: Node) -> void:
 	if _is_stuck:
