@@ -9,6 +9,8 @@ var max_range: float = INF
 var _is_stuck: bool = false
 var _has_missed: bool = false
 var _launch_position: Vector2
+var _joint: PinJoint2D
+var _stuck_mass_gain: float = 0.0
 
 
 func _ready() -> void:
@@ -44,5 +46,17 @@ func _stick(body: Node) -> void:
 	add_child(joint)
 	joint.node_a = joint.get_path_to(self)
 	joint.node_b = joint.get_path_to(body)
-	mass += body.mass if body is RigidBody2D else 1306.0
+	_stuck_mass_gain = body.mass if body is RigidBody2D else 1306.0
+	mass += _stuck_mass_gain
+	_joint = joint
 	lock_rotation = true
+
+# Releases the hook from the body it stuck to, restoring its pre-stick physics.
+func unstick() -> void:
+	if _joint:
+		_joint.queue_free()
+		_joint = null
+
+	mass -= _stuck_mass_gain
+	_stuck_mass_gain = 0.0
+	lock_rotation = false

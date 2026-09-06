@@ -201,9 +201,9 @@ func get_end() -> StrandParticle:
 func pin_start() -> void:
 	var particle: StrandParticle = get_start()
 	if particle:
-		particle.set_mass(INF)
+		particle.mass = INF
 
 func pin_end() -> void:
 	var particle: StrandParticle = get_end()
 	if particle:
-		particle.set_mass(INF)
+		particle.mass = INF
