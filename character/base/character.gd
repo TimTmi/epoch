@@ -124,7 +124,7 @@ func push(target: Character, force: Vector2):
 	target.apply_central_impulse(force * time_scale)
 
 func move(direction: Vector2) -> void:
-	direction = direction.normalized() * speed.current * time_scale
+	direction = direction.normalized() * speed.current * time_scale * abilities.get_hold_movement_multiplier()
 	apply_central_force(direction)
 
 func _physics_process(delta: float) -> void:

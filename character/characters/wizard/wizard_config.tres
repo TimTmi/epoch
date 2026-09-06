@@ -18,6 +18,7 @@ metadata/_custom_type_script = "uid://edoqyqq7rfol"
 [sub_resource type="Resource" id="Resource_arcane_bolt"]
 script = ExtResource("6_bolt")
 cooldown = 0.4
+hold_movement_multiplier = 0.5
 steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step")])
 metadata/_custom_type_script = "uid://dbv1fi7kep51m"
 
@@ -29,6 +30,7 @@ metadata/_custom_type_script = "uid://edoqyqq7rfol"
 [sub_resource type="Resource" id="Resource_earth_wall"]
 script = ExtResource("8_wall")
 cooldown = 0.5
+hold_movement_multiplier = 0.0
 steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step_wall")])
 metadata/_custom_type_script = "uid://cr0h4mcgne8y4"
 

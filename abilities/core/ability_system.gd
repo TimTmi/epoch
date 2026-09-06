@@ -28,6 +28,16 @@ func tick(delta: float) -> void:
 	for instance: AbilityInstance in passive_ability_instances:
 		instance.tick(delta)
 
+func get_hold_movement_multiplier() -> float:
+	var multiplier: float = 1.0
+	for instance: AbilityInstance in slot_ability_instances.values():
+		if instance.is_holding:
+			multiplier *= instance.ability.hold_movement_multiplier
+	for instance: AbilityInstance in passive_ability_instances:
+		if instance.is_holding:
+			multiplier *= instance.ability.hold_movement_multiplier
+	return multiplier
+
 func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityIntent, phase: InputPhase = InputPhase.PRESS) -> bool:
 	var context: AbilityContext = AbilityContext.new(intent, _owner, self, instance, _world_services)
 

@@ -3,6 +3,8 @@ class_name Ability extends Resource
 
 @export var icon: Texture = preload("uid://bo7j37st0tbcc")
 @export var cooldown: float = 0.1
+# Movement multiplier applied while a HOLD step is being held (1.0 = normal, 0.0 = immobile)
+@export var hold_movement_multiplier: float = 1.0
 @export var steps: Array[AbilityStep] = []
 @export var step_window: float = 0.8
 
