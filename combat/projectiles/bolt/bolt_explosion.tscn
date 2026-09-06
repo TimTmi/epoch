@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://87veuqb1pdk0"]
+
+[ext_resource type="Script" uid="uid://dcxbyn7mkb3bt" path="res://combat/projectiles/bolt/bolt_explosion.gd" id="1_expl"]
+
+[sub_resource type="Gradient" id="Gradient_expl"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.7, 1, 0.8, 1, 0.5, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_expl"]
+gradient = SubResource("Gradient_expl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_expl"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+direction = Vector3(1, 0, 0)
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 90.0
+gravity = Vector3(0, 0, 0)
+damping_min = 60.0
+damping_max = 100.0
+scale_min = 1.5
+scale_max = 2.5
+color_ramp = SubResource("GradientTexture1D_expl")
+
+[node name="Explosion" type="GPUParticles2D" unique_id=387403105]
+emitting = false
+amount = 32
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_expl")
+script = ExtResource("1_expl")

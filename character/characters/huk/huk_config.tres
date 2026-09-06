@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="5_2gwir"]
 [ext_resource type="Script" uid="uid://cw3p4neqsy1n5" path="res://abilities/abilities/grapple.gd" id="5_mp1gq"]
 [ext_resource type="Script" uid="uid://c7b8xl1ddrlrj" path="res://abilities/abilities/chain_trap.gd" id="6_q66dk"]
+[ext_resource type="Script" uid="uid://edoqyqq7rfol" path="res://abilities/core/ability_step.gd" id="6_ukif5"]
 
 [sub_resource type="Resource" id="Resource_3r8ps"]
 script = ExtResource("5_mp1gq")
