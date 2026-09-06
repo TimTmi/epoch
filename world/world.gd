@@ -20,6 +20,7 @@ const TEAM_SIDE_OFFSET := 192.0
 @onready var floating_texts_container: Node2D = $Effects/FloatingTexts
 @onready var spawner: Spawner = $Spawner
 @onready var UI: Control = $CanvasLayer/UI
+@onready var game_over_screen: GameOverScreen = $CanvasLayer/UI/GameOverScreen
 @onready var walls: TileMapLayer = $Walls
 
 var spawn_service: SpawnService
@@ -49,6 +50,7 @@ func setup_spawner() -> void:
 
 func connect_events() -> void:
 	spawn_service.character_spawned.connect(_on_character_spawned)
+	combat_events.character_died.connect(_on_character_died)
 	combat_floating_text_presenter.bind(combat_events)
 
 func setup_environment() -> void:
@@ -96,3 +98,6 @@ func register_team(team_name: StringName) -> bool:
 
 func _on_character_spawned(character: Character) -> void:
 	UI.add_character_info(character)
+
+func _on_character_died(character: Character) -> void:
+	game_over_screen.open(character.team == player_team)

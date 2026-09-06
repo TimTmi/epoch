@@ -96,6 +96,7 @@ func die() -> void:
 		self, Character, Event.DEAD, DeathContext.new(self),
 		func(context: DeathContext):
 			if context.dead:
+				world_services.combat_events.character_died.emit(self)
 				queue_free()
 	)
 
