@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CharacterConfig" format=3 uid="uid://bkn1a6suj5m2g"]
 
-[ext_resource type="Script" path="res://character/characters/wizard/wizard_ai.gd" id="0_ai"]
+[ext_resource type="Script" uid="uid://bfdwmb77yph8p" path="res://character/characters/wizard/wizard_ai.gd" id="0_ai"]
 [ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_xg0g0"]
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="2_0luxa"]
 [ext_resource type="PackedScene" uid="uid://ds7ei0cq5rr51" path="res://character/characters/wizard/wizard.tscn" id="2_nbq0p"]
