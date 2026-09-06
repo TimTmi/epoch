@@ -5,13 +5,16 @@
 [ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="2_0luxa"]
 [ext_resource type="PackedScene" uid="uid://ds7ei0cq5rr51" path="res://character/characters/wizard/wizard.tscn" id="2_nbq0p"]
 [ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="4_7mcsp"]
-[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="4_ac50u"]
 [ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="5_qmodq"]
+[ext_resource type="Texture2D" uid="uid://cqn7db38cm4r3" path="res://presentation/sprites/ability_icons/bolt.png" id="5_vdkw4"]
 [ext_resource type="Script" uid="uid://dbv1fi7kep51m" path="res://abilities/abilities/arcane_bolt.gd" id="6_bolt"]
 [ext_resource type="Script" uid="uid://edoqyqq7rfol" path="res://abilities/core/ability_step.gd" id="7_step"]
+[ext_resource type="Texture2D" uid="uid://c6vhntnr0t04r" path="res://presentation/sprites/ability_icons/earth-wall.png" id="8_lfdc4"]
 [ext_resource type="Script" uid="uid://df5bcewak36rq" path="res://abilities/abilities/fire_breath.gd" id="8_rwmyx"]
 [ext_resource type="Script" uid="uid://cr0h4mcgne8y4" path="res://abilities/abilities/earth_wall.gd" id="8_wall"]
 [ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="8_yd8ts"]
+[ext_resource type="Texture2D" uid="uid://btmhq8ugnrrru" path="res://presentation/sprites/ability_icons/dash.png" id="10_1apih"]
+[ext_resource type="Texture2D" uid="uid://cx26v3p3ucm42" path="res://presentation/sprites/ability_icons/flame-tunnel.png" id="12_bsamc"]
 
 [sub_resource type="Resource" id="Resource_hold_step"]
 script = ExtResource("7_step")
@@ -20,7 +23,8 @@ metadata/_custom_type_script = "uid://edoqyqq7rfol"
 
 [sub_resource type="Resource" id="Resource_nhbrr"]
 script = ExtResource("6_bolt")
-cooldown = 0.4
+icon = ExtResource("5_vdkw4")
+cooldown = 0.6
 hold_movement_multiplier = 0.5
 steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step")])
 metadata/_custom_type_script = "uid://dbv1fi7kep51m"
@@ -32,17 +36,17 @@ metadata/_custom_type_script = "uid://edoqyqq7rfol"
 
 [sub_resource type="Resource" id="Resource_ruu00"]
 script = ExtResource("8_wall")
-cooldown = 0.5
+icon = ExtResource("8_lfdc4")
+cooldown = 5.0
 hold_movement_multiplier = 0.0
 steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step_wall")])
 metadata/_custom_type_script = "uid://cr0h4mcgne8y4"
 
 [sub_resource type="Resource" id="Resource_4ejy1"]
 script = ExtResource("8_yd8ts")
+icon = ExtResource("10_1apih")
+cooldown = 3.0
 metadata/_custom_type_script = "uid://fu3wehw686tb"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yd8ts"]
-load_path = "res://.godot/imported/placeholder.png-ec1d84710652e474e76a43bf2dc3f0fc.ctex"
 
 [sub_resource type="Resource" id="Resource_ftc80"]
 script = ExtResource("7_step")
@@ -51,8 +55,8 @@ metadata/_custom_type_script = "uid://edoqyqq7rfol"
 
 [sub_resource type="Resource" id="Resource_d5vwu"]
 script = ExtResource("8_rwmyx")
-icon = SubResource("CompressedTexture2D_yd8ts")
-cooldown = 0.5
+icon = ExtResource("12_bsamc")
+cooldown = 5.0
 hold_movement_multiplier = 0.5
 steps = Array[ExtResource("7_step")]([SubResource("Resource_ftc80")])
 metadata/_custom_type_script = "uid://df5bcewak36rq"
