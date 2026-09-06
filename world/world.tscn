@@ -58,6 +58,8 @@ tile_map_data = PackedByteArray("AAD3//v/AAAAAAAAAAD4//v/AAAAAAAAAAD5//v/AAAAAAA
 tile_set = SubResource("TileSet_jng6c")
 rendering_quadrant_size = 64
 
+[node name="Obstacles" type="Node2D" parent="."]
+
 [node name="NavigationRegion" type="NavigationRegion2D" parent="." unique_id=1980622690]
 navigation_polygon = SubResource("NavigationPolygon_tfq1u")
 use_edge_connections = false
