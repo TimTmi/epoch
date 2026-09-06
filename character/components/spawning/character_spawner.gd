@@ -23,13 +23,7 @@ func spawn_global_hitbox(scene: PackedScene) -> Hitbox:
 	return world_services.spawn.spawn_hitbox(scene, character.team)
 
 func spawn_projectile(scene: PackedScene) -> Projectile:
-	var projectile: Projectile = world_services.spawn.spawn_projectile(scene, character.team)
-	if projectile == null:
-		return null
-	
-	projectile.setup_physics(character.physics_profile)
-	
-	return projectile
+	return world_services.spawn.spawn_projectile(scene, character.team)
 
 func spawn_vfx(scene: PackedScene) -> Node2D:
 	var vfx = scene.instantiate()

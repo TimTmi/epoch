@@ -50,9 +50,12 @@ func _vertex(index: int) -> Vector2:
 	)
 	
 	var perpendicular: Vector2 = direction.orthogonal()
-	
-	var side: float = fold_width
-	if index % 2 == 0:
-		side = -side
-	
+
+	# fold_width is the perpendicular delta of a single segment, so vertices
+	# alternate between the fold crest (+/-fold_width) and the axis (0).
+	var side: float = 0.0
+	if index % 2 == 1:
+		var crest: int = (index - 1) >> 1
+		side = fold_width if crest % 2 == 0 else -fold_width
+
 	return start + direction * (index * forward_step) + perpendicular * side
