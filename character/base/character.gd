@@ -114,8 +114,8 @@ func receive_status_effect(context: StatusEffectApplicationContext) -> void:
 #func try_activate_ability(ability: Ability, intent: AbilityIntent) -> void:
 	#abilities.try_activate_ability(ability, intent, self)
 
-func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent) -> void:
-	abilities.try_activate_slot(slot, intent)
+func try_activate_slot(slot: AbilitySystem.CommandSlot, intent: AbilityIntent, phase: AbilitySystem.InputPhase = AbilitySystem.InputPhase.PRESS) -> void:
+	abilities.try_activate_slot(slot, intent, phase)
 
 func is_same_team(character: Character) -> bool:
 	return team == character.team

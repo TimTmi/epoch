@@ -2,6 +2,7 @@ class_name AbilitySystem
 
 
 enum CommandSlot { PRIMARY, SECONDARY, UTILITY, SPECIAL, ULTIMATE, EXTRA_1, EXTRA_2, EXTRA_3 }
+enum InputPhase { PRESS, RELEASE }
 
 var _owner: Character
 var _world_services: WorldServices
@@ -27,18 +28,17 @@ func tick(delta: float) -> void:
 	for instance: AbilityInstance in passive_ability_instances:
 		instance.tick(delta)
 
-func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityIntent) -> bool:
+func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityIntent, phase: InputPhase = InputPhase.PRESS) -> bool:
 	var context: AbilityContext = AbilityContext.new(intent, _owner, self, instance, _world_services)
-	
-	if instance.can_activate(context):
-		instance.activate(context)
-		return true
-	
-	return false
 
-func try_activate_slot(slot: CommandSlot, intent: AbilityIntent) -> bool:
+	if phase == InputPhase.RELEASE:
+		return instance.release(context)
+
+	return instance.press(context)
+
+func try_activate_slot(slot: CommandSlot, intent: AbilityIntent, phase: InputPhase = InputPhase.PRESS) -> bool:
 	var instance: AbilityInstance = slot_ability_instances.get(slot)
 	if instance == null:
 		return false
-	
-	return try_activate_ability_instance(instance, intent)
+
+	return try_activate_ability_instance(instance, intent, phase)
