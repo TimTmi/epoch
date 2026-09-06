@@ -26,17 +26,16 @@ var bolt_charge_time: float = 1.0
 var wall_hold_time: float = 0.4
 var breath_hold_time: float = 1.5
 
-var _target: Character
 var _strafe_sign: float = 1.0
 var _is_moving: bool = false
 var _stuck_time: float = 0.0
 
 
 func tick(delta: float) -> void:
-	if not _update_target():
+	if not update_target():
 		wander()
 		return
-	character.aim_position = _target.global_position
+	character.aim_position = target.global_position
 
 	var threat: Projectile = sense_threat(delta)
 	_handle_wall(threat)
@@ -48,25 +47,8 @@ func tick(delta: float) -> void:
 		_fight()
 	_update_strafe_direction(delta)
 
-func _update_target() -> bool:
-	_target = _nearest_enemy()
-	return _target != null
-
-func _nearest_enemy() -> Character:
-	var nearest: Character = null
-	var nearest_distance: float = INF
-	for node: Node in character.world_services.world.characters_container.get_children():
-		var enemy: Character = node as Character
-		if enemy == null or character.is_same_team(enemy):
-			continue
-		var distance: float = character.global_position.distance_to(enemy.global_position)
-		if distance < nearest_distance:
-			nearest_distance = distance
-			nearest = enemy
-	return nearest
-
 func _fight() -> void:
-	var distance: float = character.global_position.distance_to(_target.global_position)
+	var distance: float = character.global_position.distance_to(target.global_position)
 	if distance <= breath_range:
 		_handle_breath()
 	else:
@@ -106,7 +88,7 @@ func _handle_breath() -> void:
 # when it strays, sidestep when cover blocks the shot. Circling instead of backing
 # off straight keeps the wizard in open space instead of walking into corners.
 func _keep_range(distance: float) -> void:
-	var toward: Vector2 = character.global_position.direction_to(_target.global_position)
+	var toward: Vector2 = character.global_position.direction_to(target.global_position)
 	var side: Vector2 = Vector2(-toward.y, toward.x) * _strafe_sign
 	if distance <= dash_range and character.abilities.slot_ability_instances[DASH_SLOT].cooldown_remaining <= 0.0:
 		character.try_activate_slot(DASH_SLOT, AbilityIntent.from_target_direction(side - toward * 0.7), AbilitySystem.InputPhase.PRESS)
@@ -114,7 +96,7 @@ func _keep_range(distance: float) -> void:
 		move_to(_nearest_walkable(character.global_position + (side - toward * 0.7).normalized() * RETREAT_STEP))
 		_is_moving = true
 	elif distance > engage_range:
-		move_to(_nearest_walkable(_target.global_position - toward * engage_range))
+		move_to(_nearest_walkable(target.global_position - toward * engage_range))
 		_is_moving = true
 	elif not _has_line_of_sight():
 		move_to(_nearest_walkable(character.global_position + side * RETREAT_STEP))
@@ -139,7 +121,7 @@ func _nearest_walkable(point: Vector2) -> Vector2:
 # True when nothing on the environment layer stands between wizard and target.
 func _has_line_of_sight() -> bool:
 	var wall_mask: int = character.world_services.world.mask_resolver.get_layer(&"environment", PhysicsSublayer.Type.WALL)
-	var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(character.global_position, _target.global_position, wall_mask)
+	var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(character.global_position, target.global_position, wall_mask)
 	return character.get_world_2d().direct_space_state.intersect_ray(query).is_empty()
 
 func _release(slot: AbilitySystem.CommandSlot) -> void:
@@ -148,4 +130,4 @@ func _release(slot: AbilitySystem.CommandSlot) -> void:
 		character.try_activate_slot(slot, _aim_intent(), AbilitySystem.InputPhase.RELEASE)
 
 func _aim_intent() -> AbilityIntent:
-	return AbilityIntent.from_target_position(_target.global_position)
+	return AbilityIntent.from_target_position(target.global_position)

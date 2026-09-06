@@ -8,6 +8,8 @@ var danger_sensor: DangerSensor
 var reaction_time: float = 0.0
 
 var wander_target: Vector2
+# Current enemy to act on; only meaningful after update_target() returned true.
+var target: Character
 var _reaction_timer: float = 0.0
 var _tracked_threat: Projectile
 
@@ -25,6 +27,24 @@ func move_to(movement_target: Vector2) -> void:
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	var new_velocity: Vector2 = character.global_position.direction_to(next_path_position) * character.speed.current
 	navigation_agent.set_velocity(new_velocity)
+
+# Picks the nearest enemy as target. Returns false when no enemy is alive.
+func update_target() -> bool:
+	target = nearest_enemy()
+	return target != null
+
+func nearest_enemy() -> Character:
+	var nearest: Character = null
+	var nearest_distance: float = INF
+	for node: Node in character.world_services.world.characters_container.get_children():
+		var enemy: Character = node as Character
+		if enemy == null or character.is_same_team(enemy):
+			continue
+		var distance: float = character.global_position.distance_to(enemy.global_position)
+		if distance < nearest_distance:
+			nearest_distance = distance
+			nearest = enemy
+	return nearest
 
 # Returns the incoming projectile once the reaction time has elapsed, null otherwise.
 func sense_threat(delta: float) -> Projectile:
