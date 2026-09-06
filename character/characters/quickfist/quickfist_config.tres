@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="4_5y5y0"]
 [ext_resource type="Script" uid="uid://bn027ie5mw1i8" path="res://abilities/abilities/punch.gd" id="5_fge5w"]
 [ext_resource type="Script" uid="uid://cnltbdm12rskg" path="res://abilities/abilities/kick.gd" id="6_cy3iv"]
+[ext_resource type="Script" uid="uid://edoqyqq7rfol" path="res://abilities/core/ability_step.gd" id="6_fge5w"]
 [ext_resource type="Script" uid="uid://fu3wehw686tb" path="res://abilities/abilities/dash.gd" id="7_luryc"]
 [ext_resource type="Script" uid="uid://pb88iskxrcgt" path="res://abilities/abilities/stomp.gd" id="8_ar4ke"]
 [ext_resource type="Script" uid="uid://bl37x7k5tv5yn" path="res://abilities/abilities/rage.gd" id="9_yv12g"]

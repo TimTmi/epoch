@@ -6,6 +6,8 @@ var instance: AbilityInstance
 var user: Character
 var abilities: AbilitySystem
 var world_services: WorldServices
+var step: int = 1
+var hold_duration: float = 0.0
 
 
 func _init(_intent: AbilityIntent, _user: Character, _abilities: AbilitySystem, _instance: AbilityInstance, _world_services: WorldServices) -> void:

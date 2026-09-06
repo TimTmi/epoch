@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="CharacterConfig" format=3 uid="uid://bkn1a6suj5m2g"]
+
+[ext_resource type="Script" uid="uid://bvv2c23hla5bq" path="res://abilities/core/ability.gd" id="1_xg0g0"]
+[ext_resource type="Script" uid="uid://cpa2omn7pxm38" path="res://character/config/character_config.gd" id="2_0luxa"]
+[ext_resource type="PackedScene" uid="uid://ds7ei0cq5rr51" path="res://character/characters/wizard/wizard.tscn" id="2_nbq0p"]
+[ext_resource type="Script" uid="uid://dtsdhk3ysrt2l" path="res://character/config/stat_config.gd" id="4_7mcsp"]
+[ext_resource type="Texture2D" uid="uid://bo7j37st0tbcc" path="res://presentation/sprites/ability_icons/placeholder.png" id="4_ac50u"]
+[ext_resource type="Script" uid="uid://d4eq8sddlmlgr" path="res://character/config/stats_config.gd" id="5_qmodq"]
+[ext_resource type="Script" uid="uid://dbv1fi7kep51m" path="res://abilities/abilities/arcane_bolt.gd" id="6_bolt"]
+[ext_resource type="Script" uid="uid://edoqyqq7rfol" path="res://abilities/core/ability_step.gd" id="7_step"]
+[ext_resource type="Script" uid="uid://df5bcewak36rq" path="res://abilities/abilities/fire_breath.gd" id="8_rwmyx"]
+[ext_resource type="Script" uid="uid://cr0h4mcgne8y4" path="res://abilities/abilities/earth_wall.gd" id="8_wall"]
+
+[sub_resource type="Resource" id="Resource_hold_step"]
+script = ExtResource("7_step")
+trigger = 1
+metadata/_custom_type_script = "uid://edoqyqq7rfol"
+
+[sub_resource type="Resource" id="Resource_nhbrr"]
+script = ExtResource("6_bolt")
+cooldown = 0.4
+hold_movement_multiplier = 0.5
+steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step")])
+metadata/_custom_type_script = "uid://dbv1fi7kep51m"
+
+[sub_resource type="Resource" id="Resource_hold_step_wall"]
+script = ExtResource("7_step")
+trigger = 1
+metadata/_custom_type_script = "uid://edoqyqq7rfol"
+
+[sub_resource type="Resource" id="Resource_ruu00"]
+script = ExtResource("8_wall")
+cooldown = 0.5
+hold_movement_multiplier = 0.0
+steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step_wall")])
+metadata/_custom_type_script = "uid://cr0h4mcgne8y4"
+
+[sub_resource type="Resource" id="Resource_hold_step_fire"]
+script = ExtResource("7_step")
+trigger = 1
+metadata/_custom_type_script = "uid://edoqyqq7rfol"
+
+[sub_resource type="Resource" id="Resource_wl60f"]
+script = ExtResource("8_rwmyx")
+cooldown = 0.5
+hold_movement_multiplier = 0.5
+steps = Array[ExtResource("7_step")]([SubResource("Resource_hold_step_fire")])
+metadata/_custom_type_script = "uid://df5bcewak36rq"
+
+[sub_resource type="Resource" id="Resource_fge5w"]
+script = ExtResource("4_7mcsp")
+metadata/_custom_type_script = "uid://dtsdhk3ysrt2l"
+
+[sub_resource type="Resource" id="Resource_cy3iv"]
+script = ExtResource("4_7mcsp")
+maximum = 1000.0
+current = 1000.0
+metadata/_custom_type_script = "uid://dtsdhk3ysrt2l"
+
+[sub_resource type="Resource" id="Resource_ac50u"]
+script = ExtResource("5_qmodq")
+health = SubResource("Resource_fge5w")
+speed = SubResource("Resource_cy3iv")
+metadata/_custom_type_script = "uid://d4eq8sddlmlgr"
+
+[resource]
+script = ExtResource("2_0luxa")
+id = &"wizard"
+scene = ExtResource("2_nbq0p")
+stats = SubResource("Resource_ac50u")
+slot_abilities = Dictionary[int, ExtResource("1_xg0g0")]({
+0: SubResource("Resource_nhbrr"),
+1: SubResource("Resource_ruu00"),
+2: SubResource("Resource_wl60f")
+})
+metadata/_custom_type_script = "uid://cpa2omn7pxm38"

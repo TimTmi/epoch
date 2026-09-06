@@ -14,6 +14,7 @@ class_name World extends Node2D
 @onready var projectiles_container: Node2D = $Projectiles
 @onready var hitboxes_container: Node2D = $Hitboxes
 @onready var strands_container: Node2D = $Strands
+@onready var obstacles_container: Node2D = $Obstacles
 @onready var floating_texts_container: Node2D = $Effects/FloatingTexts
 @onready var spawner: Spawner = $Spawner
 @onready var UI: Control = $CanvasLayer/UI
@@ -42,7 +43,7 @@ func setup_services() -> void:
 	world_services = WorldServices.new(self, spawn_service, combat_events)
 
 func setup_spawner() -> void:
-	spawner.setup(world_services, mask_resolver, characters_container, projectiles_container, hitboxes_container, strands_container)
+	spawner.setup(world_services, mask_resolver)
 
 func connect_events() -> void:
 	spawn_service.character_spawned.connect(_on_character_spawned)

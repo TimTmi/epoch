@@ -41,3 +41,6 @@ func spawn_strand(config: StrandConfig) -> Strand:
 	var strand: Strand = _spawner.spawn_strand(config)
 	strand_spawned.emit(strand)
 	return strand
+
+func spawn_obstacle(scene: PackedScene, position: Vector2 = Vector2.ZERO, rotation: float = 0.0) -> Wall:
+	return _spawner.spawn_obstacle(scene, position, rotation)
