@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://combat/hitboxes/flame_cone.gd" id="1_flame"]
+
+[sub_resource type="Gradient" id="Gradient_flame"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(1, 0.95, 0.6, 1, 0.95, 0.45, 0.1, 0.8, 0.4, 0.1, 0.05, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_flame"]
+gradient = SubResource("Gradient_flame")
+
+[sub_resource type="Curve" id="Curve_scale"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_scale"]
+curve = SubResource("Curve_scale")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_flame"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 2.0
+spread = 22.5
+initial_velocity_min = 130.0
+initial_velocity_max = 180.0
+damping_min = 1.0
+damping_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_scale")
+color_ramp = SubResource("GradientTexture1D_flame")
+
+[sub_resource type="Curve" id="Curve_lifespan"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lifespan"]
+curve = SubResource("Curve_lifespan")
+
+[node name="FlameCone" type="Area2D"]
+script = ExtResource("1_flame")
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+
+[node name="Flame" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+amount = 80
+lifetime = 0.5
+randomness = 0.1
+lifetime_randomness = 0.2
+process_material = SubResource("ParticleProcessMaterial_flame")
