@@ -2,6 +2,7 @@ class_name Burn extends StatusEffect
 
 
 const DAMAGE_INTERVAL: float = 0.5
+const PULSE_COLOR: Color = Color.ORANGE
 
 # Damage lands in DAMAGE_INTERVAL chunks instead of every tick: health changes
 # surface as floating text, so per-frame damage would flood the presentation.
@@ -30,3 +31,4 @@ func tick(delta: float, instance: StatusEffectInstance) -> void:
 
 	_time_until_damage[instance] += DAMAGE_INTERVAL
 	instance.source.deal_damage(instance.owner, damage_per_tick)
+	ModulationPulse.flash(instance.owner, PULSE_COLOR)
