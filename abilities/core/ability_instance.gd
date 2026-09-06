@@ -22,7 +22,10 @@ signal ended
 
 
 func _init(ability: Ability) -> void:
-	self.ability = ability
+	# Own a copy of the config's shared ability resource: stateful abilities
+	# (charging bolts, spawned walls, flames) keep per-user state on the
+	# resource, which must not leak between characters sharing one config.
+	self.ability = ability.duplicate(false) as Ability
 
 func tick(delta: float) -> void:
 	cooldown_remaining -= delta

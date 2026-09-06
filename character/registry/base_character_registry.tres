@@ -6,8 +6,9 @@
 [ext_resource type="Resource" uid="uid://b278s2mebyppr" path="res://character/characters/moving_dummy/moving_dummy_config.tres" id="3_pnd6x"]
 [ext_resource type="Resource" uid="uid://burdk2aso1tfe" path="res://character/characters/huk/huk_config.tres" id="4_vl0cy"]
 [ext_resource type="Resource" uid="uid://bkn1a6suj5m2g" path="res://character/characters/wizard/wizard_config.tres" id="5_xfnmf"]
+[ext_resource type="Resource" path="res://character/characters/evasive_dummy/evasive_dummy_config.tres" id="6_evasive"]
 
 [resource]
 script = ExtResource("2_w3x36")
-characters = Array[ExtResource("1_0g8vs")]([ExtResource("2_pnd6x"), ExtResource("3_pnd6x"), ExtResource("4_vl0cy"), ExtResource("5_xfnmf")])
+characters = Array[ExtResource("1_0g8vs")]([ExtResource("2_pnd6x"), ExtResource("3_pnd6x"), ExtResource("4_vl0cy"), ExtResource("5_xfnmf"), ExtResource("6_evasive")])
 metadata/_custom_type_script = "uid://dwgwjlud6mpu"

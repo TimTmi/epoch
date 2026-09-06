@@ -15,8 +15,8 @@ var _hold_elapsed: float = 0.0
 
 func hold_tick(context: AbilityContext, hold_elapsed: float) -> void:
 	_hold_elapsed = hold_elapsed
-	# Aim at the live cursor: the intent's targeting only refreshes on press/release.
-	var direction: Vector2 = context.user.get_global_mouse_position() - context.user.global_position
+	# Aim at the live aim position: the intent's targeting only refreshes on press/release.
+	var direction: Vector2 = context.user.aim_position - context.user.global_position
 	if direction == Vector2.ZERO:
 		return
 	direction = direction.normalized()

@@ -25,7 +25,7 @@ func spawn_character(config: CharacterConfig, team: StringName, position: Vector
 	if character == null:
 		return null
 	character.position = position
-	characters_container.add_child(character)
+	characters_container.add_child(character, true)
 	character.initialize(world_services, config, team, mask_resolver.get_profile(team))
 	return character
 

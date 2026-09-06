@@ -29,6 +29,10 @@ var rules: RuleSystem
 var positions : PackedVector2Array = []
 var time_scale: float = 1
 
+# World point the input provider is aiming at: the mouse for players,
+# the current target for AI. Hold-type abilities steer by it each tick.
+var aim_position: Vector2 = Vector2.ZERO
+
 
 func initialize(world_services: WorldServices, config: CharacterConfig, team: StringName, physics_profile: PhysicsProfile) -> void:
 	self.world_services = world_services
@@ -92,6 +96,7 @@ func die() -> void:
 		self, Character, Event.DEAD, DeathContext.new(self),
 		func(context: DeathContext):
 			if context.dead:
+				world_services.combat_events.character_died.emit(self)
 				queue_free()
 	)
 

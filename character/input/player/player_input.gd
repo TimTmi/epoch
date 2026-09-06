@@ -39,10 +39,11 @@ func handle_input(event: InputEvent) -> void:
 
 		character.try_activate_slot(
 			action_to_slot[action],
-			AbilityIntent.from_target_position(character.get_global_mouse_position()),
+			AbilityIntent.from_target_position(character.aim_position),
 			phase
 		)
 		break
 
 func tick(_delta: float) -> void:
+	character.aim_position = character.get_global_mouse_position()
 	character.move(Input.get_vector(move_left_action, move_right_action, move_up_action, move_down_action))
