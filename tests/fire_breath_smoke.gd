@@ -37,7 +37,7 @@ func _run() -> void:
 
 	# The breath follows the live cursor; in headless the cursor sits at a fixed
 	# world point, so park the enemy where the flame is actually blowing.
-	var aim: Vector2 = Vector2.from(flame.rotation)
+	var aim: Vector2 = Vector2.from_angle(flame.rotation)
 	enemy.input.lock()
 	enemy.global_position = wizard.global_position + aim * 32.0
 	enemy.linear_velocity = Vector2.ZERO
