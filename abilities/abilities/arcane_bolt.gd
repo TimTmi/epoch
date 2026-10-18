@@ -45,6 +45,9 @@ func activate(context: AbilityContext) -> void:
 	bolt.hit.connect(_on_bolt_hit.bind(user, power))
 	bolt.launch(direction, lerpf(min_launch_force, max_launch_force, power))
 
+func cancel_hold(context: AbilityContext) -> void:
+	_cancel_charge()
+
 func _take_charge_bolt() -> Bolt:
 	if _charging_bolt == null or not is_instance_valid(_charging_bolt):
 		return null

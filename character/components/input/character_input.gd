@@ -8,6 +8,8 @@ var _locks: int = 0
 
 
 func _init(character: Character, provider_script: GDScript) -> void:
+	self.character = character
+
 	if provider_script == null:
 		provider_script = InputProvider
 		push_error("[character %s (%s)] input script is not set" %[character.name, character.get_instance_id()])
@@ -21,6 +23,7 @@ func _init(character: Character, provider_script: GDScript) -> void:
 
 func lock() -> void:
 	_locks += 1
+	character.abilities.cancel_holds()
 
 func unlock() -> void:
 	if _locks <= 0:

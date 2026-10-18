@@ -71,6 +71,16 @@ func release(context: AbilityContext) -> bool:
 	is_holding = false
 	return _fire_step(context, step, hold_elapsed)
 
+# Drops an in-progress hold without activating: nothing fires and no cooldown starts.
+func cancel_hold() -> void:
+	if not is_holding:
+		return
+
+	is_holding = false
+	hold_elapsed = 0.0
+	pending_step = 0
+	ability.cancel_hold(_hold_context)
+
 func reset_chain() -> void:
 	current_step = 0
 	chain_timer = 0.0

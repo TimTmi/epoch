@@ -38,6 +38,9 @@ func hold_tick(context: AbilityContext, hold_elapsed: float) -> void:
 func activate(context: AbilityContext) -> void:
 	_extinguish()
 
+func cancel_hold(context: AbilityContext) -> void:
+	_extinguish()
+
 func _on_flame_breathed(target: Character, user: Character) -> void:
 	if user.is_same_team(target):
 		return

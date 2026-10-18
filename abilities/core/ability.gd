@@ -19,6 +19,10 @@ func activate(context: AbilityContext) -> void:
 func hold_tick(context: AbilityContext, hold_elapsed: float) -> void:
 	pass
 
+# Called when a HOLD step is interrupted before release; undo whatever hold_tick spawned.
+func cancel_hold(context: AbilityContext) -> void:
+	pass
+
 func step_count() -> int:
 	return maxi(steps.size(), 1)
 

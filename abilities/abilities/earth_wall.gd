@@ -35,6 +35,11 @@ func activate(context: AbilityContext) -> void:
 	wall.set_length(_length_for(context.hold_duration))
 	wall.finish(lifetime)
 
+func cancel_hold(context: AbilityContext) -> void:
+	var wall: Wall = _take_wall()
+	if wall != null:
+		wall.finish(lifetime)
+
 func _spawn_wall(context: AbilityContext, direction: Vector2) -> Wall:
 	_direction = direction
 	var user: Character = context.user

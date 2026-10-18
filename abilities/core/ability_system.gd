@@ -38,6 +38,12 @@ func get_hold_movement_multiplier() -> float:
 			multiplier *= instance.ability.hold_movement_multiplier
 	return multiplier
 
+func cancel_holds() -> void:
+	for instance: AbilityInstance in slot_ability_instances.values():
+		instance.cancel_hold()
+	for instance: AbilityInstance in passive_ability_instances:
+		instance.cancel_hold()
+
 func try_activate_ability_instance(instance: AbilityInstance, intent: AbilityIntent, phase: InputPhase = InputPhase.PRESS) -> bool:
 	var context: AbilityContext = AbilityContext.new(intent, _owner, self, instance, _world_services)
 
