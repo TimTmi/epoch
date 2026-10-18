@@ -17,6 +17,7 @@ const TEAM_SIDE_OFFSET := 192.0
 @onready var hitboxes_container: Node2D = $Hitboxes
 @onready var strands_container: Node2D = $Strands
 @onready var obstacles_container: Node2D = $Obstacles
+@onready var navigation_region: WorldNavigationRegion = $NavigationRegion
 @onready var floating_texts_container: Node2D = $Effects/FloatingTexts
 @onready var spawner: Spawner = $Spawner
 @onready var UI: Control = $CanvasLayer/UI

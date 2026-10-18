@@ -1,6 +1,9 @@
 class_name Wall extends StaticBody2D
 
 
+# Emitted when the collision shape grows or stops blocking, so navigation can rebake.
+signal footprint_changed
+
 const FADE_OUT: float = 0.4
 const CHUNK_LENGTH: float = 12.0
 const INNER_INSET: float = 1.0
@@ -31,6 +34,7 @@ func set_length(length: float) -> void:
 	_shape.shape.size = Vector2(thickness, float(chunk_count) * CHUNK_LENGTH)
 	_dust.process_material.emission_box_extents = Vector3(thickness * 0.5, float(chunk_count) * CHUNK_LENGTH * 0.5, 0)
 	_layout_chunks(chunk_count)
+	footprint_changed.emit()
 
 # Stops growing and starts the lifetime countdown after which the wall crumbles away.
 func finish(lifetime: float) -> void:
@@ -49,6 +53,7 @@ func _physics_process(delta: float) -> void:
 func _expire() -> void:
 	set_physics_process(false)
 	collision_layer = 0
+	footprint_changed.emit()
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, FADE_OUT)
 	tween.tween_callback(queue_free)

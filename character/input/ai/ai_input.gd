@@ -69,7 +69,20 @@ func wander() -> void:
 	move_to(wander_target)
 
 func random_point() -> Vector2:
+	if not is_navigation_ready():
+		return character.global_position
 	return NavigationServer2D.map_get_random_point(navigation_agent.get_navigation_map(), 1, false)
+
+# Closest point on the navmesh, or the point itself until the map first syncs.
+func nearest_walkable(point: Vector2) -> Vector2:
+	if not is_navigation_ready():
+		return point
+	return NavigationServer2D.map_get_closest_point(navigation_agent.get_navigation_map(), point)
+
+# Map queries error until the navigation map's first sync, which lands a physics
+# frame or more after characters spawn.
+func is_navigation_ready() -> bool:
+	return NavigationServer2D.map_get_iteration_id(navigation_agent.get_navigation_map()) > 0
 
 # Sidestep across the projectile's path and step back away from it.
 func _dodge_direction(threat: Projectile) -> Vector2:

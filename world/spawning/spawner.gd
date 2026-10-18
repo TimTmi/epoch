@@ -8,6 +8,7 @@ var projectiles_container: Node2D
 var hitboxes_container: Node2D
 var strands_container: Node2D
 var obstacles_container: Node2D
+var navigation_region: WorldNavigationRegion
 
 
 func setup(world_services: WorldServices, mask_resolver: PhysicsMaskResolver) -> void:
@@ -19,6 +20,7 @@ func setup(world_services: WorldServices, mask_resolver: PhysicsMaskResolver) ->
 	hitboxes_container = world.hitboxes_container
 	strands_container = world.strands_container
 	obstacles_container = world.obstacles_container
+	navigation_region = world.navigation_region
 
 func spawn_character(config: CharacterConfig, team: StringName, position: Vector2 = Vector2.ZERO) -> Character:
 	var character: Character = config.scene.instantiate()
@@ -53,6 +55,7 @@ func spawn_obstacle(scene: PackedScene, position: Vector2 = Vector2.ZERO, rotati
 	wall.position = position
 	wall.rotation = rotation
 	wall.collision_layer = mask_resolver.get_layer(&"environment", PhysicsSublayer.Type.WALL)
+	wall.footprint_changed.connect(navigation_region.request_rebake)
 	obstacles_container.add_child(wall)
 
 	return wall

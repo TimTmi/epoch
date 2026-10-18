@@ -93,13 +93,13 @@ func _keep_range(distance: float) -> void:
 	if distance <= dash_range and character.abilities.slot_ability_instances[DASH_SLOT].cooldown_remaining <= 0.0:
 		character.try_activate_slot(DASH_SLOT, AbilityIntent.from_target_direction(side - toward * 0.7), AbilitySystem.InputPhase.PRESS)
 	if distance < retreat_range:
-		move_to(_nearest_walkable(character.global_position + (side - toward * 0.7).normalized() * RETREAT_STEP))
+		move_to(nearest_walkable(character.global_position + (side - toward * 0.7).normalized() * RETREAT_STEP))
 		_is_moving = true
 	elif distance > engage_range:
-		move_to(_nearest_walkable(target.global_position - toward * engage_range))
+		move_to(nearest_walkable(target.global_position - toward * engage_range))
 		_is_moving = true
 	elif not _has_line_of_sight():
-		move_to(_nearest_walkable(character.global_position + side * RETREAT_STEP))
+		move_to(nearest_walkable(character.global_position + side * RETREAT_STEP))
 		_is_moving = true
 	else:
 		_is_moving = false
@@ -114,9 +114,6 @@ func _update_strafe_direction(delta: float) -> void:
 	if _stuck_time >= STUCK_TIME:
 		_stuck_time = 0.0
 		_strafe_sign *= -1.0
-
-func _nearest_walkable(point: Vector2) -> Vector2:
-	return NavigationServer2D.map_get_closest_point(navigation_agent.get_navigation_map(), point)
 
 # True when nothing on the environment layer stands between wizard and target.
 func _has_line_of_sight() -> bool:
