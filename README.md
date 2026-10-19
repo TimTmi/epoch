@@ -5,8 +5,8 @@ A 2D top-down action game built in **Godot 4.7** as a systems sandbox: the point
 Everything is rendered with **geometry and particles only** into a pixel-perfect 576×324 viewport — the one exception is the ability icons, supplied from [game-icons.net](https://game-icons.net) (see [attribution](presentation/sprites/ability_icons/ATTRIBUTION.md)).
 
 <p align="center">
-  <a href="https://youtu.be/J_NTF4xO00E">
-    <img src="https://img.youtube.com/vi/J_NTF4xO00E/hqdefault.jpg" width="960" alt="Epoch gameplay demo">
+  <a href="https://youtu.be/0ewNOQbwYRw">
+    <img src="https://img.youtube.com/vi/0ewNOQbwYRw/hqdefault.jpg" width="960" alt="Epoch gameplay demo">
   </a>
 </p>
 
